@@ -1,0 +1,321 @@
+.navbar {
+  width: 100%;
+  background-color: #ffffff;
+  color: #000000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  overflow: visible !important;
+  transition: transform 0.3s ease-in-out;
+}
+/* Animación para ocultar/mostrar navbar */
+.show {
+  transform: translateY(0);
+}
+
+.hide {
+  transform: translateY(-100%);
+}
+
+.navbarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.navbarLogo img {
+  height: 100px;
+}
+
+@media (min-width: 1300px) {
+  .navbarLogo img {
+    height: 100px;
+  }
+}
+
+.navbarMenu {
+  list-style: none;
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbarMenu li a {
+  text-decoration: none;
+  color: #090909;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.navbarMenu li a:hover {
+  color: #8bbaca;
+  cursor: pointer;
+}
+
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 1100;
+   /* Elimina estas dos líneas:
+  position: absolute;
+  right: 15%;
+  top: 20%;
+  */
+}
+
+.menuToggle span {
+  background-color: rgb(0, 0, 0);
+  height: 3px;
+  width: 30px;
+  margin: 5px 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.menuToggle.active span {
+  background-color: rgb(0, 0, 0);
+}
+
+.navbarSubtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.corporateIdentity {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+  color: rgba(108, 27, 173, 0.8);
+  letter-spacing: 1px;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.bannerTitle {
+  width: 100%;
+  text-align: center;
+}
+
+.bannerTitle h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(42, 120, 146, 0.9);
+  margin: 0;
+  padding: 0;
+}
+@media (max-width: 1300px) {
+  .navbarContainer {
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .navbarLogo img {
+    height: 100px;
+  }
+
+  .navbarMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #ffffff;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 1rem;
+    opacity: 0;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  }
+
+  .navbarMenu.active {
+    max-height: 500px;
+    opacity: 1;
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0.05),
+        rgba(255, 255, 255, 0.9)
+      ),
+      url("/img/logo_optimized.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+
+  .navbarMenu li {
+    padding: 1px 0;
+    text-align: center;
+    border-bottom: 1px solid #000000;
+  }
+
+  .navbarMenu li:last-child {
+    border-bottom: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+}
+
+.menuToggle.active + .navbarMenu {
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.languageMenu {
+  position: relative;
+}
+
+.languageDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  list-style: none;
+  padding: 10px;
+  display: none;
+  z-index: 1101;
+  min-width: 120px;
+}
+
+.languageMenu:hover .languageDropdown,
+.languageButton:focus + .languageDropdown {
+  display: block;
+}
+
+@media (max-width: 1300px) {
+  .languageMenu {
+    width: 100%;
+    text-align: center;
+  }
+
+  .languageButton {
+    width: 100%;
+    display: block;
+  }
+
+  .languageDropdown {
+    position: relative;
+    top: 0;
+    width: 100%;
+    box-shadow: none;
+    display: none;
+  }
+
+  .languageMenu.active .languageDropdown {
+    display: block;
+  }
+  .menuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Nada de position absolute ni right ni top */
+  }
+}
+
+@media (max-width: 768px) {
+  .languageMenu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .languageSelectorWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .languageSelector {
+    width: 90%;
+    max-width: 200px;
+  }
+
+  .navbarLogo img {
+    height: 80px;
+    padding-bottom: 5px;
+  }
+
+  .topbarCentered {
+    gap: 30px;
+    padding: 10px 15px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .menuToggle,
+  .menuToggle:focus,
+  .menuToggle:active,
+  .menuToggle span,
+  .menuToggle span:focus,
+  .menuToggle span:active {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent; /* Quita el highlight azul en móviles */
+  }
+}
+
+@media (max-width: 1300px) {
+  .menuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .navbarMenu li {
+    background-color: rgba(139, 186, 202, 0.3);
+    padding: 8px 12px;
+    margin: 5px 20px;
+    border-radius: 1px;
+    transition: background-color 0.3s ease;
+  }
+
+  .navbarMenu li a {
+    color: rgb(0, 0, 0) !important;
+  }
+
+  .navbarMenu li:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .navbarMenu li.languageMenu {
+    max-width: 200px;
+    margin: 5px auto;
+    padding: 6px 10px;
+    background-color: rgba(139, 186, 202, 0.3);
+    border-radius: 5px;
+    text-align: center;
+  }
+  .menuToggle,
+  .menuToggle:focus,
+  .menuToggle:active,
+  .menuToggle span,
+  .menuToggle span:focus,
+  .menuToggle span:active {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent; /* Quita el highlight azul en móviles */
+  }
+}
+.menuToggleActive span {
+  background-color: rgb(0, 0, 0);
+}
