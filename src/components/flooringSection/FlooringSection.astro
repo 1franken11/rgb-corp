@@ -1,0 +1,31 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
+import './FlooringSection.css';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const title = t('FlooringSections.title');
+const description = t('FlooringSections.description');
+const sections = t('FlooringSections.sections');
+---
+<section class="flooring-sections">
+  <div class="container">
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <div class="sections-grid">
+      {Array.isArray(sections) && sections.map((section) => (
+        <div class="section-card">
+          <img src={section.image} alt={section.title} />
+          <h3>{section.title}</h3>
+          <p>{section.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section> 

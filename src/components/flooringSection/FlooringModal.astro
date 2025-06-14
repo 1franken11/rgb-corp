@@ -1,0 +1,58 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: string;
+  floor: string;
+}
+
+const { lang: propLang, floor } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const floorImages: Record<string, string> = {
+  Tile: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744643216/Imagen_de_WhatsApp_2025-02-06_a_las_18.37.00_44592a86_jeumna.jpg",
+  Laminate: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744643166/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.14_faf1dc6f_l12fpq.jpg",
+  Vinyl: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744662421/vinyll_samvcc.jpg",
+  Wood: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744643154/Imagen_de_WhatsApp_2025-02-06_a_las_18.37.00_737de658_ioa8xa.jpg",
+};
+
+const descriptions = t(`FlooringSections.descriptions.${floor}`) as { title: string; description: string }[];
+---
+<div class="modal-overlay" id="flooring-modal">
+  <div class="modal-card-two-columns">
+    <div class="modal-image-column">
+      <img src={floorImages[floor]} alt={floor} />
+    </div>
+
+    <div class="modal-text-column">
+      <h2 class="modal-title">{floor}</h2>
+      <div class="modal-content-scroll">
+        {descriptions.map((item, index) => (
+          <div>
+            <h4>{item.title}</h4>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+      <button class="close-btn" id="close-modal">
+        {t('Button.Close')}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('flooring-modal');
+  const closeBtn = document.getElementById('close-modal');
+
+  closeBtn?.addEventListener('click', () => {
+    window.closeModal();
+  });
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      window.closeModal();
+    }
+  });
+</script> 

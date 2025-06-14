@@ -1,0 +1,58 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const floors = [
+  { key: "Vinyl", label: "Vinyl", image: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743508300/WhatsApp_Image_2025-03-31_at_23.10.44_ff4b6490_phzxzy.jpg", bgImage: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744642268/vynil_sie1yd.jpg" },
+  { key: "Laminate", label: "Laminate", image: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743508301/WhatsApp_Image_2025-03-31_at_23.10.44_86077beb_mnfxib.jpg", bgImage: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744642091/laminate_1_ewkfrn.jpg" },
+  { key: "Tile", label: "Tile", image: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743508301/WhatsApp_Image_2025-03-31_at_23.10.45_7e4276ce_gettwe.jpg", bgImage: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744642267/Tile_tbbln5.jpg" },
+  { key: "Wood", label: "Wood", image: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743508300/WhatsApp_Image_2025-03-31_at_23.10.44_3f250b6b_g2xic4.jpg", bgImage: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744642270/wood_kctkbz.jpg" }
+];
+---
+<div class="flooring-grid">
+  {floors.map((floor) => (
+    <div
+      class="flooring-card"
+      data-key={floor.key}
+      data-bg-image={floor.bgImage}
+    >
+      <img src={floor.image} alt={floor.label} />
+      <div class="floor-label">{floor.label}</div>
+    </div>
+  ))}
+</div>
+
+<script>
+  const flooringCards = document.querySelectorAll('.flooring-card');
+  const modalContainer = document.getElementById('flooring-modal-container');
+
+  flooringCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const floorKey = card.getAttribute('data-key');
+      const bgImage = card.getAttribute('data-bg-image');
+      if (floorKey && bgImage) {
+        window.setSelectedFloor(floorKey, bgImage);
+        // Aquí podrías cargar el modal dinámicamente
+      }
+    });
+
+    card.addEventListener('mouseenter', () => {
+      const bgImage = card.getAttribute('data-bg-image');
+      if (bgImage) {
+        window.setBgImage(bgImage);
+        window.setFadeOut(false);
+      }
+    });
+
+    card.addEventListener('mouseleave', () => {
+      window.setFadeOut(true);
+    });
+  });
+</script> 

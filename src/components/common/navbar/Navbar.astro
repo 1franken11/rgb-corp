@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import './Navbar.css';
+import MenuToggle from './MenuToggle.astro';
+import NavbarMenu from './NavbarMenu.astro';
+import TopBar from '../topbar/TopBar.astro';
+
+const { lang } = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<nav class="navbar show">
+  <TopBar />
+  <div class="navbarContainer">
+    <div class="navbarLogo">
+      <img src="/img/logo_optimized.png" alt="Logo RGB" />
+    </div>
+    <MenuToggle menuOpen={false} />
+    <NavbarMenu menuOpen={false} />
+  </div>
+  <div class="bannerTitle">
+    <h3>{t('Menu.corp')}</h3>
+  </div>
+</nav>
+
+<script>
+  let lastScrollY = 0;
+  const navbar = document.querySelector('.navbar');
+  
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    const threshold = 50;
+
+    if (Math.abs(currentScrollY - lastScrollY) < threshold) return;
+
+    if (currentScrollY > lastScrollY) {
+      navbar?.classList.remove('show');
+      navbar?.classList.add('hide');
+    } else {
+      navbar?.classList.remove('hide');
+      navbar?.classList.add('show');
+    }
+
+    lastScrollY = currentScrollY;
+  };
+
+  window.addEventListener('scroll', handleScroll);
+</script> 

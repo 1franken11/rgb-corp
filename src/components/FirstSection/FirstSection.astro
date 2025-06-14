@@ -1,0 +1,171 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { SlideData } from './SlideData';
+import { PiArrowSquareRightFill, PiArrowSquareLeftFill } from "react-icons/pi";
+import './FirstSection.css';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+// Función para convertir URL a formato optimizado
+const toWebp = (url: string) => url.replace("/upload/", "/upload/f_auto,q_auto/");
+
+// Función para obtener la imagen ideal según el ancho
+const getResponsiveImage = (srcSet: Record<string, string>, width: number): string => {
+  const key =
+    width <= 480 ? "9x16" :
+    width <= 768 ? "4x5" :
+    width <= 1024 ? "3x2" :
+    width <= 1440 ? "4x3" :
+    "16x9";
+  return toWebp(srcSet[key]);
+};
+---
+// Obtener la imagen inicial para SSR
+const initialWidth = 1920; // Ancho por defecto para SSR
+const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
+
+<section id="sp-page-title" class="firstSection">
+  <div class="slideshow">
+    <div class="slide active">
+      <img
+        src={initialImage}
+        srcset={`
+          ${initialImage} 1x,
+          ${initialImage.replace("/upload/", "/upload/dpr_2.0/")} 2x
+        `}
+        alt={SlideData[0].alt}
+        loading="eager"
+      />
+      <div class="caption">
+        {t('SLIDES.0.caption') || SlideData[0].alt}
+      </div>
+    </div>
+
+    <!-- Controles -->
+    <button class="carouselControlPrev" aria-label="Previous slide">
+      <PiArrowSquareLeftFill size={60} />
+    </button>
+    <button class="carouselControlNext" aria-label="Next slide">
+      <PiArrowSquareRightFill size={60} />
+    </button>
+
+    <div class="dots">
+      {SlideData.map((_, i) => (
+        <button
+          class={`dot ${i === 0 ? 'active' : ''}`}
+          aria-label={`Go to slide ${i + 1}`}
+          data-index={i}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { SlideData } from './SlideData';
+
+  // Función para convertir URL a formato optimizado
+  const toWebp = (url: string) => url.replace("/upload/", "/upload/f_auto,q_auto/");
+
+  // Función para obtener la imagen ideal según el ancho
+  const getResponsiveImage = (srcSet: Record<string, string>, width: number): string => {
+    const key =
+      width <= 480 ? "9x16" :
+      width <= 768 ? "4x5" :
+      width <= 1024 ? "3x2" :
+      width <= 1440 ? "4x3" :
+      "16x9";
+    return toWebp(srcSet[key]);
+  };
+
+  let current = 0;
+  let intervalRef: number | null = null;
+  let viewportWidth = window.innerWidth;
+
+  const slideshow = document.querySelector('.slideshow');
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevButton = document.querySelector('.carouselControlPrev');
+  const nextButton = document.querySelector('.carouselControlNext');
+
+  function updateSlide() {
+    slides.forEach((slide, i) => {
+      if (i === current) {
+        slide.classList.add('active');
+        const img = slide.querySelector('img');
+        if (img) {
+          const optimizedSrc = getResponsiveImage(SlideData[i].srcSet, viewportWidth);
+          img.src = optimizedSrc;
+          img.srcset = `
+            ${optimizedSrc} 1x,
+            ${optimizedSrc.replace("/upload/", "/upload/dpr_2.0/")} 2x
+          `;
+        }
+      } else {
+        slide.classList.remove('active');
+      }
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+    });
+  }
+
+  function goToNext() {
+    current = (current + 1) % SlideData.length;
+    updateSlide();
+  }
+
+  function goToPrev() {
+    current = (current - 1 + SlideData.length) % SlideData.length;
+    updateSlide();
+  }
+
+  function goToIndex(i: number) {
+    current = i;
+    updateSlide();
+  }
+
+  function resetTimer() {
+    if (intervalRef) clearInterval(intervalRef);
+    intervalRef = window.setInterval(goToNext, 5000);
+  }
+
+  // Event Listeners
+  prevButton?.addEventListener('click', () => {
+    goToPrev();
+    resetTimer();
+  });
+
+  nextButton?.addEventListener('click', () => {
+    goToNext();
+    resetTimer();
+  });
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      goToIndex(i);
+      resetTimer();
+    });
+  });
+
+  // Handle window resize
+  window.addEventListener('resize', () => {
+    viewportWidth = window.innerWidth;
+    updateSlide();
+  });
+
+  // Initialize
+  resetTimer();
+
+  // Cleanup
+  window.addEventListener('beforeunload', () => {
+    if (intervalRef) clearInterval(intervalRef);
+  });
+</script> 

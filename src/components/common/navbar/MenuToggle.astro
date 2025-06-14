@@ -1,0 +1,43 @@
+---
+import { TfiMenu } from "react-icons/tfi";
+import './Navbar.css';
+import { Astro } from 'astro';
+
+interface Props {
+  menuOpen: boolean;
+}
+
+const { menuOpen } = Astro.props;
+---
+
+<button
+  class="menuToggle"
+  aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+  type="button"
+  tabindex="0"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+</button>
+
+<script>
+  const menuToggle = document.querySelector('.menuToggle');
+  const navbarMenu = document.querySelector('.navbarMenu');
+
+  menuToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = menuToggle.getAttribute('aria-label') === 'Cerrar menú';
+    menuToggle.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
+    navbarMenu?.classList.toggle('active');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!(e.target as HTMLElement).closest('.navbar-container')) {
+      menuToggle?.setAttribute('aria-label', 'Abrir menú');
+      navbarMenu?.classList.remove('active');
+    }
+  });
+</script> 

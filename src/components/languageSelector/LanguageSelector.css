@@ -1,0 +1,29 @@
+.language-selector {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.lang-option {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.lang-option:hover {
+  transform: scale(1.1);
+}
+
+.lang-option.active {
+  border-color: #007a99;
+}
+
+.lang-option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} 

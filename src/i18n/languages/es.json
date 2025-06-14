@@ -1,0 +1,280 @@
+{
+  "Menu": {
+    "home": "Inicio",
+    "instagram": "Instagram",
+    "QuienesSomos": "Quienes Somos",
+    "floors": "Explora nuestros tipo de pisos",
+    "improveSpace": "Proyectos",
+    "Reviews": "Reseña",
+    "contact": "Contacto",
+    "corp": "CORPORACIÓN DE CONSTRUCCIÓN"
+  },
+  "SLIDES": [
+    { "caption": "Ejemplo de imagen 1" },
+    { "caption": "Ejemplo de imagen 2" }
+  ],
+  "Instagram": {
+    "title": "Últimas Publicaciones",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "page": "Página",
+    "of": "de",
+    "alt": [
+      "Publicación 1",
+      "Publicación 2",
+      "Publicación 3",
+      "Publicación 4",
+      "Publicación 5",
+      "Publicación 6",
+      "Publicación 7",
+      "Publicación 8"
+    ]
+  },
+  "ImageComparison": {
+    "title": "Antes y Después",
+    "description": "Mira la transformación de nuestros proyectos",
+    "before": "Antes",
+    "after": "Después"
+  },
+  "VideoSection": {
+    "title": "Nuestro Trabajo en Acción",
+    "description": "Mira a nuestro equipo en acción y ve la calidad de nuestras instalaciones",
+    "videoUrl": "https://www.youtube.com/embed/your-video-id"
+  },
+  "QuienesSomos": {
+    "title": "LOGO RGB",
+    "specialty": {
+      "title": "Nuestra Especialidad",
+      "description": "Nos especializamos en servicios de instalación y renovación de pisos de alta calidad."
+    },
+    "whyChooseUs": {
+      "title": "Por Qué Elegirnos",
+      "items": [
+        "Equipo experimentado de profesionales",
+        "Materiales y mano de obra de calidad",
+        "Precios competitivos",
+        "Satisfacción garantizada"
+      ]
+    },
+    "commitment": {
+      "title": "Nuestro Compromiso",
+      "description": [
+        "Nos comprometemos a brindar el mejor servicio a nuestros clientes",
+        "Utilizamos solo materiales de la más alta calidad",
+        "Garantizamos nuestro trabajo con una garantía de satisfacción",
+        "Ofrecemos precios competitivos sin comprometer la calidad"
+      ]
+    },
+    "services": {
+      "title": "Nuestros Servicios",
+      "description": [
+        "Instalación de pisos",
+        "Renovación de pisos",
+        "Reparación de pisos",
+        "Mantenimiento de pisos"
+      ]
+    },
+    "floorTypes": {
+      "title": "Tipos de Pisos",
+      "items": [
+        "Madera dura",
+        "Laminado",
+        "Vinilo",
+        "Cerámica",
+        "Alfombra"
+      ]
+    },
+    "cabinets": {
+      "title": "Gabinetes",
+      "items": [
+        "Gabinetes de cocina",
+        "Gabinetes de baño",
+        "Gabinetes personalizados",
+        "Instalación de gabinetes"
+      ]
+    },
+    "materials": {
+      "title": "Materiales",
+      "items": [
+        "Madera",
+        "Metal",
+        "Vidrio",
+        "Piedra",
+        "Materiales compuestos"
+      ]
+    }
+  },
+  "FlooringSections": {
+    "title": "Nuestras Soluciones de Pisos",
+    "description": "Descubre nuestra amplia gama de opciones de pisos para tu hogar o negocio",
+    "sections": [
+      {
+        "title": "Pisos de Madera Dura",
+        "description": "Pisos de madera dura clásicos y atemporales que añaden calidez y elegancia a cualquier espacio",
+        "image": "/images/hardwood.jpg"
+      },
+      {
+        "title": "Pisos Laminados",
+        "description": "Pisos laminados duraderos y asequibles que imitan la apariencia de la madera natural",
+        "image": "/images/laminate.jpg"
+      },
+      {
+        "title": "Pisos de Vinilo",
+        "description": "Pisos de vinilo resistentes al agua y versátiles, perfectos para cualquier habitación",
+        "image": "/images/vinyl.jpg"
+      },
+      {
+        "title": "Pisos de Cerámica",
+        "description": "Hermosos y duraderos pisos de cerámica para cocinas, baños y más",
+        "image": "/images/tile.jpg"
+      }
+    ]
+  },
+  "ProjectSection":{
+    "title": "Proyectos"
+  },
+  "Reviews":{
+    "title": "Reseñas"
+  },
+  "Button":{
+    "Close": "Cerrar"
+  },
+  "ContactForm": {
+    "title": "Contáctanos",
+    "description": "¿Tienes alguna pregunta? Envíanos un mensaje y nos pondremos en contacto contigo lo antes posible.",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "ask": "Solicitar cotizacion",
+    "another": "Otro",
+    "subject": "Motivo del contacto",
+    "surname": "Apellido",
+    "surnamePlaceholder": "Tu apellido",
+    "email": "Email",
+    "emailPlaceholder": "Tu email",
+    "message": "Mensaje",
+    "messagePlaceholder": "Tu mensaje",
+    "sendButton": "Enviar",
+    "successMessage": "¡Email enviado con éxito!",
+    "errorMessage": "Hubo un error al enviar el email. Inténtalo nuevamente.",
+    "cel": "Numero de celular",
+    "celPlaceholder": "Opcional",
+    "quote": "Solicitar cotización"
+  },
+  "Navbar": {
+    "home": "Inicio",
+    "about": "Quienes Somos",
+    "services": "Servicios",
+    "contact": "Contacto"
+  },
+  "Footer": {
+    "about": "Sobre Nosotros",
+    "description": "RGB Corporation es tu socio de confianza para soluciones de pisos en Jacksonville, Florida.",
+    "contact": "Contacto",
+    "phone": "Teléfono: +1 (904) 4225380",
+    "email": "Correo: rgbconstructioncorp@gmail.com",
+    "address": "Dirección: Jacksonville, FL",
+    "services": "Nuestros Servicios",
+    "servicesList": [
+      "Pisos Laminados",
+      "Pisos de Vinilo",
+      "Pisos de Madera",
+      "Pisos de Cerámica"
+    ],
+    "follow": "Síguenos",
+    "rights": "Todos los derechos reservados."
+  },
+  "TopBar": {
+    "phone": "+1 (904) 4225380",
+    "email": "rgbconstructioncorp@gmail.com"
+  },
+  "Home": {
+    "title": "RGB Corporation - Instalación de Pisos en Jacksonville",
+    "welcome": "Bienvenido a RGB Corporation",
+    "expertise": "Tu socio de confianza para soluciones de pisos en Jacksonville, Florida."
+  },
+  "About": {
+    "title": "Quienes Somos - RGB Corporation",
+    "description": "Conoce a RGB Corporation, tu socio de confianza en pisos en Jacksonville, Florida."
+  },
+  "Services": {
+    "title": "Nuestros Servicios - RGB Corporation",
+    "description": "Descubre nuestras soluciones integrales de pisos en Jacksonville, Florida.",
+    "laminate": "Pisos Laminados",
+    "laminateDescription": "Soluciones de pisos laminados de alta calidad para tu hogar o negocio.",
+    "laminateFeatures": [
+      "Duradero y de larga duración",
+      "Amplia variedad de estilos",
+      "Fácil mantenimiento",
+      "Económico"
+    ],
+    "vinyl": "Pisos de Vinilo",
+    "vinylDescription": "Opciones modernas de pisos de vinilo para cualquier espacio.",
+    "vinylFeatures": [
+      "Resistente al agua",
+      "Cómodo al caminar",
+      "Fácil de limpiar",
+      "Diseño versátil"
+    ],
+    "wood": "Pisos de Madera",
+    "woodDescription": "Soluciones clásicas y atemporales de pisos de madera.",
+    "woodFeatures": [
+      "Belleza natural",
+      "Larga duración",
+      "Añade valor a la propiedad",
+      "Ecológico"
+    ],
+    "tile": "Pisos de Cerámica",
+    "tileDescription": "Servicios profesionales de instalación de cerámica.",
+    "tileFeatures": [
+      "Resistente al agua",
+      "Duradero",
+      "Fácil de limpiar",
+      "Amplia variedad de estilos"
+    ],
+    "ctaButton": "Solicitar Cotización",
+    "ctaTitle": "¿Listo para Transformar tu Espacio?",
+    "ctaDescription": "Contáctanos hoy para una estimación gratuita de tu proyecto de pisos."
+  },
+  "Contact": {
+    "title": "Contáctanos",
+    "description": "Ponte en contacto con nosotros para cualquier pregunta o consulta",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Ingresa tu nombre",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "phone": "Teléfono",
+      "phonePlaceholder": "Ingresa tu número de teléfono",
+      "message": "Mensaje",
+      "messagePlaceholder": "Ingresa tu mensaje",
+      "send": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado con éxito!",
+      "error": "Error al enviar el mensaje. Por favor, intenta de nuevo."
+    }
+  },
+  "OpinionesCarousel": {
+    "title": "Opiniones de Clientes",
+    "description": "Lo que nuestros clientes dicen sobre nuestros servicios",
+    "testimonials": [
+      {
+        "name": "Juan Pérez",
+        "role": "Propietario",
+        "content": "Excelente servicio y trabajo de calidad. El equipo fue profesional y completó el trabajo a tiempo.",
+        "image": "/images/testimonials/juan-perez.jpg"
+      },
+      {
+        "name": "María García",
+        "role": "Dueña de Negocio",
+        "content": "Muy profesionales y puntuales. La instalación del piso superó nuestras expectativas.",
+        "image": "/images/testimonials/maria-garcia.jpg"
+      },
+      {
+        "name": "Carlos Rodríguez",
+        "role": "Administrador de Propiedades",
+        "content": "El mejor servicio de pisos que he contratado. ¡Altamente recomendado!",
+        "image": "/images/testimonials/carlos-rodriguez.jpg"
+      }
+    ]
+  }
+} 

@@ -1,0 +1,171 @@
+---
+import { languages, languageFlags, type Language } from '../../i18n/utils';
+import './LanguageSelector.css';
+
+interface Props {
+  currentLang: Language;
+  currentPath?: string;
+}
+
+const { currentLang = 'es', currentPath = '' } = Astro.props;
+
+function getNewPath(lang: Language) {
+  // Cambia el idioma en la URL, manteniendo la ruta
+  return currentPath.replace(/^\/[a-z]{2}/, `/${lang}`);
+}
+---
+
+<div class="language-selector-container">
+  <div class="language-selector-wrapper">
+    <div class="language-selector">
+      {Object.entries(languages).map(([lang, code]) => {
+        const typedLang = lang as Language;
+        const path = getNewPath(typedLang);
+        return (
+          <a
+            href={path}
+            class={`flag-option ${currentLang === typedLang ? 'active' : ''}`}
+            data-lang={typedLang}
+          >
+            <img src={languageFlags[typedLang]} alt={`${code} flag`} />
+            <span>{typedLang.toUpperCase()}</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<style>
+  .language-selector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+  }
+
+  .language-selector-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .language-selector {
+    width: fit-content;
+    max-width: 90%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+  }
+
+  .language-selector:hover,
+  .language-selector:focus {
+    background-color: #78a8b4;
+  }
+
+  .language-selector-container::after {
+    content: "▼";
+    font-size: 0.8rem;
+    color: white;
+    position: absolute;
+    right: 12px;
+    pointer-events: none;
+  }
+
+  .language-selector-flags {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flag-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .flag-option img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .flag-option:hover {
+    transform: scale(1.1);
+  }
+
+  .flag-option span {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .flag-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .flag-icons img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .flag-icons img:hover {
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 1300px) {
+    .language-selector {
+      width: 90%;
+      max-width: 100px; 
+      min-width: auto;
+    }
+    .navbar-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+      }
+    .language-selector-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1301px) and (max-width: 1350px) {
+    .language-menu {
+      position: static; 
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .language-selector {
+      width: auto;
+      min-width: 140px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .language-selector {
+      width: 100%;
+      max-width: 100px; 
+    }
+  }
+
+  .flag-option,
+  .flag-option:focus,
+  .flag-option:active,
+  .flag-option img:focus,
+  .flag-option img:active {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+</style> 

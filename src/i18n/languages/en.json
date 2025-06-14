@@ -1,0 +1,284 @@
+{
+  "Menu": {
+    "home": "Home",
+    "instagram": "Instagram",
+    "QuienesSomos": "About Us",
+    "floors": "Explore Our Floor Types",
+    "improveSpace": "We Improve Your Space",
+    "Reviews": "Reviews",
+    "contact": "Contact",
+    "corp": "CONSTRUCTION CORPORATION"
+  },
+  "SLIDES": [
+    {
+      "caption": "Image Example 1"
+    },
+    {
+      "caption": "Image Example 2"
+    }
+  ],
+  "Instagram": {
+    "title": "Latest Posts",
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page",
+    "of": "of",
+    "alt": [
+      "Post 1",
+      "Post 2",
+      "Post 3",
+      "Post 4",
+      "Post 5",
+      "Post 6",
+      "Post 7",
+      "Post 8"
+    ]
+  },
+  "ImageComparison": {
+    "title": "Before and After",
+    "description": "See the transformation of our projects",
+    "before": "Before",
+    "after": "After"
+  },
+  "VideoSection": {
+    "title": "Our Work in Action",
+    "description": "Watch our team at work and see the quality of our installations",
+    "videoUrl": "https://www.youtube.com/embed/your-video-id"
+  },
+  "QuienesSomos": {
+    "title": "RGB LOGO",
+    "specialty": {
+      "title": "Our Specialty",
+      "description": "We specialize in high-quality flooring installation and renovation services."
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us",
+      "items": [
+        "Experienced team of professionals",
+        "Quality materials and workmanship",
+        "Competitive prices",
+        "Satisfaction guaranteed"
+      ]
+    },
+    "commitment": {
+      "title": "Our Commitment",
+      "description": [
+        "We are committed to providing the best service to our customers",
+        "We use only the highest quality materials",
+        "We guarantee our work with a satisfaction warranty",
+        "We offer competitive prices without compromising quality"
+      ]
+    },
+    "services": {
+      "title": "Our Services",
+      "description": [
+        "Floor installation",
+        "Floor renovation",
+        "Floor repair",
+        "Floor maintenance"
+      ]
+    },
+    "floorTypes": {
+      "title": "Floor Types",
+      "items": [
+        "Hardwood",
+        "Laminate",
+        "Vinyl",
+        "Tile",
+        "Carpet"
+      ]
+    },
+    "cabinets": {
+      "title": "Cabinets",
+      "items": [
+        "Kitchen cabinets",
+        "Bathroom cabinets",
+        "Custom cabinets",
+        "Cabinet installation"
+      ]
+    },
+    "materials": {
+      "title": "Materials",
+      "items": [
+        "Wood",
+        "Metal",
+        "Glass",
+        "Stone",
+        "Composite materials"
+      ]
+    }
+  },
+  "FlooringSections": {
+    "title": "Our Flooring Solutions",
+    "description": "Discover our wide range of flooring options for your home or business",
+    "sections": [
+      {
+        "title": "Hardwood Floors",
+        "description": "Classic and timeless hardwood floors that add warmth and elegance to any space",
+        "image": "/images/hardwood.jpg"
+      },
+      {
+        "title": "Laminate Floors",
+        "description": "Durable and affordable laminate floors that mimic the look of natural wood",
+        "image": "/images/laminate.jpg"
+      },
+      {
+        "title": "Vinyl Floors",
+        "description": "Water-resistant and versatile vinyl floors perfect for any room",
+        "image": "/images/vinyl.jpg"
+      },
+      {
+        "title": "Tile Floors",
+        "description": "Beautiful and durable tile floors for kitchens, bathrooms, and more",
+        "image": "/images/tile.jpg"
+      }
+    ]
+  },
+  "ProjectSection":{
+    "title": "Projects"
+  },
+  "Reviews":{
+    "title": "Reviews"
+  },
+  "Button":{
+    "Close": "Close"
+  },
+  "ContactForm": {
+    "title": "Contact Us",
+    "description": "Have a question? Send us a message and we'll get back to you as soon as possible.",
+    "name": "First Name",
+    "namePlaceholder": "Your first name",
+    "subject": "Reason for contact",
+    "ask": "Request quote",
+    "another": "Other",
+    "surname": "Last Name",
+    "surnamePlaceholder": "Your last name",
+    "email": "Email",
+    "emailPlaceholder": "Your email",
+    "message": "Message",
+    "messagePlaceholder": "Your message",
+    "sendButton": "Send",
+    "successMessage": "Email sent successfully!",
+    "errorMessage": "There was an error sending the email. Please try again.",
+    "cel": "Cellphone number",
+    "celPlaceholder": "Optional",
+    "quote": "Request a quote"
+  },
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact"
+  },
+  "Footer": {
+    "about": "About Us",
+    "description": "RGB Corporation is your trusted partner for flooring solutions in Jacksonville, Florida.",
+    "contact": "Contact",
+    "phone": "Phone: +1 (904) 4225380",
+    "email": "Email: rgbconstructioncorp@gmail.com",
+    "address": "Address: Jacksonville, FL",
+    "services": "Our Services",
+    "servicesList": [
+      "Laminate Flooring",
+      "Vinyl Flooring",
+      "Wood Flooring",
+      "Tile Flooring"
+    ],
+    "follow": "Follow Us",
+    "rights": "All rights reserved."
+  },
+  "TopBar": {
+    "phone": "+1 (904) 4225380",
+    "email": "rgbconstructioncorp@gmail.com"
+  },
+  "Home": {
+    "title": "RGB Corporation - Flooring Installation in Jacksonville",
+    "welcome": "Welcome to RGB Corporation",
+    "expertise": "Your trusted partner for flooring solutions in Jacksonville, Florida."
+  },
+  "About": {
+    "title": "About Us - RGB Corporation",
+    "description": "Learn about RGB Corporation, your trusted flooring partner in Jacksonville, Florida."
+  },
+  "Services": {
+    "title": "Our Services - RGB Corporation",
+    "description": "Discover our comprehensive flooring solutions in Jacksonville, Florida.",
+    "laminate": "Laminate Flooring",
+    "laminateDescription": "High-quality laminate flooring solutions for your home or business.",
+    "laminateFeatures": [
+      "Durable and long-lasting",
+      "Wide variety of styles",
+      "Easy maintenance",
+      "Cost-effective"
+    ],
+    "vinyl": "Vinyl Flooring",
+    "vinylDescription": "Modern vinyl flooring options for any space.",
+    "vinylFeatures": [
+      "Water-resistant",
+      "Comfortable underfoot",
+      "Easy to clean",
+      "Versatile design"
+    ],
+    "wood": "Wood Flooring",
+    "woodDescription": "Classic and timeless wood flooring solutions.",
+    "woodFeatures": [
+      "Natural beauty",
+      "Long-lasting",
+      "Adds value to property",
+      "Eco-friendly"
+    ],
+    "tile": "Tile Flooring",
+    "tileDescription": "Professional tile installation services.",
+    "tileFeatures": [
+      "Water-resistant",
+      "Durable",
+      "Easy to clean",
+      "Wide variety of styles"
+    ],
+    "ctaButton": "Get a Quote",
+    "ctaTitle": "Ready to Transform Your Space?",
+    "ctaDescription": "Contact us today for a free estimate on your flooring project."
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with us for any questions or inquiries",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Enter your name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter your phone number",
+      "message": "Message",
+      "messagePlaceholder": "Enter your message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Error sending message. Please try again."
+    }
+  },
+  "OpinionesCarousel": {
+    "title": "Customer Reviews",
+    "description": "What our customers say about our services",
+    "testimonials": [
+      {
+        "name": "John Doe",
+        "role": "Homeowner",
+        "content": "Excellent service and quality work. The team was professional and completed the job on time.",
+        "image": "/images/testimonials/john-doe.jpg"
+      },
+      {
+        "name": "Jane Smith",
+        "role": "Business Owner",
+        "content": "Very professional and punctual. The floor installation exceeded our expectations.",
+        "image": "/images/testimonials/jane-smith.jpg"
+      },
+      {
+        "name": "Mike Johnson",
+        "role": "Property Manager",
+        "content": "The best flooring service I've ever hired. Highly recommended!",
+        "image": "/images/testimonials/mike-johnson.jpg"
+      }
+    ]
+  }
+} 

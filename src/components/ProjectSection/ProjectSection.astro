@@ -1,0 +1,135 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import ProjectsModal from './ProjectsModal';
+import './ProjectsSection.css';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const projects = [
+  {
+    media: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4",
+    gallery: ["https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4"],
+  },
+  {
+    media: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4",
+    gallery: ["https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4"],
+  },
+  // ... resto de los proyectos ...
+];
+---
+<section class="projects-section">
+  <h2 class="text-center mb-4">{t('ProjectSection.title')}</h2>
+  <div class="project-gallery">
+    {projects.map((project, index) => {
+      const isVideo = project.media.endsWith(".mp4");
+      return (
+        <div class="project-item" data-index={index}>
+          {isVideo ? (
+            <video
+              src={project.media}
+              class="project-thumbnail"
+              muted
+              loop
+              playsinline
+              onmouseenter="this.play()"
+              onmouseleave="this.pause(); this.currentTime = 0;"
+              oncontextmenu="return false;"
+            />
+          ) : (
+            <img src={project.media} alt="Proyecto" />
+          )}
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<script>
+  import { PiArrowSquareRightFill, PiArrowSquareLeftFill } from "react-icons/pi";
+
+  const projects = [
+    // ... mismo array de proyectos ...
+  ];
+
+  let selectedGallery: string[] = [];
+  let currentProjectIndex: number | null = null;
+
+  function openGallery(index: number) {
+    selectedGallery = projects[index].gallery;
+    currentProjectIndex = index;
+    showModal();
+  }
+
+  function nextProject() {
+    if (currentProjectIndex !== null) {
+      const nextIndex = (currentProjectIndex + 1) % projects.length;
+      currentProjectIndex = nextIndex;
+      selectedGallery = projects[nextIndex].gallery;
+      updateModal();
+    }
+  }
+
+  function prevProject() {
+    if (currentProjectIndex !== null) {
+      const prevIndex = (currentProjectIndex - 1 + projects.length) % projects.length;
+      currentProjectIndex = prevIndex;
+      selectedGallery = projects[prevIndex].gallery;
+      updateModal();
+    }
+  }
+
+  // Agregar event listeners a los proyectos
+  document.querySelectorAll('.project-item').forEach((item, index) => {
+    item.addEventListener('click', () => openGallery(index));
+  });
+
+  // Función para mostrar el modal
+  function showModal() {
+    const modal = document.createElement('div');
+    modal.id = 'projects-modal';
+    document.body.appendChild(modal);
+    updateModal();
+  }
+
+  // Función para actualizar el contenido del modal
+  function updateModal() {
+    const modal = document.getElementById('projects-modal');
+    if (!modal) return;
+
+    modal.innerHTML = `
+      <div class="modal-backdrop">
+        <div class="modal-content">
+          <button class="modal-close">×</button>
+          <div class="media-wrapper">
+            ${selectedGallery.map((media, index) => `
+              <div class="media-item" style="display: ${index === 0 ? 'block' : 'none'}">
+                ${media.endsWith('.mp4') 
+                  ? `<video src="${media}" class="modal-video" controls autoplay muted loop></video>`
+                  : `<img src="${media}" class="modal-image" alt="Proyecto" />`
+                }
+              </div>
+            `).join('')}
+          </div>
+          <div class="gallery-nav-wrapper">
+            <button class="modal-nav-button modal-prev-gallery">←</button>
+            <button class="modal-nav-button modal-next-gallery">→</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+    // Agregar event listeners al modal
+    modal.querySelector('.modal-close')?.addEventListener('click', () => {
+      modal.remove();
+    });
+
+    modal.querySelector('.modal-prev-gallery')?.addEventListener('click', prevProject);
+    modal.querySelector('.modal-next-gallery')?.addEventListener('click', nextProject);
+  }
+</script> 

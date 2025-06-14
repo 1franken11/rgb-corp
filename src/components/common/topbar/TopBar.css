@@ -14,9 +14,8 @@
   padding: 5px 10px;
 }
 
-/* 🟢 CENTRADO PARA TODAS LAS PANTALLAS */
 .topbar.centered {
-  background-color: #000000; /* podés cambiar el color si querés */
+  background-color: #000000;
   color: #cde4e7;
   text-align: center;
   padding: 10px;
@@ -80,7 +79,6 @@
   height: 16px;
 }
 
-/* 🔽 Responsive: stack en móviles */
 @media (max-width: 768px) {
   .topbar-container {
     flex-direction: column;
@@ -105,4 +103,4 @@
     width: 14px;
     height: 14px;
   }
-}
+} 

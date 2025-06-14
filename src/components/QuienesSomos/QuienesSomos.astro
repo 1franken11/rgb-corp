@@ -1,0 +1,92 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
+import './QuienesSomos.css';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const specialtyTitle = t('QuienesSomos.specialty.title');
+const specialtyDescription = t('QuienesSomos.specialty.description');
+const whyChooseUsTitle = t('QuienesSomos.whyChooseUs.title');
+const whyChooseUsItems = t('QuienesSomos.whyChooseUs.items');
+const commitmentTitle = t('QuienesSomos.commitment.title');
+const commitmentDescription = t('QuienesSomos.commitment.description');
+const servicesTitle = t('QuienesSomos.services.title');
+const servicesDescription = t('QuienesSomos.services.description');
+const floorTypesTitle = t('QuienesSomos.floorTypes.title');
+const floorTypes = t('QuienesSomos.floorTypes.items');
+const cabinetsTitle = t('QuienesSomos.cabinets.title');
+const cabinets = t('QuienesSomos.cabinets.items');
+const materialsTitle = t('QuienesSomos.materials.title');
+const materials = t('QuienesSomos.materials.items');
+---
+
+<section class="quienes-somos">
+  <div class="container">
+    <div class="specialty">
+      <h2>{specialtyTitle}</h2>
+      <p>{specialtyDescription}</p>
+    </div>
+
+    <div class="why-choose-us">
+      <h2>{whyChooseUsTitle}</h2>
+      <ul>
+        {Array.isArray(whyChooseUsItems) && whyChooseUsItems.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="commitment">
+      <h2>{commitmentTitle}</h2>
+      <div class="commitment-items">
+        {Array.isArray(commitmentDescription) && commitmentDescription.map((item) => (
+          <div class="commitment-item">
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="services">
+      <h2>{servicesTitle}</h2>
+      <ul>
+        {Array.isArray(servicesDescription) && servicesDescription.map((service) => (
+          <li>{service}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="floor-types">
+      <h3>{floorTypesTitle}</h3>
+      <ul>
+        {Array.isArray(floorTypes) && floorTypes.map((type) => (
+          <li>{type}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="cabinets">
+      <h3>{cabinetsTitle}</h3>
+      <ul>
+        {Array.isArray(cabinets) && cabinets.map((cabinet) => (
+          <li>{cabinet}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="materials">
+      <h3>{materialsTitle}</h3>
+      <ul>
+        {Array.isArray(materials) && materials.map((material) => (
+          <li>{material}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section> 

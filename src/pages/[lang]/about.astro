@@ -1,0 +1,36 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<MainLayout 
+  title="RGB Corporation - Sobre Nosotros" 
+  description="Conoce más sobre RGB Corporation"
+  lang={lang}
+>
+  <div class="container">
+    <h1>{t('about.title')}</h1>
+    <p>{t('about.description')}</p>
+  </div>
+</MainLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  h1 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+</style> 

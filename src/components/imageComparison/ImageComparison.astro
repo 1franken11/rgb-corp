@@ -1,0 +1,132 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
+import './ImageComparison.css';
+
+interface Props {
+  lang?: Language;
+  beforeImage?: string;
+  afterImage?: string;
+}
+
+const { 
+  lang: propLang,
+  beforeImage = "/before.jpg",
+  afterImage = "/after.jpg"
+} = Astro.props;
+
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const title = t('ImageComparison.title');
+const description = t('ImageComparison.description');
+const beforeLabel = t('ImageComparison.before');
+const afterLabel = t('ImageComparison.after');
+---
+
+<section class="image-comparison">
+  <div class="container">
+    <h2>{title}</h2>
+    <p>{description}</p>
+
+    <div class="comparison-container" id="comparison-container">
+      <div class="before-image">
+        <img 
+          src={beforeImage} 
+          alt={beforeLabel} 
+          loading="lazy"
+          width="800"
+          height="500"
+        />
+        <span class="label">{beforeLabel}</span>
+      </div>
+      <div class="after-image" id="after-image">
+        <img 
+          src={afterImage} 
+          alt={afterLabel} 
+          loading="lazy"
+          width="800"
+          height="500"
+        />
+        <span class="label">{afterLabel}</span>
+      </div>
+      <div class="slider" id="slider">
+        <div class="slider-handle"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  let isDragging = false;
+  let sliderPosition = 50;
+  const container = document.getElementById('comparison-container');
+  const afterImage = document.getElementById('after-image');
+  const slider = document.getElementById('slider');
+
+  const handleMouseDown = () => {
+    isDragging = true;
+  };
+
+  const handleMouseUp = () => {
+    isDragging = false;
+  };
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !container) return;
+
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const position = (x / rect.width) * 100;
+    sliderPosition = Math.min(Math.max(position, 0), 100);
+    
+    if (afterImage && slider) {
+      afterImage.style.width = `${sliderPosition}%`;
+      slider.style.left = `${sliderPosition}%`;
+    }
+  };
+
+  const handleTouchStart = () => {
+    isDragging = true;
+  };
+
+  const handleTouchMove = (e: TouchEvent) => {
+    if (!isDragging || !container) return;
+
+    const rect = container.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const position = (x / rect.width) * 100;
+    sliderPosition = Math.min(Math.max(position, 0), 100);
+    
+    if (afterImage && slider) {
+      afterImage.style.width = `${sliderPosition}%`;
+      slider.style.left = `${sliderPosition}%`;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    isDragging = false;
+  };
+
+  // Mouse events
+  slider?.addEventListener('mousedown', handleMouseDown);
+  window.addEventListener('mouseup', handleMouseUp);
+  window.addEventListener('mousemove', handleMouseMove);
+
+  // Touch events
+  slider?.addEventListener('touchstart', handleTouchStart);
+  window.addEventListener('touchend', handleTouchEnd);
+  window.addEventListener('touchmove', handleTouchMove);
+
+  // Cleanup
+  document.addEventListener('astro:before-swap', () => {
+    // Mouse events cleanup
+    slider?.removeEventListener('mousedown', handleMouseDown);
+    window.removeEventListener('mouseup', handleMouseUp);
+    window.removeEventListener('mousemove', handleMouseMove);
+
+    // Touch events cleanup
+    slider?.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchend', handleTouchEnd);
+    window.removeEventListener('touchmove', handleTouchMove);
+  });
+</script> 

@@ -1,90 +1,20 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import {
-  ContactForm,
-  FirstSection,
-  FlooringSections,
-  QuienesSomos,
-  OpinionesCarousel,
-  ProjectSection,
-} from "../components/index.ts"; // Importación correcta del index.ts de tus componentes React
-
-// Inicialización de AOS: Se recomienda inicializarlo de manera global o en un script específico
-// que se ejecute en el cliente, si los elementos de AOS están en componentes que no son React.
-// Para componentes React, el 'useEffect' dentro de ellos es válido, pero si data-aos está en HTML estático
-// generado por Astro, necesitamos un script global como este.
-import AOS from 'aos';
-import 'aos/dist/aos.css'; // Asegurate de que el CSS de AOS esté disponible (ya lo tenemos en BaseLayout)
-
-// Este script se ejecutará en el cliente una vez que la página cargue.
-// Al no usar is:inline, Astro puede optimizarlo si es necesario.
-// Sin embargo, para AOS, is:inline a veces es preferible si necesitas que esté disponible muy temprano.
-// Por ahora, lo mantenemos como en tu ejemplo original, usando is:inline.
-// Si AOS necesita escanear elementos dentro de componentes React que se hidratan más tarde,
-// podrías necesitar llamar a AOS.refresh() o AOS.init() de nuevo después de la hidratación.
+import MainLayout from '../layouts/MainLayout.astro';
+import TopBar from '../components/common/topbar/TopBar.astro';
+import Navbar from '../components/common/navbar/Navbar.astro';
+import LanguageSelector from '../components/languageSelector/LanguageSelector.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+const { lang } = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+Astro.redirect('/es/');
 ---
 
-<BaseLayout
-  title="RGB Corporation - Instalación de Pisos y Revestimientos en Jacksonville, FL"
-  description="RGB Corporation ofrece servicios profesionales de instalación de pisos flotantes y revestimientos en Jacksonville, Florida. Obtenga una cotización para su proyecto con expertos locales."
-  keywords="flooring Jacksonville, floor coverings Jacksonville, floating floor installation Florida, RGB Corporation, vinyl flooring, wood flooring Jacksonville"
-  author="RGB Corporation"
-  ogTitle="RGB Corporation - Revestimientos de Pisos en Jacksonville, FL"
-  ogDescription="Especialistas en pisos flotantes, vinílicos y de madera en Jacksonville, FL. Calidad garantizada para su hogar o negocio."
-  ogUrl="https://rgb-corporation.com"
->
-  <script is:inline>
-    // Importamos AOS directamente aquí, ya que is:inline no permite importaciones relativas
-    // desde el frontmatter de Astro. Esta es una forma común de manejar libs de terceros
-    // que necesitan ejecutarse directamente en el cliente.
-    // Deberías asegurarte que 'aos' esté disponible en el entorno del navegador
-    // (por ejemplo, a través de tu archivo `main.ts` o un script global en el layout
-    // que cargue la librería, o simplemente que esté bien incluido en el bundle de Astro).
-    // Para simplificar, asumimos que 'aos' está correctamente cargado y disponible globalmente
-    // o que Astro lo "bundlea" cuando lo importas en un script.
-    // Una alternativa más robusta sería:
-    // import 'aos'; // Esto aseguraría que AOS se incluya en el bundle del cliente
-    // document.addEventListener('DOMContentLoaded', () => {
-    //   if (window.AOS) { // Verifica si AOS está disponible globalmente
-    //     window.AOS.init({
-    //       duration: 1000,
-    //       once: false,
-    //       mirror: true,
-    //     });
-    //   }
-    // });
-
-    // La forma más directa que pusiste y que suele funcionar es esta:
-    import AOS from 'aos';
-    import 'aos/dist/aos.css';
-
-    document.addEventListener('DOMContentLoaded', () => {
-      AOS.init({
-        duration: 1000,
-        once: false,
-        mirror: true,
-      });
-    });
-  </script>
-
-  <div class="fullpage">
-    <FirstSection client:load />
+<MainLayout title="RGB Corporation - Inicio" lang={lang}>
+  <TopBar client:load />
+  <Navbar lang={lang} />
+  <LanguageSelector currentLang={lang} currentPath={Astro.url.pathname} />
+  <div class="container">
+    <h1>{t('home.title')}</h1>
+    <p>{t('home.description')}</p>
   </div>
-
-  <div data-aos="fade-up">
-    <QuienesSomos client:load />
-  </div>
-
-  <div data-aos="fade-up" data-aos-once="true">
-    <FlooringSections client:load />
-  </div>
-
-  <div data-aos="fade-right" data-aos-once="true">
-    <ProjectSection client:load />
-  </div>
-
-  <OpinionesCarousel reviews={[]} itemsPerSlide={3} client:load />
-
-  <ContactForm client:load />
-
-</BaseLayout>
+</MainLayout>

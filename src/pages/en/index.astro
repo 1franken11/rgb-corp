@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title="Home | RGB Corp" description="Welcome to RGB Corp">
+  <main>
+    <!-- Aquí va el contenido de tu HomePage -->
+  </main>
+</Layout> 

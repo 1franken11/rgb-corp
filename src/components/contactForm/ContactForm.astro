@@ -1,0 +1,70 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
+import './ContactForm.css';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang = propLang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+---
+
+<div class="contact-form">
+  <h2>{t('ContactForm.title')}</h2>
+  <form id="contactForm" class="form">
+    <div class="form-group">
+      <label for="name">{t('ContactForm.name')}</label>
+      <input type="text" id="name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label for="email">{t('ContactForm.email')}</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phone">{t('ContactForm.phone')}</label>
+      <input type="tel" id="phone" name="phone" required />
+    </div>
+
+    <div class="form-group">
+      <label for="message">{t('ContactForm.message')}</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="submit-button">{t('ContactForm.submit')}</button>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('contactForm');
+  
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+    
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (response.ok) {
+        alert('Mensaje enviado con éxito');
+        (e.target as HTMLFormElement).reset();
+      } else {
+        throw new Error('Error al enviar el mensaje');
+      }
+    } catch (error) {
+      alert('Error al enviar el mensaje. Por favor, intente nuevamente.');
+      console.error('Error:', error);
+    }
+  });
+</script> 

@@ -1,9 +1,28 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-
 import react from '@astrojs/react';
+import tailwind from '@astrojs/tailwind';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()]
+  integrations: [
+    react(),
+    tailwind()
+  ],
+  output: 'static',
+  site: 'https://rgb-corp.com',
+  trailingSlash: 'always',
+  compressHTML: true,
+  build: {
+    inlineStylesheets: 'auto',
+    format: 'directory'
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'pt'],
+    routing: {
+      prefixDefaultLocale: false,
+      strategy: 'prefix-always'
+    }
+  }
 });

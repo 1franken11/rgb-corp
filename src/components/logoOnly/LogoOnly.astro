@@ -1,0 +1,36 @@
+---
+interface Props {
+  showPng: boolean;
+}
+
+const { showPng } = Astro.props;
+---
+
+<img
+  src="https://res.cloudinary.com/drwacbtjf/image/upload/v1745328531/logo_LE_c63hwt.jpg"
+  alt="Logo estático"
+  class:list={[
+    'logoPngWrapper',
+    showPng ? 'fadeIn' : 'fadeOut'
+  ]}
+/>
+
+<style>
+  .logoPngWrapper {
+    position: static;
+    width: 300px;
+    height: auto;
+    transition: opacity 1s ease-in-out;
+    z-index: 2;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .fadeIn {
+    opacity: 1;
+  }
+
+  .fadeOut {
+    opacity: 0;
+  }
+</style> 

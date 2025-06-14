@@ -9,7 +9,7 @@
   overflow: visible !important;
   transition: transform 0.3s ease-in-out;
 }
-/* Animación para ocultar/mostrar navbar */
+
 .show {
   transform: translateY(0);
 }
@@ -29,12 +29,6 @@
 
 .navbarLogo img {
   height: 100px;
-}
-
-@media (min-width: 1300px) {
-  .navbarLogo img {
-    height: 100px;
-  }
 }
 
 .navbarMenu {
@@ -68,23 +62,11 @@
   cursor: pointer;
   padding: 8px;
   z-index: 1100;
-   /* Elimina estas dos líneas:
-  position: absolute;
-  right: 15%;
-  top: 20%;
-  */
 }
 
-.menuToggle span {
-  background-color: rgb(0, 0, 0);
-  height: 3px;
-  width: 30px;
-  margin: 5px 0;
-  transition: all 0.3s ease-in-out;
-}
-
-.menuToggle.active span {
-  background-color: rgb(0, 0, 0);
+.menuToggle svg {
+  width: 36px;
+  height: 36px;
 }
 
 .navbarSubtitle {
@@ -119,6 +101,7 @@
   margin: 0;
   padding: 0;
 }
+
 @media (max-width: 1300px) {
   .navbarContainer {
     position: relative;
@@ -224,11 +207,11 @@
   .languageMenu.active .languageDropdown {
     display: block;
   }
+  
   .menuToggle {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Nada de position absolute ni right ni top */
   }
 }
 
@@ -263,15 +246,16 @@
     align-items: center;
     flex-wrap: wrap;
   }
+  
   .menuToggle,
   .menuToggle:focus,
   .menuToggle:active,
-  .menuToggle span,
-  .menuToggle span:focus,
-  .menuToggle span:active {
+  .menuToggle svg,
+  .menuToggle svg:focus,
+  .menuToggle svg:active {
     outline: none !important;
     box-shadow: none !important;
-    -webkit-tap-highlight-color: transparent; /* Quita el highlight azul en móviles */
+    -webkit-tap-highlight-color: transparent;
   }
 }
 
@@ -281,6 +265,7 @@
     align-items: center;
     justify-content: center;
   }
+  
   .navbarMenu li {
     background-color: rgba(139, 186, 202, 0.3);
     padding: 8px 12px;
@@ -305,17 +290,19 @@
     border-radius: 5px;
     text-align: center;
   }
+  
   .menuToggle,
   .menuToggle:focus,
   .menuToggle:active,
-  .menuToggle span,
-  .menuToggle span:focus,
-  .menuToggle span:active {
+  .menuToggle svg,
+  .menuToggle svg:focus,
+  .menuToggle svg:active {
     outline: none !important;
     box-shadow: none !important;
-    -webkit-tap-highlight-color: transparent; /* Quita el highlight azul en móviles */
+    -webkit-tap-highlight-color: transparent;
   }
 }
+
 .menuToggleActive span {
   background-color: rgb(0, 0, 0);
-}
+} 

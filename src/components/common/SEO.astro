@@ -1,0 +1,57 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  keywords?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogUrl?: string;
+  geoRegion?: string;
+  geoPlacename?: string;
+  geoPosition?: string;
+  icbm?: string;
+}
+
+const {
+  title,
+  description,
+  keywords,
+  ogTitle = title,
+  ogDescription = description,
+  ogImage = "https://res.cloudinary.com/drwacbtjf/image/upload/v1745328531/logo_LE_c63hwt.jpg",
+  ogUrl = Astro.url.href,
+  geoRegion,
+  geoPlacename,
+  geoPosition,
+  icbm
+} = Astro.props;
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+<meta name="author" content="RGB Corporation" />
+<meta name="robots" content="index, follow" />
+
+<!-- Geo Tags -->
+{geoRegion && <meta name="geo.region" content={geoRegion} />}
+{geoPlacename && <meta name="geo.placename" content={geoPlacename} />}
+{geoPosition && <meta name="geo.position" content={geoPosition} />}
+{icbm && <meta name="ICBM" content={icbm} />}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={ogUrl} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={ogImage} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={ogUrl} />
+<meta property="twitter:title" content={ogTitle} />
+<meta property="twitter:description" content={ogDescription} />
+<meta property="twitter:image" content={ogImage} /> 

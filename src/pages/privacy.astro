@@ -1,0 +1,214 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const lastUpdated = '1 de Marzo, 2024';
+---
+
+<MainLayout title="Política de Privacidad - RGB Corp" lang="es">
+  <div class="privacy-page">
+    <section class="hero">
+      <div class="container">
+        <h1>Política de Privacidad</h1>
+        <p>Última actualización: {lastUpdated}</p>
+      </div>
+    </section>
+
+    <section class="privacy-content">
+      <div class="container">
+        <div class="content-wrapper">
+          <div class="section">
+            <h2>1. Introducción</h2>
+            <p>
+              RGB Corp ("nosotros", "nuestro" o "la Compañía") se compromete a proteger su privacidad. 
+              Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su 
+              información personal cuando utiliza nuestro sitio web y servicios.
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>2. Información que Recopilamos</h2>
+            <h3>2.1 Información Personal</h3>
+            <p>Podemos recopilar la siguiente información personal:</p>
+            <ul>
+              <li>Nombre completo</li>
+              <li>Dirección de correo electrónico</li>
+              <li>Número de teléfono</li>
+              <li>Dirección física</li>
+              <li>Información del proyecto</li>
+            </ul>
+
+            <h3>2.2 Información No Personal</h3>
+            <p>También recopilamos información no personal, como:</p>
+            <ul>
+              <li>Información del navegador</li>
+              <li>Dirección IP</li>
+              <li>Tipo de dispositivo</li>
+              <li>Páginas visitadas</li>
+              <li>Tiempo de visita</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>3. Uso de la Información</h2>
+            <p>Utilizamos su información personal para:</p>
+            <ul>
+              <li>Proporcionar y mantener nuestros servicios</li>
+              <li>Responder a sus consultas y solicitudes</li>
+              <li>Enviar información sobre nuestros servicios</li>
+              <li>Mejorar nuestro sitio web y servicios</li>
+              <li>Cumplir con obligaciones legales</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>4. Protección de Datos</h2>
+            <p>
+              Implementamos medidas de seguridad técnicas y organizativas para proteger su información 
+              personal contra acceso no autorizado, alteración, divulgación o destrucción.
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>5. Compartir Información</h2>
+            <p>
+              No vendemos ni alquilamos su información personal a terceros. Podemos compartir su 
+              información con:
+            </p>
+            <ul>
+              <li>Proveedores de servicios que nos ayudan a operar nuestro negocio</li>
+              <li>Autoridades legales cuando sea requerido por ley</li>
+              <li>Terceros con su consentimiento explícito</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>6. Sus Derechos</h2>
+            <p>Usted tiene derecho a:</p>
+            <ul>
+              <li>Acceder a su información personal</li>
+              <li>Corregir información inexacta</li>
+              <li>Solicitar la eliminación de sus datos</li>
+              <li>Oponerse al procesamiento de sus datos</li>
+              <li>Retirar su consentimiento en cualquier momento</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>7. Cookies y Tecnologías Similares</h2>
+            <p>
+              Utilizamos cookies y tecnologías similares para mejorar su experiencia en nuestro sitio web. 
+              Puede controlar el uso de cookies a través de la configuración de su navegador.
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>8. Cambios en la Política de Privacidad</h2>
+            <p>
+              Nos reservamos el derecho de modificar esta Política de Privacidad en cualquier momento. 
+              Los cambios entrarán en vigor inmediatamente después de su publicación en el sitio web.
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>9. Contacto</h2>
+            <p>
+              Si tiene preguntas sobre esta Política de Privacidad, puede contactarnos en:
+            </p>
+            <ul>
+              <li>Email: privacidad@rgbcorp.cl</li>
+              <li>Teléfono: +56 9 1234 5678</li>
+              <li>Dirección: Av. Principal 123, Santiago, Chile</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</MainLayout>
+
+<style>
+  .privacy-page {
+    padding-bottom: var(--spacing-xl);
+  }
+
+  .hero {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: var(--spacing-xl) 0;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .privacy-content {
+    padding: var(--spacing-xl) 0;
+  }
+
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--color-secondary);
+    padding: var(--spacing-xl);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .section:last-child {
+    margin-bottom: 0;
+  }
+
+  .section h2 {
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.5rem;
+  }
+
+  .section h3 {
+    color: var(--color-primary);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+    font-size: 1.2rem;
+  }
+
+  .section p {
+    margin-bottom: var(--spacing-md);
+    line-height: 1.6;
+    color: var(--color-text);
+  }
+
+  .section ul {
+    list-style-type: disc;
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .section li {
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .content-wrapper {
+      padding: var(--spacing-lg);
+    }
+
+    .section h2 {
+      font-size: 1.3rem;
+    }
+
+    .section h3 {
+      font-size: 1.1rem;
+    }
+  }
+</style> 

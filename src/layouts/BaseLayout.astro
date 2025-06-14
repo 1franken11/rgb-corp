@@ -1,89 +1,57 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  keywords?: string;
-  author?: string;
-  robots?: string;
-  ogTitle?: string;
-  ogDescription?: string;
-  ogType?: string;
-  ogUrl?: string;
-  ogImage?: string;
-  geoRegion?: string;
-  geoPlacename?: string;
-  geoPosition?: string;
-  icbm?: string;
-}
-
-const {
-  title,
-  description,
-  keywords,
-  author = "RGB Corporation",
-  robots = "index, follow",
-  ogTitle,
-  ogDescription,
-  ogType = "website",
-  ogUrl = "https://rgb-corporation.com",
-  ogImage = "https://res.cloudinary.com/drwacbtjf/image/upload/v1745328531/logo_LE_c63hwt.jpg",
-  geoRegion = "US-FL",
-  geoPlacename = "Jacksonville",
-  geoPosition = "30.3322;-81.6557",
-  icbm = "30.3322, -81.6557",
-} = Astro.props;
-
-// Importar estilos CSS globales
-import '../styles/index.css';
-import '../styles/fullpage.css';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { Navbar, Footer } from '../components';
+import { LanguageProvider } from '../context/LanguageProvider';
+import '../styles/global.css';
 import 'aos/dist/aos.css';
 
-// *** NUEVAS IMPORTACIONES PARA NAVBAR Y FOOTER ***
-import { Navbar, Footer } from '../components/index.ts'; // Importamos Navbar y Footer de tu index.ts de componentes
-import { LanguageProvider } from '../context/LanguageProvider'; // Importamos el LanguageProvider
+interface Props {
+	title: string;
+	description?: string;
+}
 
+const { title, description } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    {keywords && <meta name="keywords" content={keywords} />}
-    {author && <meta name="author" content={author} />}
-    {robots && <meta name="robots" content={robots} />}
-
-    <meta property="og:title" content={ogTitle || title} />
-    <meta property="og:description" content={ogDescription || description} />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:url" content={ogUrl} />
-    <meta property="og:image" content={ogImage} />
-
-    {geoRegion && <meta name="geo.region" content={geoRegion} />}
-    {geoPlacename && <meta name="geo.placename" content={geoPlacename} />}
-    {geoPosition && <meta name="geo.position" content={geoPosition} />}
-    {icbm && <meta name="ICBM" content={icbm} />}
-
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    {/* Envolvemos toda la aplicación con LanguageProvider */}
-    <LanguageProvider client:load> {/* client:load para que el contexto sea interactivo */}
-      {/* La Navbar se renderiza fuera del slot para que sea global en todas las páginas */}
-      <Navbar client:load /> {/* client:load para que la Navbar sea interactiva */}
-      <main>
-        <slot />
-      </main>
-      {/* El Footer también se renderiza fuera del slot */}
-      <Footer client:load /> {/* client:load para que el Footer (si tiene JS) sea interactivo */}
-    </LanguageProvider>
-  </body>
+<!DOCTYPE html>
+<html lang={lang}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		{description && <meta name="description" content={description} />}
+	</head>
+	<body>
+		<LanguageProvider client:load>
+			<Navbar client:load />
+			<slot />
+			<Footer client:load />
+		</LanguageProvider>
+	</body>
 </html>
 
-<style is:global>
-  html {
-    scroll-behavior: smooth;
-  }
+<script>
+	import AOS from 'aos';
+	
+	// Inicialización de AOS
+	document.addEventListener('DOMContentLoaded', () => {
+		AOS.init({
+			duration: 1000,
+			once: false,
+			mirror: true,
+		});
+	});
+</script>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
 </style>

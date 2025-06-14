@@ -1,0 +1,182 @@
+---
+const quickLinks = [
+  { href: '/', text: 'Inicio' },
+  { href: '/about', text: 'Quiénes Somos' },
+  { href: '/services', text: 'Servicios' },
+  { href: '/projects', text: 'Proyectos' },
+  { href: '/contact', text: 'Contacto' }
+];
+
+const socialLinks = [
+  { href: 'https://facebook.com', icon: 'fab fa-facebook', label: 'Facebook' },
+  { href: 'https://instagram.com', icon: 'fab fa-instagram', label: 'Instagram' },
+  { href: 'https://linkedin.com', icon: 'fab fa-linkedin', label: 'LinkedIn' },
+  { href: 'https://youtube.com', icon: 'fab fa-youtube', label: 'YouTube' }
+];
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>RGB Corp</h3>
+        <p>Expertos en revestimientos de alta calidad para tu hogar o negocio. Ofrecemos soluciones profesionales y duraderas.</p>
+        <div class="social-links">
+          {socialLinks.map((social) => (
+            <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
+              <i class={social.icon}></i>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Enlaces Rápidos</h3>
+        <ul>
+          {quickLinks.map((link) => (
+            <li>
+              <a href={link.href}>{link.text}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contacto</h3>
+        <ul class="contact-info">
+          <li>
+            <i class="fas fa-map-marker-alt"></i>
+            <span>123 Calle Principal, Ciudad, Estado</span>
+          </li>
+          <li>
+            <i class="fas fa-phone"></i>
+            <a href="tel:+1234567890">+1 (234) 567-890</a>
+          </li>
+          <li>
+            <i class="fas fa-envelope"></i>
+            <a href="mailto:info@rgbcorp.com">info@rgbcorp.com</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {new Date().getFullYear()} RGB Corp. Todos los derechos reservados.</p>
+      <div class="legal-links">
+        <a href="/privacy">Política de Privacidad</a>
+        <a href="/terms">Términos y Condiciones</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: var(--spacing-xl) 0 var(--spacing-md);
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .footer-section h3 {
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.2rem;
+  }
+
+  .footer-section p {
+    margin-bottom: var(--spacing-md);
+    opacity: 0.8;
+  }
+
+  .social-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .social-links a {
+    color: var(--color-secondary);
+    font-size: 1.5rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .social-links a:hover {
+    opacity: 0.8;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .footer-section ul li a {
+    color: var(--color-secondary);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .footer-section ul li a:hover {
+    opacity: 1;
+  }
+
+  .contact-info li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .contact-info i {
+    width: 20px;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: var(--spacing-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+  }
+
+  .legal-links {
+    display: flex;
+    gap: var(--spacing-md);
+  }
+
+  .legal-links a {
+    color: var(--color-secondary);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+  }
+
+  .legal-links a:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .legal-links {
+      justify-content: center;
+    }
+  }
+</style> 

@@ -1,0 +1,55 @@
+---
+import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import LanguageSelector from '../../languageSelector/LanguageSelector.astro';
+
+const { lang } = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Props {
+  menuOpen: boolean;
+}
+
+const { menuOpen } = Astro.props;
+
+const menuItems = [
+  { id: "sp-page-title", key: "home" },
+  { id: "quienes-somos", key: "QuienesSomos" },
+  { id: "flooring", key: "floors" },
+  { id: "projects-section", key: "improveSpace" },
+  { id: "reviews-section", key: "Reviews" },
+  { id: "contact-container", key: "contact" },
+];
+---
+
+<ul class={`navbarMenu ${menuOpen ? 'active' : ''}`}>
+  {menuItems.map((item) => (
+    <li>
+      <a href={`#${item.id}`}>
+        {t(`Menu.${item.key}`)}
+      </a>
+    </li>
+  ))}
+  <li class="languageMenu">
+    <LanguageSelector currentLang={lang} currentPath={Astro.url.pathname} />
+  </li>
+</ul>
+
+<script>
+  document.querySelectorAll('.navbarMenu a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href')?.substring(1);
+      const targetElement = document.getElementById(targetId || '');
+      
+      if (targetElement) {
+        const offset = 180;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+</script> 
