@@ -37,6 +37,7 @@ const {
   </head>
   <body>
     <Navbar lang={lang} client:load />
+    <slot />
   </body>
 </html>
 
@@ -49,6 +50,16 @@ const {
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
     --spacing-lg: 2rem;
+    --navbar-height: 100px;
+    --topbar-height: 36px;
+    --header-total-height: calc(var(--navbar-height) + var(--topbar-height));
+  }
+
+  @media (max-width: 768px) {
+    :root {
+      --navbar-height: 80px;
+      --topbar-height: 32px;
+    }
   }
 
   * {
@@ -58,6 +69,7 @@ const {
   }
 
   html, body {
+    margin: 0;
     width: 100%;
     overflow-x: hidden;
     font-family: 'Quicksand', sans-serif;

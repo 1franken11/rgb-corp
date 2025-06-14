@@ -1,13 +1,20 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import type { Language } from '../../i18n/utils';
+import FirstSection from '../../components/FirstSection/FirstSection.astro';
+import '../../components/FirstSection/fullpage.css';
 
 const lang: Language = 'es';
 ---
 
 <MainLayout title="RGB Corporation - Inicio" lang={lang}>
-  <main>
-    <h1>Bienvenido a RGB Corporation</h1>
-    <!-- Aquí irá el contenido de tu página principal -->
-  </main>
+  <div class="fullpage">
+    <div class="first-section">
+      <FirstSection lang={lang} />
+    </div>
+    <main>
+      <h1>Bienvenido a RGB Corporation</h1>
+      <!-- Aquí irá el contenido de tu página principal -->
+    </main>
+  </div>
 </MainLayout> 

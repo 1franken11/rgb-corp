@@ -18,11 +18,11 @@ export default defineConfig({
     format: 'directory'
   },
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'es', 'pt'],
+    defaultLocale: 'es',
+    locales: ['es', 'en', 'pt'],
     routing: {
-      prefixDefaultLocale: false,
-      strategy: 'prefix-always'
+      prefixDefaultLocale: true,
+      strategy: 'pathname'
     }
   }
 });

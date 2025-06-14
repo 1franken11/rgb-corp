@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
 import { SlideData } from './SlideData';
 import { PiArrowSquareRightFill, PiArrowSquareLeftFill } from "react-icons/pi";
 import './FirstSection.css';
@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+const currentLang: Language = typeof propLang === 'string' ? propLang as Language : getLangFromUrl(Astro.url).lang;
 const t = useTranslations(currentLang);
 
 // Función para convertir URL a formato optimizado
@@ -25,10 +25,11 @@ const getResponsiveImage = (srcSet: Record<string, string>, width: number): stri
     "16x9";
   return toWebp(srcSet[key]);
 };
----
+
 // Obtener la imagen inicial para SSR
 const initialWidth = 1920; // Ancho por defecto para SSR
 const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
+---
 
 <section id="sp-page-title" class="firstSection">
   <div class="slideshow">
@@ -71,10 +72,10 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
   import { SlideData } from './SlideData';
 
   // Función para convertir URL a formato optimizado
-  const toWebp = (url: string) => url.replace("/upload/", "/upload/f_auto,q_auto/");
+  const toWebp = (url: any) => url.replace("/upload/", "/upload/f_auto,q_auto/");
 
   // Función para obtener la imagen ideal según el ancho
-  const getResponsiveImage = (srcSet: Record<string, string>, width: number): string => {
+  const getResponsiveImage = (srcSet: any, width: any): string => {
     const key =
       width <= 480 ? "9x16" :
       width <= 768 ? "4x5" :
@@ -85,7 +86,7 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
   };
 
   let current = 0;
-  let intervalRef: number | null = null;
+  let intervalRef: any = null;
   let viewportWidth = window.innerWidth;
 
   const slideshow = document.querySelector('.slideshow');
@@ -95,7 +96,7 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
   const nextButton = document.querySelector('.carouselControlNext');
 
   function updateSlide() {
-    slides.forEach((slide, i) => {
+    slides.forEach((slide: any, i: any) => {
       if (i === current) {
         slide.classList.add('active');
         const img = slide.querySelector('img');
@@ -112,7 +113,7 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
       }
     });
 
-    dots.forEach((dot, i) => {
+    dots.forEach((dot: any, i: any) => {
       dot.classList.toggle('active', i === current);
     });
   }
@@ -127,7 +128,7 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
     updateSlide();
   }
 
-  function goToIndex(i: number) {
+  function goToIndex(i: any) {
     current = i;
     updateSlide();
   }
@@ -137,7 +138,6 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
     intervalRef = window.setInterval(goToNext, 5000);
   }
 
-  // Event Listeners
   prevButton?.addEventListener('click', () => {
     goToPrev();
     resetTimer();
@@ -148,23 +148,20 @@ const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
     resetTimer();
   });
 
-  dots.forEach((dot, i) => {
+  dots.forEach((dot: any, i: any) => {
     dot.addEventListener('click', () => {
       goToIndex(i);
       resetTimer();
     });
   });
 
-  // Handle window resize
   window.addEventListener('resize', () => {
     viewportWidth = window.innerWidth;
     updateSlide();
   });
 
-  // Initialize
   resetTimer();
 
-  // Cleanup
   window.addEventListener('beforeunload', () => {
     if (intervalRef) clearInterval(intervalRef);
   });

@@ -1,0 +1,13 @@
+.fullpage {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.first-section {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+} 

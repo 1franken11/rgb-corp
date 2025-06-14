@@ -4,9 +4,12 @@ import TopBar from '../components/common/topbar/TopBar.astro';
 import Navbar from '../components/common/navbar/Navbar.astro';
 import LanguageSelector from '../components/languageSelector/LanguageSelector.astro';
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// Redirigir a la versión en español por defecto
+Astro.redirect('/es/');
+
 const { lang } = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-Astro.redirect('/es/');
 ---
 
 <MainLayout title="RGB Corporation - Inicio" lang={lang}>

@@ -36,20 +36,23 @@ const menuItems = [
 
 <script>
   document.querySelectorAll('.navbarMenu a').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetId = link.getAttribute('href')?.substring(1);
-      const targetElement = document.getElementById(targetId || '');
-      
-      if (targetElement) {
-        const offset = 180;
-        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
         
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
+        if (targetElement) {
+          const offset = 180;
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    }
   });
 </script> 

@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import QuienesSomos from '../../components/QuienesSomos/QuienesSomos.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title="About Us | RGB Corp" description="Learn more about RGB Corp">
+  <main>
+  </main>
+</Layout> 

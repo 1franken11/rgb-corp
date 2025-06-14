@@ -15,18 +15,18 @@ export const showDefaultLang = false;
 
 export function getLanguageFromURL(pathname: string): Language {
   const langCode = pathname.split('/')[1];
-  if (langCode === 'en' || langCode === 'pt') {
-    return langCode;
+  if (langCode in languages) {
+    return langCode as Language;
   }
-  return 'es';
+  return defaultLang;
 }
 
 export function getLangFromUrl(url: URL): { lang: Language } {
   const langCode = url.pathname.split('/')[1];
-  if (langCode === 'en' || langCode === 'pt') {
-    return { lang: langCode };
+  if (langCode in languages) {
+    return { lang: langCode as Language };
   }
-  return { lang: 'es' };
+  return { lang: defaultLang };
 }
 
 export function useTranslations(lang: Language) {
@@ -74,16 +74,24 @@ export function useI18n() {
 
 export function getPathFromURL(url: URL) {
   const [, lang, ...rest] = url.pathname.split('/');
-  return rest.join('/');
+  if (lang in languages) {
+    return rest.join('/');
+  }
+  return url.pathname.slice(1);
 }
 
 export function getLanguageFromPath(path: string) {
   const [, lang] = path.split('/');
-  if (lang in languages) return lang as Language;
-  return undefined;
+  if (lang in languages) {
+    return lang as Language;
+  }
+  return defaultLang;
 }
 
 export function getPathWithoutLanguage(path: string) {
   const [, lang, ...rest] = path.split('/');
-  return rest.join('/');
+  if (lang in languages) {
+    return rest.join('/');
+  }
+  return path.slice(1);
 } 
