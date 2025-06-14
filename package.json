@@ -12,12 +12,16 @@
   "dependencies": {
     "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
+    "@floating-ui/dom": "^1.7.1",
     "aos": "^2.3.4",
     "astro": "^4.0.0",
+    "focus-trap": "^7.6.5",
+    "lightgallery": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0",
-    "react-router-dom": "^7.6.2"
+    "react-router-dom": "^7.6.2",
+    "swiper": "^11.2.8"
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",

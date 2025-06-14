@@ -1,6 +1,8 @@
 ---
 import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
-import './FlooringSection.css';
+import FlooringGrid from './FlooringGrid.astro';
+import FlooringModal from './FlooringModal.astro';
+import './FlooringSections.css';
 
 interface Props {
   lang?: Language;
@@ -9,23 +11,104 @@ interface Props {
 const { lang: propLang } = Astro.props;
 const currentLang = propLang || getLangFromUrl(Astro.url);
 const t = useTranslations(currentLang);
-
-const title = t('FlooringSections.title');
-const description = t('FlooringSections.description');
-const sections = t('FlooringSections.sections');
 ---
-<section class="flooring-sections">
-  <div class="container">
-    <h2>{title}</h2>
-    <p>{description}</p>
-    <div class="sections-grid">
-      {Array.isArray(sections) && sections.map((section) => (
-        <div class="section-card">
-          <img src={section.image} alt={section.title} />
-          <h3>{section.title}</h3>
-          <p>{section.description}</p>
-        </div>
-      ))}
-    </div>
+
+<section id="flooring">
+  <div class="flooring-sections">
+    <div class="flooring-bg-overlay" id="flooring-bg"></div>
+    <h2 class="flooring-title">{t('FlooringSections.title')}</h2>
+    <FlooringGrid client:load lang={currentLang} />
   </div>
-</section> 
+</section>
+
+<script>
+  let selectedFloor: string | null = null;
+  let bgImage: string | null = null;
+  let fadeOut = false;
+  let fixedBgImage: string | null = null;
+
+  const bgOverlay = document.getElementById('flooring-bg') as HTMLElement;
+
+  function updateBackground() {
+    if (bgOverlay) {
+      bgOverlay.style.backgroundImage = fixedBgImage
+        ? `url(${fixedBgImage})`
+        : bgImage
+        ? `url(${bgImage})`
+        : 'none';
+      
+      bgOverlay.classList.toggle('fade-out', fadeOut && !fixedBgImage);
+    }
+  }
+
+  function createModal(floor: string) {
+    // Remover modal existente si hay uno
+    const existingModal = document.getElementById('flooring-modal');
+    if (existingModal) {
+      existingModal.remove();
+    }
+
+    // Crear nuevo modal
+    const modal = document.createElement('div');
+    modal.id = 'flooring-modal';
+    modal.className = 'modal-overlay';
+    
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-card-two-columns';
+    
+    // Crear el contenido del modal usando el componente FlooringModal
+    const modalComponent = document.createElement('flooring-modal');
+    modalComponent.setAttribute('floor', floor);
+    modalComponent.setAttribute('lang', document.documentElement.lang || 'es');
+    
+    modalContent.appendChild(modalComponent);
+    modal.appendChild(modalContent);
+    document.body.appendChild(modal);
+
+    // Agregar event listeners para cerrar el modal
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        document.dispatchEvent(new CustomEvent('modalClose'));
+      }
+    });
+
+    const closeBtn = modal.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        document.dispatchEvent(new CustomEvent('modalClose'));
+      });
+    }
+  }
+
+  // Event listeners para manejar los eventos del FlooringGrid
+  document.addEventListener('floorSelected', ((e: CustomEvent) => {
+    selectedFloor = e.detail.floor;
+    fixedBgImage = e.detail.bgImage;
+    updateBackground();
+    if (selectedFloor) {
+      createModal(selectedFloor);
+    }
+  }) as EventListener);
+
+  document.addEventListener('floorHover', ((e: CustomEvent) => {
+    bgImage = e.detail.bgImage;
+    fadeOut = false;
+    updateBackground();
+  }) as EventListener);
+
+  document.addEventListener('floorLeave', () => {
+    fadeOut = true;
+    updateBackground();
+  });
+
+  document.addEventListener('modalClose', () => {
+    const modal = document.getElementById('flooring-modal');
+    if (modal) {
+      modal.remove();
+    }
+    selectedFloor = null;
+    fixedBgImage = null;
+    updateBackground();
+    document.getElementById('flooring')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script> 

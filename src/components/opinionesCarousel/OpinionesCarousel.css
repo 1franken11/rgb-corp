@@ -1,0 +1,109 @@
+.opinionesSection {
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.opinionesSection h2 {
+  text-align: center;
+  display: block;      
+  width: 100%;          
+  margin: 0 auto;        
+}
+
+.carouselContainer {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.opinionesGrid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.fadeIn {
+  animation: fadeIn 2s ease-in-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.facebook-iframe-card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+}
+
+.facebook-iframe-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.carouselControlPrev,
+.carouselControlNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  filter: none;
+  width: auto;
+  height: auto;
+  color: #333;
+  z-index: 10;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.carouselControlPrev:hover,
+.carouselControlNext:hover {
+  color: #666;
+}
+
+.carouselControlPrev {
+  left: 0;
+}
+
+.carouselControlNext {
+  right: 0;
+}
+
+.carouselWrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .opinionesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .opinionesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .carouselControlPrev {
+    left: -25px;
+  }
+
+  .carouselControlNext {
+    right: -25px;
+  }
+} 

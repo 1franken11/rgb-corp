@@ -1,0 +1,251 @@
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+
+interface Props {
+  gallery: string[];
+  lang?: string;
+}
+
+const { gallery, lang } = Astro.props;
+const currentLang = lang || getLangFromUrl(Astro.url);
+const t = useTranslations(currentLang);
+
+const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : gallery;
+
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <button class="close-button" aria-label={t('ProjectSection.close')}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+    <div class="media-wrapper" id="lightgallery">
+      {parsedGallery.map((media: string, index: number) => (
+        <a href={media} class="media-item" data-index={index}>
+          <img src={media} alt={`Gallery image ${index + 1}`} />
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  import lightGallery from 'lightgallery';
+  import lgZoom from 'lightgallery/plugins/zoom';
+  import lgThumbnail from 'lightgallery/plugins/thumbnail';
+  import { createFocusTrap } from 'focus-trap';
+  import { computePosition, flip, shift, offset } from '@floating-ui/dom';
+
+  class ProjectModalElement extends HTMLElement {
+    private lightGalleryInstance: any;
+    private focusTrap: any;
+
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+    }
+
+    connectedCallback() {
+      const modalContent = this.querySelector('.modal-content');
+      const closeButton = this.querySelector('.close-button');
+      const mediaWrapper = this.querySelector('#lightgallery');
+
+      // Inicializar lightGallery
+      this.lightGalleryInstance = lightGallery(mediaWrapper, {
+        plugins: [lgZoom, lgThumbnail],
+        speed: 500,
+        download: true,
+        counter: true,
+        getCaptionFromTitleOrAlt: true,
+        mode: 'lg-fade',
+        cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
+        backdropDuration: 400,
+        startAnimationDuration: 400,
+        closable: true,
+        loop: true,
+        escKey: true,
+        keyPress: true,
+        controls: true,
+        slideEndAnimation: true,
+        hideControlOnEnd: false,
+        mousewheel: true,
+        getCaptionFromTitleOrAlt: true,
+        appendSubHtmlTo: '.lg-item',
+        subHtmlSelectorRelative: true,
+        preload: 1,
+        showCloseIcon: true,
+        showMaximizeIcon: true,
+        showThumbByDefault: false,
+        toogleThumb: true,
+        enableSwipe: true,
+        enableDrag: true,
+        allowMediaOverlap: true,
+        toggleThumbSize: true,
+        thumbWidth: 100,
+        thumbContHeight: 100,
+        thumbMargin: 5,
+        autoplayVideoOnSlide: true,
+        videoMaxSize: '1280-720',
+        loadYoutubeThumbnail: true,
+        youtubeThumbSize: 'default',
+        vimeoThumbSize: 'thumbnail_large',
+        dailymotionThumbSize: 'thumbnail_720p',
+        vkThumbSize: 'base',
+        videojs: true,
+        videojsTheme: 'vjs-default-skin',
+        videojsOptions: {
+          controls: true,
+          autoplay: false,
+          preload: 'auto',
+          fluid: true,
+          responsive: true,
+          liveui: true
+        }
+      });
+
+      // Configurar focus trap
+      this.focusTrap = createFocusTrap(modalContent, {
+        initialFocus: closeButton,
+        allowOutsideClick: true,
+        escapeDeactivates: true,
+        returnFocusOnDeactivate: true
+      });
+
+      this.focusTrap.activate();
+
+      // Manejar el cierre del modal
+      closeButton?.addEventListener('click', () => {
+        this.lightGalleryInstance.destroy();
+        this.focusTrap.deactivate();
+        this.remove();
+      });
+
+      // Manejar navegación con teclado
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.lightGalleryInstance.destroy();
+          this.focusTrap.deactivate();
+          this.remove();
+        }
+      });
+
+      // Posicionar el modal
+      this.updatePosition();
+      window.addEventListener('resize', () => this.updatePosition());
+    }
+
+    private async updatePosition() {
+      const modalContent = this.querySelector('.modal-content');
+      const modalBackdrop = this.querySelector('.modal-backdrop');
+
+      if (modalContent && modalBackdrop) {
+        const { x, y } = await computePosition(modalContent, modalBackdrop, {
+          placement: 'center',
+          middleware: [
+            offset(10),
+            flip(),
+            shift({ padding: 5 })
+          ]
+        });
+
+        Object.assign(modalContent.style, {
+          position: 'absolute',
+          left: `${x}px`,
+          top: `${y}px`
+        });
+      }
+    }
+
+    disconnectedCallback() {
+      if (this.lightGalleryInstance) {
+        this.lightGalleryInstance.destroy();
+      }
+      if (this.focusTrap) {
+        this.focusTrap.deactivate();
+      }
+    }
+  }
+
+  customElements.define('project-modal', ProjectModalElement);
+</script>
+
+<style>
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .close-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .media-wrapper {
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .media-item {
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .media-item:hover {
+    transform: scale(1.05);
+  }
+
+  .media-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 1rem;
+    }
+
+    .media-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+</style> 
