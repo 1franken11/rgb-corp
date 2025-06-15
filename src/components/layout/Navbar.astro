@@ -76,7 +76,7 @@ const currentPath = Astro.url.pathname;
 
     <button 
       class={styles.menuToggle} 
-      aria-label="Toggle menu"
+      id="menu-toggle-btn"  aria-label="Toggle menu"
       aria-expanded="false"
       aria-controls="nav-menu"
     >
@@ -85,13 +85,10 @@ const currentPath = Astro.url.pathname;
       <span></span>
     </button>
 
-    <div id="nav-menu" class={styles.navMenu}>
-      {menuItems.map((item) => (
+    <div id="nav-menu" class={styles.navMenu}> {menuItems.map((item) => (
         <a 
           href={item.href} 
-          class={styles.navLink}
-          class:active={currentPath === item.href}
-          data-lang-en={item.lang.en}
+          class:list={[styles.navLink, currentPath === item.href ? styles.active : '']} data-lang-en={item.lang.en}
           data-lang-es={item.lang.es}
           data-lang-por={item.lang.por}
         >
@@ -134,6 +131,11 @@ const currentPath = Astro.url.pathname;
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: 4px;
     transition: all 0.3s ease;
+  }
+
+  .nav-link.active { /* Definimos la clase active aquí */
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--color-accent);
   }
 
   .nav-link:hover {
@@ -191,17 +193,20 @@ const currentPath = Astro.url.pathname;
 
 <script>
   // Toggle menu en móvil
-  const menuToggle = document.querySelector(`.${styles.menuToggle}`);
-  const navMenu = document.querySelector(`.${styles.navMenu}`);
+  // Usamos los IDs que agregamos/ya existen
+  const menuToggle = document.getElementById('menu-toggle-btn');
+  const navMenu = document.getElementById('nav-menu');
 
-  menuToggle?.addEventListener('click', () => {
-    navMenu?.classList.toggle('active');
-    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-    menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
-  });
+  if (menuToggle && navMenu) {
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', (!isExpanded).toString());
+    });
+  }
 
   // Cerrar menú al hacer click en un enlace
-  document.querySelectorAll(`.${styles.navLink}`).forEach(link => {
+  document.querySelectorAll('.nav-link').forEach(link => { 
     link.addEventListener('click', () => {
       navMenu?.classList.remove('active');
       menuToggle?.setAttribute('aria-expanded', 'false');
@@ -210,10 +215,13 @@ const currentPath = Astro.url.pathname;
 
   // Cerrar menú al hacer click fuera
   document.addEventListener('click', (e) => {
+    // CAMBIO AQUÍ: Seleccionamos la navbar por su ID
+    const navbarContainer = document.getElementById('main-navbar'); 
+
     if (
       navMenu?.classList.contains('active') &&
-      !navMenu.contains(e.target as Node) &&
-      !menuToggle?.contains(e.target as Node)
+      navbarContainer && 
+      !navbarContainer.contains(e.target as Node)
     ) {
       navMenu.classList.remove('active');
       menuToggle?.setAttribute('aria-expanded', 'false');
@@ -222,7 +230,7 @@ const currentPath = Astro.url.pathname;
 
   // Actualizar textos según el idioma seleccionado
   const updateMenuTexts = (lang: string) => {
-    document.querySelectorAll(`.${styles.navLink}`).forEach(link => {
+    document.querySelectorAll('.nav-link').forEach(link => { 
       const text = link.getAttribute(`data-lang-${lang.toLowerCase()}`);
       if (text) link.textContent = text;
     });
@@ -232,4 +240,4 @@ const currentPath = Astro.url.pathname;
   document.addEventListener('languageChanged', ((e: CustomEvent) => {
     updateMenuTexts(e.detail.lang);
   }) as EventListener);
-</script> 
+</script>

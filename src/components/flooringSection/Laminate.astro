@@ -6,7 +6,7 @@ interface Props {
 }
 
 const { lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language; 
 const t = useTranslations(currentLang);
 
 const descriptions = t('FlooringSections.descriptions.Laminate') as { title: string; description: string }[];
@@ -21,4 +21,4 @@ const descriptions = t('FlooringSections.descriptions.Laminate') as { title: str
       </div>
     ))}
   </div>
-</div> 
+</div>

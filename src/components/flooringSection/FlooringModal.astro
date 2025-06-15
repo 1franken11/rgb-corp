@@ -11,7 +11,8 @@ interface Props {
 }
 
 const { floor, lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+// Aplicamos la aserción de tipo aquí también
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
 const t = useTranslations(currentLang);
 
 const floorImages: Record<string, string> = {
@@ -63,4 +64,4 @@ const components: Record<string, any> = {
       modal.remove();
     });
   }
-</script> 
+</script>

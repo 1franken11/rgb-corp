@@ -9,11 +9,12 @@ interface Props {
 }
 
 const { lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+// Aplicamos la aserción de tipo aquí también
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
 const t = useTranslations(currentLang);
 ---
 
-<section id="flooring">
+<section id="flooring" class="flooring-section">
   <div class="flooring-sections">
     <div class="flooring-bg-overlay" id="flooring-bg"></div>
     <h2 class="flooring-title">{t('FlooringSections.title')}</h2>
@@ -69,6 +70,7 @@ const t = useTranslations(currentLang);
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         document.dispatchEvent(new CustomEvent('modalClose'));
+        modal.remove();
       }
     });
 
@@ -76,6 +78,7 @@ const t = useTranslations(currentLang);
     if (closeBtn) {
       closeBtn.addEventListener('click', () => {
         document.dispatchEvent(new CustomEvent('modalClose'));
+        modal.remove();
       });
     }
   }
@@ -111,4 +114,4 @@ const t = useTranslations(currentLang);
     updateBackground();
     document.getElementById('flooring')?.scrollIntoView({ behavior: 'smooth' });
   });
-</script> 
+</script>

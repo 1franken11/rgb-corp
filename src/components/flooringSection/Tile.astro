@@ -1,3 +1,4 @@
+---
 import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
 
 interface Props {
@@ -5,11 +6,11 @@ interface Props {
 }
 
 const { lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
 const t = useTranslations(currentLang);
 
 const descriptions = t('FlooringSections.descriptions.Tile') as { title: string; description: string }[];
-
+---
 <div class="flooring-item">
   <div class="flooring-description">
     {descriptions.map((item, index) => (

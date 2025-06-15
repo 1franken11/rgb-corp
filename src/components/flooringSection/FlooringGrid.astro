@@ -6,7 +6,8 @@ interface Props {
 }
 
 const { lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+// Aseguramos que currentLang siempre sea de tipo Language, asumiendo que getLangFromUrl devuelve directamente un Language
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language; // <-- Cambio importante aquí
 const t = useTranslations(currentLang);
 
 const floors = [
@@ -44,7 +45,7 @@ const floors = [
       data-floor={floor.key}
       data-bg-image={floor.bgImage}
     >
-      <img src={floor.image} alt={floor.label} />
+      <img src={floor.image} alt={floor.label} loading="lazy" />
       <div class="floor-label">{floor.label}</div>
     </div>
   ))}

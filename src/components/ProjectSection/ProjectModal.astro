@@ -1,19 +1,21 @@
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+---
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 
 interface Props {
   gallery: string[];
-  lang?: string;
+  lang?: Language; // Aseguramos que lang sea del tipo Language si es posible
 }
 
-const { gallery, lang } = Astro.props;
-const currentLang = lang || getLangFromUrl(Astro.url);
+const { gallery, lang: propLang } = Astro.props;
+// Solución para el primer error de tipo:
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
 const t = useTranslations(currentLang);
 
 const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : gallery;
-
+---
 <div class="modal-backdrop">
   <div class="modal-content">
     <button class="close-button" aria-label={t('ProjectSection.close')}>
@@ -45,13 +47,20 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
 
     constructor() {
       super();
-      this.attachShadow({ mode: 'open' });
+      // No attaches shadow DOM directly here if you want CSS from Astro to apply directly
+      // this.attachShadow({ mode: 'open' }); // <-- Consider removing this if your styles don't apply
     }
 
     connectedCallback() {
-      const modalContent = this.querySelector('.modal-content');
-      const closeButton = this.querySelector('.close-button');
-      const mediaWrapper = this.querySelector('#lightgallery');
+      // Asegúrate de que estos elementos existan antes de usarlos
+      const modalContent = this.querySelector('.modal-content') as HTMLElement | null; // Castear a HTMLElement
+      const closeButton = this.querySelector('.close-button') as HTMLElement | null; // Castear a HTMLElement
+      const mediaWrapper = this.querySelector('#lightgallery') as HTMLElement | null; // Castear a HTMLElement
+
+      if (!modalContent || !closeButton || !mediaWrapper) {
+        console.error('ProjectModal: Missing required elements.');
+        return;
+      }
 
       // Inicializar lightGallery
       this.lightGalleryInstance = lightGallery(mediaWrapper, {
@@ -59,7 +68,7 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
         speed: 500,
         download: true,
         counter: true,
-        getCaptionFromTitleOrAlt: true,
+        // Eliminado la entrada duplicada de getCaptionFromTitleOrAlt
         mode: 'lg-fade',
         cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
         backdropDuration: 400,
@@ -72,7 +81,7 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
         slideEndAnimation: true,
         hideControlOnEnd: false,
         mousewheel: true,
-        getCaptionFromTitleOrAlt: true,
+        getCaptionFromTitleOrAlt: true, // Mantener una de las dos
         appendSubHtmlTo: '.lg-item',
         subHtmlSelectorRelative: true,
         preload: 1,
@@ -117,7 +126,7 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
       this.focusTrap.activate();
 
       // Manejar el cierre del modal
-      closeButton?.addEventListener('click', () => {
+      closeButton.addEventListener('click', () => { // Ya no es opcional aquí
         this.lightGalleryInstance.destroy();
         this.focusTrap.deactivate();
         this.remove();
@@ -138,8 +147,8 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
     }
 
     private async updatePosition() {
-      const modalContent = this.querySelector('.modal-content');
-      const modalBackdrop = this.querySelector('.modal-backdrop');
+      const modalContent = this.querySelector('.modal-content') as HTMLElement | null; // Castear a HTMLElement
+      const modalBackdrop = this.querySelector('.modal-backdrop') as HTMLElement | null; // Castear a HTMLElement
 
       if (modalContent && modalBackdrop) {
         const { x, y } = await computePosition(modalContent, modalBackdrop, {
@@ -151,7 +160,8 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
           ]
         });
 
-        Object.assign(modalContent.style, {
+        // Solución para el error de 'style'
+        Object.assign(modalContent.style, { 
           position: 'absolute',
           left: `${x}px`,
           top: `${y}px`
@@ -248,4 +258,4 @@ const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : galler
       grid-template-columns: 1fr;
     }
   }
-</style> 
+</style>

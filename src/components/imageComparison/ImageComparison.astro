@@ -14,7 +14,7 @@ const {
   afterImage = "/after.jpg"
 } = Astro.props;
 
-const currentLang = propLang || getLangFromUrl(Astro.url);
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
 const t = useTranslations(currentLang);
 
 const title = t('ImageComparison.title');
