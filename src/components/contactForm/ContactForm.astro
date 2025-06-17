@@ -77,25 +77,15 @@ const t = translations[currentLang];
 
 <section class="contact-container">
   <div class="contact-info">
-    <h2>{t.title}</h2>
-    <p>{t.subtitle}</p>
     <ImageComparison comparisons={imageComparisonsData}
     lang ={currentLang} />
   </div>
-    <div class="social-icons">
-      <a href="https://instagram.com/rgbcorp" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-instagram icon instagram"></i>
-      </a>
-      <a href="https://facebook.com/rgbcorp" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-facebook icon facebook"></i>
-      </a>
-      <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-whatsapp icon whatsapp"></i>
-      </a>
-    </div>
+
   </div>
 
   <div class="contact-form">
+    <h2>{t.title}</h2>
+    <p>{t.subtitle}</p>
     <form id="contactForm">
       <div>
         <label for="name">{t.name}</label>
@@ -121,7 +111,19 @@ const t = translations[currentLang];
     </form>
     <div id="successMessage" class="success-message hidden">{t.success}</div>
     <div id="errorMessage" class="error-message hidden">{t.error}</div>
+        <div class="social-icons">
+      <a href="https://instagram.com/rgbcorp" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram icon instagram"></i>
+      </a>
+      <a href="https://facebook.com/rgbcorp" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook icon facebook"></i>
+      </a>
+      <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp icon whatsapp"></i>
+      </a>
+    </div>
   </div>
+  
 </section>
 </div>
 

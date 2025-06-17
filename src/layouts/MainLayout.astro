@@ -1,21 +1,14 @@
 ---
 import Navbar from '../components/common/navbar/Navbar.astro';
-import Footer from '../components/common/Footer';
 import '../styles/global.css';
 import TopBar from '../components/common/topbar/TopBar.astro';
 import type { Language } from '../i18n/utils';
+import { getLangFromUrl } from '../i18n/utils';
+import { getSeoData } from '../utils/seo';
 
-interface Props {
-  title: string;
-  description?: string;
-  lang: Language;
-}
-
-const { 
-  title, 
-  description = "RGB Corporation",
-  lang
-} = Astro.props;
+const url = new URL(Astro.request.url);
+const { lang } = getLangFromUrl(url);
+const seo = getSeoData(lang, url.pathname);
 ---
 <!DOCTYPE html>
 <html lang={lang}>
@@ -23,9 +16,33 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
-    <title>{title}</title>
+
+<!-- SEO Metadata -->
+    <meta name="description" content={seo.description} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:image" content={seo.ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.ogImage} />
+    <link rel="canonical" href={`https://rgb-corporation.com/${lang}${url.pathname}`} />
+    <title>{seo.title}</title>
+
+    <!-- Fonts and CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <!-- Vercel Analytics -->
+    <script async src="/_vercel/insights/script.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -101,15 +118,7 @@ const {
   }
 </style>
 
+<!-- AOS Script Centralizado -->
 <script>
-  import AOS from 'aos';
-  import 'aos/dist/aos.css';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    AOS.init({
-      duration: 1000,
-      once: false,
-      mirror: true,
-    });
-  });
-</script> 
+  import '../scripts/aos-init.js';
+</script>

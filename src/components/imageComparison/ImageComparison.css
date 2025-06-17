@@ -2,7 +2,6 @@
 
 /* Estilos de la sección general */
 .image-comparison-section {
-  padding: 4rem 0; /* Espaciado general de la sección */
   background-color: var(--color-background, #f8f8f8); /* Color de fondo, usando variable CSS o fallback */
 }
 

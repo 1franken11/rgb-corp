@@ -1,10 +1,9 @@
 export { default as TopBar } from './common/topbar/TopBar.astro';
 export { default as Navbar } from './common/navbar/Navbar.astro';
-export { default as Footer } from './common/footer/Footer.astro';
+export { default as Footer } from './common/Footer.astro';
 export { default as QuienesSomos } from './QuienesSomos/QuienesSomos.astro';
 export { default as FlooringSection } from './flooringSection/FlooringSection.astro';
 export { default as ImageComparison } from './imageComparison/ImageComparison.astro';
 export { default as OpinionesCarousel } from './opinionesCarousel/OpinionesCarousel.astro';
-export { default as VideoSection } from './VideoSection.astro';
 export { default as ContactForm } from './contactForm/ContactForm.astro';
 export { default as Welcome } from './Welcome.astro';

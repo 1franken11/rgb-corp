@@ -1,4 +1,11 @@
 /* src/components/ContactForm/ContactForm.css */
+h2{
+      text-align: center;
+}
+p{
+      text-align: center;
+}
+
 
 .contact-container {
     display: flex;
@@ -59,6 +66,13 @@
     font-weight: bold;
     color: #444;
 }
+.contact-info,
+.contact-form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
 
 .contact-form input,
 .contact-form textarea,
@@ -116,7 +130,6 @@
 
 /* Estos estilos parecen ser para otro componente, si no los usas aquí, elimínalos */
 .image-comparison-section {
-    margin-top: 2rem;
 }
 
 .comparison-item {
@@ -160,6 +173,7 @@
 @media (max-width: 768px) {
     .contact-container {
         flex-direction: column;
+        align-items: center; /* Centra ambos bloques horizontalmente */
         padding: 20px;
         gap: 20px;
     }

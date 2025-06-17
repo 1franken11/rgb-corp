@@ -8,7 +8,7 @@ import FlooringSection from '../../components/flooringSection/FlooringSection.as
 import ProjectSection from '../../components/ProjectSection/ProjectSection.astro';
 import OpinionesCarousel from '../../components/opinionesCarousel/OpinionesCarousel.astro';
 import ContactForm from '../../components/contactForm/ContactForm.astro';
-import Footer from '../../components/footer/Footer.astro';
+import Footer from '@/components/layout/Footer.astro';
 import '../../components/FirstSection/fullpage.css';
 
 const lang: Language = 'es';
@@ -16,37 +16,19 @@ const lang: Language = 'es';
 
 // --- Define tus comparaciones de imágenes aquí ---
 // Esto es un ejemplo, reemplazá con tus propias rutas de imágenes y textos
-const imageComparisonsData = [
-  {
-    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854663/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_e9174645_lgkbqk.jpg', // Ruta a tu imagen "antes"
-    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854747/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.14_023dbe16_ylkdxr.jpg', // Ruta a tu imagen "después"
-    alt: 'Cocina reformada' // Texto alternativo descriptivo
-  },
-  {
-    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854491/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_3294c619_mqj5ug.jpg',
-    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854491/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_183997cd_qypyal.jpg',
-    alt: 'Baño modernizado'
-  },
-  {
-    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742921850/living2_tzjvsr.jpg',
-    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742921699/living1_cdkagq.jpg',
-    alt: 'Living room renovado'
-  }
-];
+
 // --- Fin de la definición de comparaciones ---
 ---
 
 <MainLayout title="RGB Corporation - Inicio" lang={lang}>
+    <main>
   <FirstSection lang={lang} />
   <QuienesSomos lang={lang} />
   <FlooringSection lang={lang} />
-  <ImageComparison lang={lang} comparisons={imageComparisonsData} />
   <ProjectSection lang={lang} />
-  <OpinionesCarousel lang={lang} />
-  <ContactForm lang={lang} />
-  <Footer lang={lang} />
-  <main>
-    <h1>Bienvenido a RGB Corporation</h1>
-    <!-- Aquí irá el contenido de tu página principal -->
+  <OpinionesCarousel lang={lang} client:visible />
+  <ContactForm lang={lang} client:visible />
+  <Footer lang={lang} client:visible />
+
   </main>
 </MainLayout> 

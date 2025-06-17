@@ -2,13 +2,26 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import type { Language } from '../../i18n/utils';
 import FirstSection from '../../components/FirstSection/FirstSection.astro';
-
+import { QuienesSomos } from '@/components';
+import {FlooringSection} from '@/components';
+import {ImageComparison} from '@/components';
+import ProjectSection from '../../components/ProjectSection/ProjectSection.astro';
+import {OpinionesCarousel} from '@/components';
+import {ContactForm} from '@/components';
+import Footer from '@/components/layout/Footer.astro';
 const lang: Language = 'pt';
+
 ---
 
 <MainLayout title="Home | RGB Corp" lang={lang}>
+    <main>
   <FirstSection lang={lang} />
-  <main>
-    <!-- Aquí va el contenido de tu HomePage -->
+  <QuienesSomos lang={lang} />
+  <FlooringSection lang={lang} />
+  <ProjectSection lang={lang} />
+  <OpinionesCarousel lang={lang} client:visible />
+  <ContactForm lang={lang} client:visible />
+  <Footer lang={lang} client:visible />
+
   </main>
 </MainLayout> 

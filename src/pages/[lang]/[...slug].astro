@@ -1,5 +1,5 @@
 ---
-import Layout from '../../layouts/Layout.astro';
+import MainLayout from '../../layouts/MainLayout.astro';
 import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
 import { languages } from '../../i18n/utils';
 
@@ -34,8 +34,8 @@ const module = await pageComponents[page as keyof typeof pageComponents]();
 const Component = module.default;
 ---
 
-<Layout title={t(`${page}.title`)} description={t(`${page}.description`)}>
+<MainLayout title={t(`${page}.title`)} description={t(`${page}.description`)} lang={lang}>
   <main>
     <Component lang={lang} />
   </main>
-</Layout>
+</MainLayout>
