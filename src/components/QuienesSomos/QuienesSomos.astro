@@ -27,11 +27,22 @@ const materials = t('QuienesSomos.materials.items');
 ---
 
 <section class="quienes-somos">
+
+  
   <div class="container">
     <div class="specialty">
+      
+    <div class="services">
+      <h2>{servicesTitle}</h2>
+      <ul>
+        {Array.isArray(servicesDescription) && servicesDescription.map((service) => (
+          <li>{service}</li>
+        ))}
+      </ul>
+    </div>
+
       <h2>{specialtyTitle}</h2>
       <p>{specialtyDescription}</p>
-    </div>
 
     <div class="why-choose-us">
       <h2>{whyChooseUsTitle}</h2>
@@ -41,6 +52,8 @@ const materials = t('QuienesSomos.materials.items');
         ))}
       </ul>
     </div>
+    </div>
+
 
     <div class="commitment">
       <h2>{commitmentTitle}</h2>
@@ -51,15 +64,6 @@ const materials = t('QuienesSomos.materials.items');
           </div>
         ))}
       </div>
-    </div>
-
-    <div class="services">
-      <h2>{servicesTitle}</h2>
-      <ul>
-        {Array.isArray(servicesDescription) && servicesDescription.map((service) => (
-          <li>{service}</li>
-        ))}
-      </ul>
     </div>
 
   </div>

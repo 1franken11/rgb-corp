@@ -28,25 +28,29 @@ const getResponsiveImage = (srcSet: Record<string, string>, width: number): stri
 
 // Obtener la imagen inicial para SSR
 const initialWidth = 1920; // Ancho por defecto para SSR
-const initialImage = getResponsiveImage(SlideData[0].srcSet, initialWidth);
 ---
 
 <section id="sp-page-title" class="firstSection">
   <div class="slideshow">
-    <div class="slide active">
-      <img
-        src={initialImage}
-        srcset={`
-          ${initialImage} 1x,
-          ${initialImage.replace("/upload/", "/upload/dpr_2.0/")} 2x
-        `}
-        alt={SlideData[0].alt}
-        loading="eager"
-      />
-      <div class="caption">
-        {t('SLIDES.0.caption') || SlideData[0].alt}
-      </div>
-    </div>
+    {SlideData.map((slide, index) => {
+      const initialImage = getResponsiveImage(slide.srcSet, initialWidth);
+      return (
+        <div class={`slide ${index === 0 ? 'active' : ''}`}>
+          <img
+            src={initialImage}
+            srcset={`
+              ${initialImage} 1x,
+              ${initialImage.replace("/upload/", "/upload/dpr_2.0/")} 2x
+            `}
+            alt={slide.alt}
+            loading={index === 0 ? "eager" : "lazy"}
+          />
+          <div class="caption">
+            {t(`SLIDES.${index}.caption`) || slide.alt}
+          </div>
+        </div>
+      );
+    })}
 
     <!-- Controles -->
     <button class="carouselControlPrev" aria-label="Previous slide">

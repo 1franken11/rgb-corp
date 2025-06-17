@@ -1,67 +1,192 @@
----
-import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
-import Laminate from './Laminate.astro';
-import Vinyl from './Vinyl.astro';
-import Tile from './Tile.astro';
-import Wood from './Wood.astro';
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
+import './FlooringModal.css';
 
 interface Props {
-  floor: string;
-  lang?: Language;
+  lang?: string;
 }
 
-const { floor, lang: propLang } = Astro.props;
-// Aplicamos la aserción de tipo aquí también
-const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
+const { lang: propLang } = Astro.props;
+const currentLang: Language = typeof propLang === 'string' ? propLang as Language : getLangFromUrl(Astro.url).lang;
 const t = useTranslations(currentLang);
 
-const floorImages: Record<string, string> = {
-  Tile: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744643216/Imagen_de_WhatsApp_2025-02-06_a_las_18.37.00_44592a86_jeumna.jpg",
-  Laminate: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744643166/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.14_faf1dc6f_l12fpq.jpg",
-  Vinyl: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744662421/vinyll_samvcc.jpg",
-  Wood: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744643154/Imagen_de_WhatsApp_2025-02-06_a_las_18.37.00_737de658_ioa8xa.jpg",
-};
-
-const components: Record<string, any> = {
-  Tile: <Tile lang={currentLang} />,
-  Laminate: <Laminate lang={currentLang} />,
-  Vinyl: <Vinyl lang={currentLang} />,
-  Wood: <Wood lang={currentLang} />,
-};
----
-
-<div class="modal-overlay" id="flooring-modal">
-  <div class="modal-card-two-columns">
-    <div class="modal-image-column">
-      <img src={floorImages[floor]} alt={floor} />
-    </div>
-    <div class="modal-text-column">
-      <h2 class="modal-title">{t(`FlooringSections.options.${floor}`)}</h2>
-      <div class="modal-content-scroll">
-        {components[floor]}
+<div class="modal-backdrop">
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Close modal">×</button>
+    <div class="modal-gallery">
+      <button class="gallery-nav prev" aria-label="Previous image">❮</button>
+      <div class="gallery-container">
+        <!-- El contenido de la galería se cargará dinámicamente -->
       </div>
-      <button class="close-btn" id="close-modal">
-        {t('Button.Close')}
-      </button>
+      <button class="gallery-nav next" aria-label="Next image">❯</button>
     </div>
   </div>
 </div>
 
 <script>
-  const modal = document.getElementById('flooring-modal');
-  const closeBtn = document.getElementById('close-modal');
+  class FlooringModal extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+    }
 
-  if (modal && closeBtn) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        document.dispatchEvent(new CustomEvent('modalClose'));
-        modal.remove();
+    connectedCallback() {
+      const gallery = JSON.parse(this.getAttribute('gallery') || '[]');
+      let currentIndex = 0;
+
+      const template = `
+        <style>
+          .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050;
+          }
+
+          .modal-content {
+            position: relative;
+            max-width: 95vw;
+            max-height: 95vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .modal-gallery {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .gallery-container {
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .gallery-container img,
+          .gallery-container video {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+          }
+
+          .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+          }
+
+          .gallery-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+          }
+
+          .prev {
+            left: 20px;
+          }
+
+          .next {
+            right: 20px;
+          }
+
+          .modal-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-size: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+          }
+        </style>
+        <div class="modal-backdrop">
+          <div class="modal-content">
+            <button class="modal-close">×</button>
+            <div class="modal-gallery">
+              <button class="gallery-nav prev">❮</button>
+              <div class="gallery-container"></div>
+              <button class="gallery-nav next">❯</button>
+            </div>
+          </div>
+        </div>
+      `;
+
+      this.shadowRoot.innerHTML = template;
+
+      const container = this.shadowRoot.querySelector('.gallery-container');
+      const prevButton = this.shadowRoot.querySelector('.prev');
+      const nextButton = this.shadowRoot.querySelector('.next');
+      const closeButton = this.shadowRoot.querySelector('.modal-close');
+
+      function showMedia(index: number) {
+        if (!container) return;
+        const media = gallery[index];
+        const isVideo = media.endsWith('.mp4');
+        
+        container.innerHTML = isVideo
+          ? `<video src="${media}" controls autoplay></video>`
+          : `<img src="${media}" alt="Gallery image" />`;
       }
-    });
 
-    closeBtn.addEventListener('click', () => {
-      document.dispatchEvent(new CustomEvent('modalClose'));
-      modal.remove();
-    });
+      function updateNavigation() {
+        if (prevButton) prevButton.style.display = currentIndex > 0 ? 'block' : 'none';
+        if (nextButton) nextButton.style.display = currentIndex < gallery.length - 1 ? 'block' : 'none';
+      }
+
+      prevButton?.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          showMedia(currentIndex);
+          updateNavigation();
+        }
+      });
+
+      nextButton?.addEventListener('click', () => {
+        if (currentIndex < gallery.length - 1) {
+          currentIndex++;
+          showMedia(currentIndex);
+          updateNavigation();
+        }
+      });
+
+      closeButton?.addEventListener('click', () => {
+        this.remove();
+      });
+
+      // Mostrar la primera imagen
+      showMedia(currentIndex);
+      updateNavigation();
+
+      // Cerrar con Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.remove();
+        }
+      });
+    }
   }
-</script>
+
+  customElements.define('flooring-modal', FlooringModal);
+</script> 

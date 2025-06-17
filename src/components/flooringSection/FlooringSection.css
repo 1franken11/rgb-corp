@@ -1,69 +1,218 @@
 .flooring-sections {
-  padding: 4rem 0;
-  background-color: var(--color-background);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.flooring-sections h2 {
+  position: relative;
+  overflow: hidden;
   text-align: center;
-  margin-bottom: 1rem;
-  color: var(--color-text);
+  padding: 40px 20px;
+  background-color: #ffffff;
 }
 
-.flooring-sections p {
-  text-align: center;
-  margin-bottom: 3rem;
-  color: var(--color-text);
-  max-width: 800px;
+.flooring-title {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: rgba(42, 120, 146, 0.7);
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: rgba(240, 248, 255, 0.5);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);  
+  border-radius: 5px;
+}
+
+.flooring-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 0;
+}
+
+.flooring-bg-overlay.fade-out {
+  opacity: 0;
+}
+
+.flooring-sections > *:not(.flooring-bg-overlay) {
+  position: relative;
+  z-index: 1;
+}
+
+.flooring-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.flooring-card {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.flooring-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.25, 0.1, 0.25, 1), opacity 0.6s ease-in-out;
+}
+
+.flooring-card:hover img {
+  transform: scale(1.07);
+  opacity: 0.9;
+}
+
+.floor-label {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: #fff;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px 0;
+  z-index: 1000;
+}
+
+.modal-card-two-columns {
+  display: flex;
+  flex-direction: row;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+}
+
+.modal-image-column {
+  width: 50%;
+  overflow: hidden;
+}
+
+.modal-image-column img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.modal-text-column {
+  width: 50%;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: rgba(42, 120, 146, 0.7);
+}
+
+.modal-content-scroll {
+  overflow-y: auto;
+  padding: 20px 20px;
+}
+
+.modal-content-scroll p {
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.close-btn {
+  background-color: #8bbaca;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.sections-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 1rem;
-}
-
-.section-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.section-card:hover {
-  transform: translateY(-5px);
-}
-
-.section-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.section-card h3 {
-  padding: 1rem;
-  margin: 0;
-  color: var(--color-text);
-}
-
-.section-card p {
-  padding: 0 1rem 1rem;
-  margin: 0;
-  color: var(--color-text);
-  font-size: 0.9rem;
+  color: black;
 }
 
 @media (max-width: 768px) {
-  .sections-grid {
-    grid-template-columns: 1fr;
+  .modal-card-two-columns {
+    flex-direction: column;
+    width: 95%;
+    max-height: none;
+    border-radius: 10px;
   }
-} 
+
+  .modal-image-column {
+    width: 100%;
+    max-height: none;
+  }
+  
+  .modal-image-column img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .modal-text-column {
+    width: 100%;
+    padding: 20px;
+    text-align: left;
+  }
+
+  .modal-content-scroll {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .modal-title {
+    font-size: 1.6rem;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .close-btn {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #8bbaca;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 0 0 10px 10px;
+    color: black;
+  }
+}
+
+/* Elimina outline, box-shadow y highlight azul en todo lo clickeable */
+button,
+button:focus,
+button:active,
+a,
+a:focus,
+a:active,
+.flooring-card,
+.flooring-card:focus,
+.flooring-card:active,
+.close-btn,
+.close-btn:focus,
+.close-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}

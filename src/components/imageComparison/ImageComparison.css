@@ -1,171 +1,225 @@
-.comparison-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2rem;
-  width: 100%;
-  padding: 2rem;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  flex-wrap: wrap;
-  color: rgba(42, 120, 146, 0.9);
-  cursor: default;
+/* src/components/imageComparison/ImageComparison.css */
+
+/* Estilos de la sección general */
+.image-comparison-section {
+  padding: 4rem 0; /* Espaciado general de la sección */
+  background-color: var(--color-background, #f8f8f8); /* Color de fondo, usando variable CSS o fallback */
 }
 
-.comparison-wrapper {
-  color: rgba(42, 120, 146, 0.7);
-  list-style: disc;
-  padding-left: 1.5rem;
-}
-
-.comparison-after-wrapper,
-.comparison-divider,
-.comparison-slider {
-  will-change: clip-path, left;
-}
-
-.comparison-wrapper h2 {
-  margin-bottom: 1rem;
-}
-
-.services-block {
-  flex: 1 1 300px;
-  max-width: 400px;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 1rem;
-  border-radius: 12px;
-}
-
-.image-container {
-  flex: 2 1 600px;
-}
-
-.image-container {
-  flex: 1;
-  min-width: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-h3 {
-  size: 20;
-}
-
-.image-comparison-container {
-  position: relative;
-  width: 100%;
-  height: auto;
-  min-height: 400px;
-  border-radius: 12px;
-  overflow: hidden;
-  user-select: none;
+.image-comparison-section .container { /* Asumo que tienes un .container global */
+  max-width: 1200px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.image-comparison-container img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  display: block;
-  margin: auto;
+.image-comparison-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--color-text, #333); /* Color de texto, usando variable CSS o fallback */
 }
 
+.image-comparison-section p {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-text, #555); /* Color de texto, usando variable CSS o fallback */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Contenedor principal del custom element en Astro */
+/* Esta es la envoltura alrededor de <image-comparison-element> */
+.image-comparison-section .comparison-container {
+  max-width: 1200px; /* Aumentado para pantallas más grandes */
+  margin: 0 auto;
+  padding: 0 2rem; /* Añadido padding para separar de los bordes */
+}
+
+
+/* --- ESTILOS ESPECÍFICOS DEL CUSTOM ELEMENT <image-comparison-element> --- */
+
+/* El propio Custom Element, actúa como el contenedor principal */
+image-comparison-element {
+  display: block; /* Indispensable para que ocupe espacio y se le puedan aplicar estilos */
+  width: 100%;
+  position: relative; /* Muy importante para posicionar a sus hijos */
+  border-radius: 12px;
+  overflow: hidden; /* Oculta partes de las imágenes si se desbordan */
+  user-select: none; /* Evita selección de texto */
+  touch-action: none; /* Mejora el comportamiento táctil para arrastrar */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  min-height: 500px; /* Aumentado para pantallas más grandes */
+  background-color: #eee; /* Color de fondo mientras carga la imagen */
+}
+
+/* Contenedor interno que genera el render() del Custom Element */
+.image-comparison-container {
+  width: 100%;
+  height: 100%; /* Ocupa el 100% de la altura de 'image-comparison-element' */
+  position: relative;
+  overflow: hidden; /* Crucial para que clip-path funcione */
+}
+
+/* Imágenes "antes" y "después" */
+.image-before,
+.image-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta la imagen para cubrir el área, manteniendo la relación de aspecto */
+  display: block; /* Asegura que no haya espacios extra */
+  pointer-events: none; /* Permite que el ratón "pase" a los elementos de control */
+  user-select: none;
+  -webkit-user-drag: none; /* Deshabilita el arrastre nativo de imágenes */
+}
+
+/* Wrapper para la imagen "después" que usa clip-path */
 .comparison-after-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  transition: clip-path 0.05s;
+  overflow: hidden; /* Necesario para que clip-path funcione visualmente */
+  will-change: clip-path; /* Optimización de rendimiento para animaciones */
+  transition: clip-path 0.05s ease-out; /* Transición para un movimiento más suave */
 }
 
+/* La línea divisoria */
 .comparison-divider {
   position: absolute;
   top: 0;
-  width: 2px;
   height: 100%;
-  background-color: white;
-  box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
-  z-index: 2;
+  width: 2px; /* Ancho de la línea */
+  background-color: white; /* Color de la línea */
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.35); /* Sombra para resaltar */
+  z-index: 2; /* Por encima de las imágenes */
+  transform: translateX(-50%); /* Ajusta para que el 'left' sea el centro de la línea */
+  pointer-events: none; /* Los eventos los maneja el slider */
+  will-change: left; /* Optimización de rendimiento */
 }
 
+/* El control deslizante (círculo con flechas) */
 .comparison-slider {
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); /* Centra el slider exactamente en el punto del mouse */
   width: 56px;
   height: 56px;
   border-radius: 50%;
   border: 2px solid white;
-  backdrop-filter: blur(7px);
+  background-color: rgba(255, 255, 255, 0.4); /* Fondo translúcido */
+  backdrop-filter: blur(7px); /* Efecto de desenfoque detrás del slider */
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
-  z-index: 3;
-  pointer-events: auto;
-  cursor: grab;
+  z-index: 3; /* Por encima del divisor */
+  cursor: grab; /* Cursor para indicar que se puede arrastrar */
+  will-change: left; /* Optimización de rendimiento */
 }
 
 .comparison-slider:active {
-  cursor: grabbing;
+  cursor: grabbing; /* Cursor cuando se está arrastrando */
 }
 
+/* Flechas dentro del slider */
 .slider-arrow {
   width: 0;
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
+  position: relative; /* Para moverlas con margin-left/right */
 }
 
 .left-arrow {
   border-right: 10px solid white;
-  margin-right: 8px;
+  margin-right: 8px; /* Espacio entre las flechas */
 }
 
 .right-arrow {
   border-left: 10px solid white;
-  margin-left: 8px;
+  margin-left: 8px; /* Espacio entre las flechas */
 }
 
+/* Puntos de navegación */
 .comparison-dots {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
-  gap: 0.5rem;
+  margin-top: 1rem; /* Espacio arriba de los puntos */
+  gap: 0.5rem; /* Espacio entre los puntos */
+  z-index: 4; /* Asegura que estén por encima del comparador si hay superposición */
 }
 
 .dot {
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: #ccc; /* Color por defecto */
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Borde sutil */
 }
 
 .dot.active {
-  background-color: #333;
+  background-color: #333; /* Color del punto activo */
 }
 
-.image-before,
-.image-after {
-  pointer-events: none;
-  user-select: none;
-  -webkit-user-drag: none;
-}
 
+/* --- Media Queries para responsividad --- */
+
+/* Para pantallas muy anchas */
 @media (min-width: 1600px) {
-  .image-comparison-container {
+  .image-comparison-section .comparison-container {
+    max-width: 1400px;
+  }
+
+  image-comparison-element {
     aspect-ratio: 21 / 9;
+    height: auto;
+    min-height: 600px;
   }
 }
 
+/* Para pantallas de escritorio */
+@media (min-width: 769px) and (max-width: 1599px) {
+  .image-comparison-section .comparison-container {
+    max-width: 1200px;
+  }
+
+  image-comparison-element {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 500px;
+  }
+
+  .comparison-slider {
+    width: 64px;
+    height: 64px;
+  }
+
+  .slider-arrow {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+
+  .left-arrow {
+    border-right: 12px solid white;
+  }
+
+  .right-arrow {
+    border-left: 12px solid white;
+  }
+}
+
+/* Para tablets y pantallas de escritorio pequeñas */
 @media (max-width: 768px) {
-  .image-comparison-container {
-    aspect-ratio: 4 / 3;
+  image-comparison-element {
+    aspect-ratio: 4 / 3; /* Relación de aspecto más cuadrada */
+    height: auto;
+    min-height: 300px; /* Ajuste de altura mínima */
   }
 
   .comparison-slider {
@@ -185,142 +239,51 @@ h3 {
   .right-arrow {
     border-left: 8px solid white;
   }
-}
 
-@media (max-width: 500px) {
-  .image-comparison-container {
-    aspect-ratio: 1 / 1;
+  .comparison-dots {
+    margin-top: 0.75rem; /* Menos margen en dispositivos pequeños */
+    gap: 0.4rem;
   }
 
-  .image-comparison-container img {
-    object-position: center top;
-  }
-  
   .dot {
     width: 10px;
     height: 10px;
   }
 }
 
-.image-comparison {
-  padding: 4rem 0;
-  background-color: var(--color-background);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-.image-comparison h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-  color: var(--color-text);
-}
-
-.image-comparison p {
-  text-align: center;
-  margin-bottom: 3rem;
-  color: var(--color-text);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.comparison-container {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.before-image,
-.after-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.before-image img,
-.after-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.after-image {
-  width: 50%;
-  overflow: hidden;
-}
-
-.label {
-  position: absolute;
-  bottom: 20px;
-  padding: 8px 16px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-
-.before-image .label {
-  right: 20px;
-}
-
-.after-image .label {
-  left: 20px;
-}
-
-.slider {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 4px;
-  height: 100%;
-  background-color: white;
-  cursor: ew-resize;
-  transform: translateX(-50%);
-}
-
-.slider-handle {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 40px;
-  height: 40px;
-  background-color: white;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.slider-handle::before,
-.slider-handle::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 2px;
-  background-color: #666;
-  transform: translate(-50%, -50%);
-}
-
-.slider-handle::before {
-  transform: translate(-50%, -50%) rotate(45deg);
-}
-
-.slider-handle::after {
-  transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-@media (max-width: 768px) {
-  .comparison-container {
-    height: 300px;
+/* Para teléfonos móviles */
+@media (max-width: 500px) {
+  image-comparison-element {
+    aspect-ratio: 1 / 1; /* Cuadrado perfecto */
+    height: auto;
+    min-height: 250px; /* Altura mínima para móviles */
   }
-} 
+
+  .image-comparison-container img {
+    /* Si las imágenes son muy altas, puedes ajustar el object-position */
+    /* object-position: center top; */ /* Esto mueve la parte visible de la imagen */
+  }
+  
+  .comparison-slider {
+    width: 40px;
+    height: 40px;
+  }
+
+  .slider-arrow {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  .left-arrow {
+    border-right: 6px solid white;
+  }
+
+  .right-arrow {
+    border-left: 6px solid white;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+}

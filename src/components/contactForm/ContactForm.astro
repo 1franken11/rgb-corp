@@ -1,6 +1,7 @@
 ---
 import { getLanguageFromURL } from '../../i18n/utils';
 import type { Language } from '../../i18n/utils';
+import ImageComparison from '../imageComparison/ImageComparison.astro';
 import './ContactForm.css';
 
 interface Props {
@@ -54,25 +55,33 @@ const translations = {
     after: "Depois"
   }
 };
-
-const t = translations[currentLang];
-
-const comparisons = [
+const imageComparisonsData = [
   {
-    before: "/images/comparison1-before.jpg",
-    after: "/images/comparison1-after.jpg"
+    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854663/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_e9174645_lgkbqk.jpg', // Ruta a tu imagen "antes"
+    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854747/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.14_023dbe16_ylkdxr.jpg', // Ruta a tu imagen "después"
+    alt: 'Cocina reformada' // Texto alternativo descriptivo
   },
   {
-    before: "/images/comparison2-before.jpg",
-    after: "/images/comparison2-after.jpg"
+    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854491/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_3294c619_mqj5ug.jpg',
+    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854491/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_183997cd_qypyal.jpg',
+    alt: 'Baño modernizado'
+  },
+  {
+    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742921850/living2_tzjvsr.jpg',
+    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742921699/living1_cdkagq.jpg',
+    alt: 'Living room renovado'
   }
 ];
+const t = translations[currentLang];
 ---
 
 <section class="contact-container">
   <div class="contact-info">
     <h2>{t.title}</h2>
     <p>{t.subtitle}</p>
+    <ImageComparison comparisons={imageComparisonsData}
+    lang ={currentLang} />
+  </div>
     <div class="social-icons">
       <a href="https://instagram.com/rgbcorp" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram icon instagram"></i>
@@ -114,20 +123,6 @@ const comparisons = [
     <div id="errorMessage" class="error-message hidden">{t.error}</div>
   </div>
 </section>
-
-<div class="image-comparison-section">
-  {comparisons.map((comparison) => (
-    <div class="comparison-item">
-      <div>
-        <h3>{t.before}</h3>
-        <img src={comparison.before} alt="Before" />
-      </div>
-      <div>
-        <h3>{t.after}</h3>
-        <img src={comparison.after} alt="After" />
-      </div>
-    </div>
-  ))}
 </div>
 
 <script>
