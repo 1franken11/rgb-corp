@@ -4,7 +4,6 @@ import type { Language } from '../../i18n/utils';
 import FirstSection from '../../components/FirstSection/FirstSection.astro';
 import { QuienesSomos } from '@/components';
 import {FlooringSection} from '@/components';
-import {ImageComparison}from '@/components';
 import ProjectSection from '@/components/ProjectSection/ProjectSection.astro';
 import {OpinionesCarousel} from '@/components';
 import {ContactForm} from '@/components';
@@ -22,6 +21,7 @@ const lang: Language = 'en';
   <ProjectSection lang={lang} />
   <OpinionesCarousel lang={lang} client:visible />
   <ContactForm lang={lang} client:visible />
+  <Footer lang={lang} client:visible />
 
   </main>
 </MainLayout> 

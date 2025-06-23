@@ -51,28 +51,39 @@
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos generales para los botones de control del carrusel */
 .carouselControlPrev,
 .carouselControlNext {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  box-shadow: none;
-  filter: none;
-  width: auto;
-  height: auto;
-  color: #333;
-  z-index: 10;
-  cursor: pointer;
-  transition: color 0.3s ease;
+  top: 50%; /* Centrar verticalmente */
+  transform: translateY(-50%); /* Ajuste fino para el centrado vertical */
+  background-color: transparent; /* Fondo transparente por defecto */
+  border: none; /* Sin borde */
+  color: #ffffff; /* Color blanco para los iconos */
+  cursor: pointer; /* Indicador de clic */
+  z-index: 10; /* Asegurarse de que estén por encima de las imágenes */
+  padding: 0; /* Eliminar padding interno por defecto */
+  display: flex; /* Usar flexbox para centrar el icono */
+  align-items: center; /* Centrar el icono verticalmente */
+  justify-content: center; /* Centrar el icono horizontalmente */
+  transition: color 0.3s ease, background-color 0.3s ease; /* Transiciones suaves */
 }
+
+/* Ajuste del tamaño de los iconos de React (PiArrowSquare...Fill) */
+/* Esto es crucial porque el `size={60}` en el JSX es un atributo, no una propiedad CSS. */
+/* Aseguramos un tamaño base para los iconos SVG. */
+.carouselControlPrev svg,
+.carouselControlNext svg {
+  width: 55px; /* Tamaño del SVG */
+  height: 55px; /* Tamaño del SVG */
+  /* Puedes ajustar este tamaño si 60px es demasiado grande o pequeño visualmente */
+}
+
+
 
 .carouselControlPrev:hover,
 .carouselControlNext:hover {
-  color: #666;
+  color: #000000;
 }
 
 .carouselControlPrev {
@@ -100,10 +111,8 @@
   }
   
   .carouselControlPrev {
-    left: -25px;
   }
 
   .carouselControlNext {
-    right: -25px;
   }
 } 

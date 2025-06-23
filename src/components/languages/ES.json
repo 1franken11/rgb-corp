@@ -11,7 +11,9 @@
   },
   "SLIDES": [
     { "caption": "Ejemplo de imagen 1" },
-    { "caption": "Ejemplo de imagen 2" }
+    { "caption": "Ejemplo de imagen 2" },
+    { "caption": "Ejemplo de imagen 3" },
+    { "caption": "Ejemplo de imagen 4" }
   ],
   "Instagram": {
     "title": "Últimas Publicaciones",

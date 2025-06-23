@@ -108,7 +108,7 @@
 
 .carouselControlPrev:hover,
 .carouselControlNext:hover {
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .carouselControlPrev {

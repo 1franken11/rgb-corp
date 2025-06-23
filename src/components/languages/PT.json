@@ -10,8 +10,10 @@
     "corp": "CORPORAÇÃO DE CONSTRUÇÃO"
   },
   "SLIDES": [
-    { "caption": "Exemplo de imagem 1" },
-    { "caption": "Exemplo de imagem 2" }
+    { "caption": "Ejemplo de imagen 1" },
+    { "caption": "Ejemplo de imagen 2" },
+    { "caption": "Ejemplo de imagen 3" },
+    { "caption": "Ejemplo de imagen 4" }
   ],
   "Instagram": {
     "title": "Últimas Publicações",
