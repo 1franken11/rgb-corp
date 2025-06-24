@@ -10,7 +10,7 @@ export const languages = {
 
 export type Language = 'es' | 'en' | 'pt';
 
-export const defaultLang = 'es';
+export const defaultLang = 'en';
 export const showDefaultLang = false;
 
 export function getLanguageFromURL(pathname: string): Language {

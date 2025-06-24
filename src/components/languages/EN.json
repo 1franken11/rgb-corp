@@ -178,5 +178,32 @@
     "cel": "Cellphone number",
     "celPlaceholder": "Optional",
     "quote": "Request a quote"
+  },
+  "Footer": {
+    "title": "RGB Corp",
+    "quickLinksTitle": "Quick Links",
+    "contactTitle": "Contact",
+    "description": "Experts in high-quality flooring for your home or business. We offer professional and durable solutions.",
+    "quickLinks": [
+      { "href": "/", "text": "Home" },
+      { "href": "/about", "text": "About Us" },
+      { "href": "/services", "text": "Services" },
+      { "href": "/projects", "text": "Projects" },
+      { "href": "/contact", "text": "Contact" }
+    ],
+    "socialLinks": [
+      { "href": "https://www.facebook.com/profile.php?id=61562097362152", "icon": "fab fa-facebook", "label": "Facebook" },
+      { "href": "https://www.instagram.com/rgb_corp/", "icon": "fab fa-instagram", "label": "Instagram" }
+    ],
+    "contact": {
+      "phone": "+1 (904) 422-5380",
+      "phone2": "+1 (904) 728-9872",
+      "email": "rgbconstructioncorp@gmail.com"
+    },
+    "legalLinks": [
+      { "href": "/privacy", "text": "Privacy Policy" },
+      { "href": "/terms", "text": "Terms and Conditions" }
+    ],
+    "copyright": "&copy; {year} RGB Corp. All rights reserved."
   }
 }

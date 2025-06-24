@@ -18,8 +18,8 @@ export default defineConfig({
     format: 'directory'
   },
   i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'en', 'pt'],
+    defaultLocale: 'en',
+    locales: ['en', 'es', 'pt'],
     routing: {
       prefixDefaultLocale: true,
       strategy: 'pathname'

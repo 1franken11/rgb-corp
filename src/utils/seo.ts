@@ -11,7 +11,7 @@ type RouteKey = 'home' | 'projects' | 'contact';
 const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
   es: {
     home: {
-      title: 'RGB Corporation - Soluciones en Tecnología',
+      title: 'RGB Corporation - Instalaciones de pisos y revestimientos en Jacksonville, FL',
       description: 'Especialistas en reformas, pisos vinílicos, porcelanatos y más.',
       ogImage: '/images/og-home-es.jpg',
     },
@@ -28,7 +28,7 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
   },
   en: {
     home: {
-      title: 'RGB Corporation - Tech Solutions',
+      title: 'RGB Corporation - Flooring and wall covering installation in Jacksonville, FL',
       description: 'Experts in reforms, vinyl flooring, porcelain tiles and more.',
       ogImage: '/images/og-home-en.jpg',
     },
@@ -45,7 +45,7 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
   },
   pt: {
     home: {
-      title: 'RGB Corporation - Soluções em Tecnologia',
+      title: 'RGB Corporation - Instalação de pisos e revestimentos de parede em Jacksonville, FL',
       description: 'Especialistas em reformas, pisos vinílicos, porcelanatos e mais.',
       ogImage: '/images/og-home-pt.jpg',
     },

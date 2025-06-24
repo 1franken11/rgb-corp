@@ -34,14 +34,17 @@ const afterLabel = t('ImageComparison.after');
 
 // Convertimos el array de comparaciones a una cadena JSON para pasarlo al Custom Element
 const comparisonsJson = JSON.stringify(comparisons);
+
+// Generar un ID único para este componente
+const uniqueId = `image-comparison-${Math.random().toString(36).substr(2, 9)}`;
 ---
 
-<section class="image-comparison-section">
+<section class="image-comparison-section" data-component-id={uniqueId}>
   <h2>{title}</h2>
   <p>{description}</p>
   <div class="comparison-container">
     <image-comparison-element
-      id="main-image-comparison"
+      data-component-id={uniqueId}
       data-comparisons={comparisonsJson}
       data-before-label={beforeLabel}
       data-after-label={afterLabel}

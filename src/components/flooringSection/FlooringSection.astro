@@ -13,17 +13,19 @@ const t = useTranslations(currentLang);
 const closeButtonText = t('Button.Close');
 ---
 
-<section id="flooring">
-  <div class="flooring-sections">
+<section id="flooring-section" data-aos="fade-up">
+  <div class="flooring-sections" data-aos="zoom-in" data-aos-delay="200">
     <div id="flooring-bg-overlay" class="flooring-bg-overlay"></div>
-    <h2 class="flooring-title">{t('FlooringSections.title')}</h2>
-    <div class="flooring-grid">
-      {flooringData.map((floor) => (
+    <h2 class="flooring-title" data-aos="fade-up" data-aos-delay="100">{t('FlooringSections.title')}</h2>
+    <div class="flooring-grid" data-aos="fade-up" data-aos-delay="300">
+      {flooringData.map((floor, index) => (
         <div
           class="flooring-card"
           data-floor={floor.key}
           data-bg-image={floor.bgImage}
           data-modal-image={floor.modalImage}
+          data-aos="fade-up"
+          data-aos-delay={400 + index * 100}
         >
           <img src={floor.image} alt={floor.label} />
           <div class="floor-label">{floor.label}</div>
@@ -142,7 +144,7 @@ const closeButtonText = t('Button.Close');
             selectedFloor = null;
             fixedBgImage = null;
             updateBackground();
-            document.getElementById('flooring')?.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
           });
 
           // Close on outside click
@@ -152,7 +154,7 @@ const closeButtonText = t('Button.Close');
               selectedFloor = null;
               fixedBgImage = null;
               updateBackground();
-              document.getElementById('flooring')?.scrollIntoView({ behavior: 'smooth' });
+              document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
             }
           });
 
@@ -163,7 +165,7 @@ const closeButtonText = t('Button.Close');
               selectedFloor = null;
               fixedBgImage = null;
               updateBackground();
-              document.getElementById('flooring')?.scrollIntoView({ behavior: 'smooth' });
+              document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
               document.removeEventListener('keydown', handleEscape);
             }
           };

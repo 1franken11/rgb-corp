@@ -24,25 +24,31 @@ const t = useTranslations(lang);
 </nav>
 
 <script>
-  let lastScrollY = 0;
+  let lastScrollTop = 0;
   const navbar = document.querySelector('.navbar');
   
-  const handleScroll = () => {
-    const currentScrollY = window.scrollY;
-    const threshold = 50;
-
-    if (Math.abs(currentScrollY - lastScrollY) < threshold) return;
-
-    if (currentScrollY > lastScrollY) {
-      navbar?.classList.remove('show');
-      navbar?.classList.add('hide');
-    } else {
-      navbar?.classList.remove('hide');
-      navbar?.classList.add('show');
+  // Script de scroll simplificado
+  function handleScroll() {
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Si estamos scrolleando hacia abajo y no estamos en la parte superior
+    if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+      if (navbar) {
+        navbar.classList.add('hide');
+        navbar.classList.remove('show');
+      }
     }
-
-    lastScrollY = currentScrollY;
-  };
-
-  window.addEventListener('scroll', handleScroll);
+    // Si estamos scrolleando hacia arriba o estamos en la parte superior
+    else if (currentScrollTop < lastScrollTop || currentScrollTop <= 100) {
+      if (navbar) {
+        navbar.classList.remove('hide');
+        navbar.classList.add('show');
+      }
+    }
+    
+    lastScrollTop = currentScrollTop;
+  }
+  
+  // Agregar el event listener
+  window.addEventListener('scroll', handleScroll, { passive: true });
 </script> 

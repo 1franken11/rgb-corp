@@ -1,26 +1,23 @@
 ---
-const quickLinks = [
-  { href: '/', text: 'Inicio' },
-  { href: '/about', text: 'Quiénes Somos' },
-  { href: '/services', text: 'Servicios' },
-  { href: '/projects', text: 'Proyectos' },
-  { href: '/contact', text: 'Contacto' }
-];
-
-const socialLinks = [
-  { href: 'https://facebook.com', icon: 'fab fa-facebook', label: 'Facebook' },
-  { href: 'https://instagram.com', icon: 'fab fa-instagram', label: 'Instagram' }
-];
+import { getTranslation, getLangFromAstroUrl } from '../../i18n/translation.ts';
+const lang = getLangFromAstroUrl(Astro);
+const { t } = getTranslation(lang);
+import global from "../../styles/global.css"
+const quickLinks = t('Footer.quickLinks');
+const socialLinks = t('Footer.socialLinks');
+const contact = t('Footer.contact');
+const legalLinks = t('Footer.legalLinks');
+const copyright = t('Footer.copyright').replace('{year}', new Date().getFullYear());
 ---
 
 <footer class="footer">
   <div class="container">
     <div class="footer-content">
       <div class="footer-section">
-        <h3>RGB Corp</h3>
-        <p>Expertos en revestimientos de alta calidad para tu hogar o negocio. Ofrecemos soluciones profesionales y duraderas.</p>
+        <h3>{t('Footer.title')}</h3>
+        <p>{t('Footer.description')}</p>
         <div class="social-links">
-          {socialLinks.map((social) => (
+          {socialLinks.map((social: any) => (
             <a href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
               <i class={social.icon}></i>
             </a>
@@ -29,9 +26,9 @@ const socialLinks = [
       </div>
 
       <div class="footer-section">
-        <h3>Enlaces Rápidos</h3>
+        <h3>{t('Footer.quickLinksTitle') ?? 'Enlaces Rápidos'}</h3>
         <ul>
-          {quickLinks.map((link) => (
+          {quickLinks.map((link: any) => (
             <li>
               <a href={link.href}>{link.text}</a>
             </li>
@@ -40,29 +37,30 @@ const socialLinks = [
       </div>
 
       <div class="footer-section">
-        <h3>Contacto</h3>
+        <h3>{t('Footer.contactTitle') ?? 'Contacto'}</h3>
         <ul class="contact-info">
           <li>
-            <i class="fas fa-map-marker-alt"></i>
-            <span>123 Calle Principal, Ciudad, Estado</span>
+            <i class="fas fa-phone"></i>
+            <a href={`tel:${contact.phone}`}>{contact.phone}</a>
           </li>
           <li>
             <i class="fas fa-phone"></i>
-            <a href="tel:+1234567890">+1 (234) 567-890</a>
+            <a href={`tel:${contact.phone2}`}>{contact.phone2}</a>
           </li>
           <li>
             <i class="fas fa-envelope"></i>
-            <a href="mailto:info@rgbcorp.com">info@rgbcorp.com</a>
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
           </li>
         </ul>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; {new Date().getFullYear()} RGB Corp. Todos los derechos reservados.</p>
+      <p set:html={copyright}></p>
       <div class="legal-links">
-        <a href="/privacy">Política de Privacidad</a>
-        <a href="/terms">Términos y Condiciones</a>
+        {legalLinks.map((link: any) => (
+          <a href={link.href}>{link.text}</a>
+        ))}
       </div>
     </div>
   </div>

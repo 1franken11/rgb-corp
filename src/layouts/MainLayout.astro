@@ -1,7 +1,7 @@
 ---
-import Navbar from '../components/common/navbar/Navbar.astro';
-import '../styles/global.css';
+// import '../styles/global.css';
 import TopBar from '../components/common/topbar/TopBar.astro';
+import Navbar from '../components/common/navbar/Navbar.astro';
 import type { Language } from '../i18n/utils';
 import { getLangFromUrl } from '../i18n/utils';
 import { getSeoData } from '../utils/seo';
@@ -37,24 +37,37 @@ const seo = getSeoData(lang, url.pathname);
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-
-    <!-- Vercel Analytics -->
-    <script async src="/_vercel/insights/script.js"></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/global.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     
+    <!-- AOS CSS -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+
     <!-- Vercel Analytics -->
-    <script async src="/_vercel/insights/script.js"></script>
+    <!-- <script async src="/_vercel/insights/script.js"></script> -->
   </head>
   <body>
-    <Navbar lang={lang} client:load />
+    <Navbar client:load />
     <slot />
+    
+    <!-- AOS JS -->
+    <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script is:inline>
+      // Configuración global de AOS
+      document.addEventListener('DOMContentLoaded', function() {
+        // Esperar un poco para asegurar que AOS esté cargado
+        setTimeout(() => {
+          if (window.AOS) {
+            window.AOS.init({
+              duration: 1000,
+              once: true,
+              mirror: false,
+              offset: 100,
+              easing: 'ease-in-out'
+            });
+          }
+        }, 100);
+      });
+    </script> -->
   </body>
 </html>
 
@@ -63,6 +76,9 @@ const seo = getSeoData(lang, url.pathname);
     --color-primary: #8bbaca;
     --color-secondary: #ffffff;
     --color-accent: #4a90e2;
+    --color-text: #333333;
+    --color-background: #ffffff;
+    --color-black: #000000;
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 1.5rem;
@@ -85,19 +101,33 @@ const seo = getSeoData(lang, url.pathname);
     padding: 0;
   }
 
-  html, body {
+  html {
     margin: 0;
     width: 100%;
     overflow-x: hidden;
+    overflow-y: visible;
     font-family: 'Quicksand', sans-serif;
     font-weight: 500;
     font-style: normal;
+    transform: none !important;
+    overflow: visible !important;
+    box-sizing: border-box;
   }
 
   body {
-    margin-top: 0;
-    padding-top: 140px;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    transform: none !important;
+    overflow: visible !important;
+    padding-top: 0;
     box-sizing: border-box;
+    background-color: #ffffff;
+    min-height: 100vh;
   }
 
   p, ul, li {
@@ -110,15 +140,45 @@ const seo = getSeoData(lang, url.pathname);
   }
 
   /* AOS Animations */
-  [data-aos] {
+  /* [data-aos] {
     pointer-events: none;
   }
   [data-aos].aos-animate {
     pointer-events: auto;
+  } */
+
+  /* Debug: asegurar que el contenido sea visible */
+  main {
+    position: relative;
+    z-index: 1;
+    background-color: #ffffff;
+    margin-top: 140px; /* Ajustado para coincidir con la altura real del navbar */
+  }
+
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Asegurar que el navbar no cubra el contenido */
+  .navbar {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    overflow: visible !important;
+  }
+
+  /* Asegurar que el contenido esté debajo del navbar */
+  .navbar + * {
+    margin-top: 140px;
+  }
+
+  /* Asegurar que el body no tenga transformaciones */
+  body {
+    transform: none !important;
+    overflow: visible !important;
   }
 </style>
-
-<!-- AOS Script Centralizado -->
-<script>
-  import '../scripts/aos-init.js';
-</script>

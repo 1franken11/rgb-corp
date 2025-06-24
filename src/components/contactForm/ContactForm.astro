@@ -72,46 +72,47 @@ const imageComparisonsData = [
     alt: 'Living room renovado'
   }
 ];
+const encodedMessage = encodeURIComponent(
+    "Hello, I would like more information about your services"
+  );
 const t = translations[currentLang];
 ---
 
-<section class="contact-container">
-  <div class="contact-info">
+<section id="contact-container" class="contact-container" data-aos="fade-up">
+  <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
     <ImageComparison comparisons={imageComparisonsData}
     lang ={currentLang} />
   </div>
 
-  </div>
-
-  <div class="contact-form">
-    <h2>{t.title}</h2>
-    <p>{t.subtitle}</p>
-    <form id="contactForm">
-      <div>
+  <div class="contact-form" data-aos="fade-left" data-aos-delay="300">
+    <h2 data-aos="fade-up" data-aos-delay="100">{t.title}</h2>
+    <p data-aos="fade-up" data-aos-delay="150">{t.subtitle}</p>
+    <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+      <div data-aos="fade-up" data-aos-delay="250">
         <label for="name">{t.name}</label>
         <input type="text" id="name" name="name" required />
       </div>
-      <div>
+      <div data-aos="fade-up" data-aos-delay="300">
         <label for="surname">{t.surname}</label>
         <input type="text" id="surname" name="surname" required />
       </div>
-      <div>
+      <div data-aos="fade-up" data-aos-delay="350">
         <label for="email">{t.email}</label>
         <input type="email" id="email" name="email" required />
       </div>
-      <div>
+      <div data-aos="fade-up" data-aos-delay="400">
         <label for="phone">{t.phone}</label>
         <input type="tel" id="phone" name="phone" required />
       </div>
-      <div>
+      <div data-aos="fade-up" data-aos-delay="450">
         <label for="message">{t.message}</label>
         <textarea id="message" name="message" required></textarea>
       </div>
-      <button type="submit">{t.submit}</button>
+      <button type="submit" data-aos="fade-up" data-aos-delay="500">{t.submit}</button>
     </form>
     <div id="successMessage" class="success-message hidden">{t.success}</div>
     <div id="errorMessage" class="error-message hidden">{t.error}</div>
-        <div class="social-icons">
+        <div class="social-icons" data-aos="fade-up" data-aos-delay="550">
       <a href="https://instagram.com/rgbcorp" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram icon instagram"></i>
       </a>

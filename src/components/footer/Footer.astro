@@ -1,15 +1,15 @@
 ---
-import './Footer.module.css';
+import styles from './Footer.module.css';
 ---
 
-<footer class="footer" role="contentinfo">
-  <div class="footerLeft">
-    <div class="socialLinks">
+<footer class={styles.footer} role="contentinfo">
+  <div class={styles.footerLeft}>
+    <div class={styles.socialLinks}>
       <a
         href="https://www.instagram.com/rgb_corp/"
         target="_blank"
         rel="noopener noreferrer"
-        class="socialLink"
+        class={styles.socialLink}
         aria-label="Follow us on Instagram"
       >
         <i class="fab fa-instagram"></i>
@@ -18,7 +18,7 @@ import './Footer.module.css';
         href="https://www.facebook.com/profile.php?id=61562097362152"
         target="_blank"
         rel="noopener noreferrer"
-        class="socialLink"
+        class={styles.socialLink}
         aria-label="Follow us on Facebook"
       >
         <i class="fab fa-facebook"></i>
@@ -27,18 +27,18 @@ import './Footer.module.css';
         href="https://wa.me/+19044225380"
         target="_blank"
         rel="noopener noreferrer"
-        class="socialLink"
+        class={styles.socialLink}
         aria-label="Contact us on WhatsApp"
       >
         <i class="fab fa-whatsapp"></i>
       </a>
     </div>
-    <span class="copyright">
+    <span class={styles.copyright}>
       ©{new Date().getFullYear()} RGB Corporation
     </span>
   </div>
 
-  <div class="footerRight">
-    <span class="credit">Designed by Franco Garcia</span>
+  <div class={styles.footerRight}>
+    <span class={styles.credit}>Designed by Franco Garcia</span>
   </div>
 </footer> 

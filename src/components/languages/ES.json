@@ -219,15 +219,15 @@
       ]
     }
   },
-    "ProjectSection":{
+  "ProjectSection":{
       "title": "Proyectos"
-    },
-    "Reviews":{
+  },
+  "Reviews":{
       "title": "Reseñas"
-    },
-    "Button":{
+  },
+  "Button":{
       "Close": "Cerrar"
-    },
+  },
   "ContactForm": {
     "title": "Contáctanos",
     "description": "¿Tienes alguna pregunta? Envíanos un mensaje y nos pondremos en contacto contigo lo antes posible.",
@@ -248,5 +248,32 @@
     "cel": "Numero de celular",
     "celPlaceholder": "Opcional",
     "quote": "Solicitar cotización"
+  },
+  "Footer": {
+    "title": "RGB Corp",
+    "quickLinksTitle": "Enlaces Rápidos",
+    "contactTitle": "Contacto",
+    "description": "Expertos en revestimientos de alta calidad para tu hogar o negocio. Ofrecemos soluciones profesionales y duraderas.",
+    "quickLinks": [
+      { "href": "/", "text": "Inicio" },
+      { "href": "/about", "text": "Quiénes Somos" },
+      { "href": "/services", "text": "Servicios" },
+      { "href": "/projects", "text": "Proyectos" },
+      { "href": "/contact", "text": "Contacto" }
+    ],
+    "socialLinks": [
+      { "href": "https://www.facebook.com/profile.php?id=61562097362152", "icon": "fab fa-facebook", "label": "Facebook" },
+      { "href": "https://www.instagram.com/rgb_corp/", "icon": "fab fa-instagram", "label": "Instagram" }
+    ],
+    "contact": {
+      "phone": "+1 (904) 422-5380",
+      "phone2": "+1 (904) 728-9872",
+      "email": "rgbconstructioncorp@gmail.com"
+    },
+    "legalLinks": [
+      { "href": "/privacy", "text": "Política de Privacidad" },
+      { "href": "/terms", "text": "Términos y Condiciones" }
+    ],
+    "copyright": "&copy; {year} RGB Corp. Todos los derechos reservados."
   }
 }

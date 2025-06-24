@@ -8,14 +8,17 @@
   z-index: 1000;
   overflow: visible !important;
   transition: transform 0.3s ease-in-out;
-}
-
-.show {
   transform: translateY(0);
+  height: auto;
+  min-height: 136px; /* Altura mínima del navbar */
 }
 
-.hide {
-  transform: translateY(-100%);
+.navbar.show {
+  transform: translateY(0) !important;
+}
+
+.navbar.hide {
+  transform: translateY(-100%) !important;
 }
 
 .navbarContainer {

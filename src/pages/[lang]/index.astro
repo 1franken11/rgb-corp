@@ -1,10 +1,12 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import TopBar from '../../components/common/topbar/TopBar.astro';
-import Navbar from '../../components/common/navbar/Navbar.astro';
-import LanguageSelector from '../../components/languageSelector/LanguageSelector.astro';
+import FirstSection from '../../components/FirstSection/FirstSection.astro';
+import QuienesSomos from '../../components/QuienesSomos/QuienesSomos.astro';
 import FlooringSection from '../../components/flooringSection/FlooringSection.astro';
-import ProjectSection from '../../components/projectSection/ProjectSection.astro';
+import ProjectSection from '../../components/ProjectSection/ProjectSection.astro';
+import OpinionesCarousel from '../../components/opinionesCarousel/OpinionesCarousel.astro';
+import ContactForm from '../../components/contactForm/ContactForm.astro';
+import Footer from '../../components/layout/Footer.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
 const { lang } = getLangFromUrl(Astro.url);
@@ -12,14 +14,14 @@ const t = useTranslations(lang);
 ---
 
 <MainLayout title={t('Menu.home')} lang={lang}>
-  <TopBar client:load lang={lang} />
-  <Navbar client:load lang={lang} />
-  <LanguageSelector client:load lang={lang} />
-  
   <main>
+    <FirstSection lang={lang} />
+    <QuienesSomos lang={lang} />
     <FlooringSection client:load lang={lang} />
     <ProjectSection client:load lang={lang} />
     <OpinionesCarousel client:load lang={lang} />
+    <ContactForm lang={lang} client:visible />
+    <Footer client:visible />
   </main>
 </MainLayout>
 

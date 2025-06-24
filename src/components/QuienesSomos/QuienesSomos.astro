@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { lang: propLang } = Astro.props;
-const currentLang = propLang || getLangFromUrl(Astro.url);
+const currentLang: Language = propLang || getLangFromUrl(Astro.url).lang;
 const t = useTranslations(currentLang);
 
 const specialtyTitle = t('QuienesSomos.specialty.title');
@@ -26,40 +26,39 @@ const materialsTitle = t('QuienesSomos.materials.title');
 const materials = t('QuienesSomos.materials.items');
 ---
 
-<section class="quienes-somos">
+<section id="quienes-somos" class="quienes-somos" data-aos="fade-up">
 
   
   <div class="container">
-    <div class="specialty">
+    <div class="specialty" data-aos="fade-right" data-aos-delay="200">
       
-    <div class="services">
+    <div class="services" data-aos="fade-up" data-aos-delay="300">
       <h2>{servicesTitle}</h2>
       <ul>
         {Array.isArray(servicesDescription) && servicesDescription.map((service) => (
-          <li>{service}</li>
+          <li data-aos="fade-left" data-aos-delay="400">{service}</li>
         ))}
       </ul>
     </div>
 
-      <h2>{specialtyTitle}</h2>
-      <p>{specialtyDescription}</p>
+      <h2 data-aos="fade-up" data-aos-delay="100">{specialtyTitle}</h2>
+      <p data-aos="fade-up" data-aos-delay="150">{specialtyDescription}</p>
 
-    <div class="why-choose-us">
-      <h2>{whyChooseUsTitle}</h2>
+    <div class="why-choose-us" data-aos="fade-up" data-aos-delay="250">
       <ul>
-        {Array.isArray(whyChooseUsItems) && whyChooseUsItems.map((item) => (
-          <li>{item}</li>
+        {Array.isArray(whyChooseUsItems) && whyChooseUsItems.map((item, index) => (
+          <li data-aos="fade-left" data-aos-delay={300 + index * 50}>{item}</li>
         ))}
       </ul>
     </div>
     </div>
 
 
-    <div class="commitment">
-      <h2>{commitmentTitle}</h2>
+    <div class="commitment" data-aos="fade-left" data-aos-delay="200">
+      <h2 data-aos="fade-up" data-aos-delay="100">{commitmentTitle}</h2>
       <div class="commitment-items">
-        {Array.isArray(commitmentDescription) && commitmentDescription.map((item) => (
-          <div class="commitment-item">
+        {Array.isArray(commitmentDescription) && commitmentDescription.map((item, index) => (
+          <div class="commitment-item" data-aos="fade-up" data-aos-delay={200 + index * 100}>
             <p>{item}</p>
           </div>
         ))}

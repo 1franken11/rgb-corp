@@ -12,9 +12,9 @@ const currentLang: Language = typeof propLang === 'string' ? propLang as Languag
 const t = useTranslations(currentLang);
 ---
 
-<section class="projects-section">
-  <h2 class="text-center mb-4">{t('ProjectSection.title')}</h2>
-  <div class="project-gallery">
+<section id="project-section" class="projects-section" data-aos="fade-up">
+  <h2 class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">{t('ProjectSection.title')}</h2>
+  <div class="project-gallery" data-aos="fade-up" data-aos-delay="200">
     {ProjectData.map((project, index) => {
       const isVideo = project.media.endsWith(".mp4");
       return (
@@ -22,6 +22,8 @@ const t = useTranslations(currentLang);
           class="project-item"
           data-gallery={JSON.stringify(project.gallery)}
           data-index={index}
+          data-aos="fade-up"
+          data-aos-delay={300 + index * 100}
         >
           {isVideo ? (
             <video

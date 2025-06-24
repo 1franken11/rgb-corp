@@ -248,5 +248,32 @@
     "cel": "Numero de celular",
     "celPlaceholder": "Opcional",
     "quote": "Solicite um orçamento"
+  },
+  "Footer": {
+    "title": "RGB Corp",
+    "quickLinksTitle": "Links Rápidos",
+    "contactTitle": "Contato",
+    "description": "Especialistas em revestimentos de alta qualidade para sua casa ou negócio. Oferecemos soluções profissionais e duradouras.",
+    "quickLinks": [
+      { "href": "/", "text": "Início" },
+      { "href": "/about", "text": "Quem Somos" },
+      { "href": "/services", "text": "Serviços" },
+      { "href": "/projects", "text": "Projetos" },
+      { "href": "/contact", "text": "Contato" }
+    ],
+    "socialLinks": [
+      { "href": "https://facebook.com", "icon": "fab fa-facebook", "label": "Facebook" },
+      { "href": "https://instagram.com", "icon": "fab fa-instagram", "label": "Instagram" }
+    ],
+    "contact": {
+      "phone": "+1 (904) 422-5380",
+      "phone2": "+1 (904) 728-9872",
+      "email": "rgbconstructioncorp@gmail.com"
+    },
+    "legalLinks": [
+      { "href": "/privacy", "text": "Política de Privacidade" },
+      { "href": "/terms", "text": "Termos e Condições" }
+    ],
+    "copyright": "&copy; {year} RGB Corp. Todos os direitos reservados."
   }
 }

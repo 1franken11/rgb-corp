@@ -55,7 +55,9 @@ export class ImageComparisonElement extends HTMLElement {
       this.beforeLabel = this.dataset.beforeLabel || "Before";
       this.afterLabel = this.dataset.afterLabel || "After";
     
+      console.log("ConnectedCallback - About to render with comparisons:", this.comparisons.length);
       this.render(); // Llama a render para crear el DOM
+      console.log("ConnectedCallback - Render completed");
     
       // Obtener referencias DESPUÉS de que render() haya creado los elementos
       // Es crucial usar 'this.querySelector' para buscar dentro del propio Custom Element
@@ -74,6 +76,7 @@ export class ImageComparisonElement extends HTMLElement {
       console.log("Container Ref:", this.containerRef);
       console.log("Image Before Ref:", this.imageBeforeRef);
       console.log("Image After Ref:", this.imageAfterRef);
+      console.log("Dots Container Ref:", this.dotsContainerRef);
 
       // 4. Agregar event listeners (ahora que las referencias están disponibles)
       if (this.containerRef && this.sliderRef) {
@@ -88,6 +91,7 @@ export class ImageComparisonElement extends HTMLElement {
     
       if (this.dotsContainerRef) {
         this.dotsContainerRef.addEventListener('click', this.handleDotClickBound);
+        console.log("Dot click listener added to:", this.dotsContainerRef);
       }
     
       this.updateImageDisplay(); // Actualiza las URLs de las imágenes y centra
@@ -241,7 +245,18 @@ export class ImageComparisonElement extends HTMLElement {
     
     // Método para renderizar el contenido interno del Custom Element
     render() {
+      console.log("Render method called with comparisons:", this.comparisons.length);
       const current = this.comparisons[this.currentIndex] || { before: '', after: '', alt: '' };
+      
+      const dotsHTML = this.comparisons.map((_, i) => `
+        <span
+          class="dot ${i === this.currentIndex ? "active" : ""}"
+          data-index="${i}"
+        ></span>
+      `).join('');
+      
+      console.log("Generated dots HTML:", dotsHTML);
+      
       this.innerHTML = `
         <div class="image-comparison-container">
           <img
@@ -274,14 +289,11 @@ export class ImageComparisonElement extends HTMLElement {
         </div>
     
         <div class="comparison-dots">
-          ${this.comparisons.map((_, i) => `
-            <span
-              class="dot ${i === this.currentIndex ? "active" : ""}"
-              data-index="${i}"
-            ></span>
-          `).join('')}
+          ${dotsHTML}
         </div>
       `;
+      
+      console.log("Render completed. InnerHTML length:", this.innerHTML.length);
       this.updateDotsActiveState(); // Asegura que el estado activo se establezca al renderizar
     }
 }

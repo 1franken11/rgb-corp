@@ -1,6 +1,6 @@
 .footer {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--color-black) !important;
+  color: #fff !important;
   padding: 30px 20px;
   font-size: 0.9rem;
   display: flex;
