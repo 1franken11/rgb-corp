@@ -1,0 +1,308 @@
+import './ShadersSlider.css';
+
+<div id="shaders-slider-container" class="shaders-slider-container">
+  <div class="slider-overlay">
+    <div class="slider-content">
+      <h1 class="slider-title" data-aos="fade-up">RGB Corporation</h1>
+      <p class="slider-subtitle" data-aos="fade-up" data-aos-delay="200">
+        Transformando espacios con excelencia y calidad
+      </p>
+      <div class="slider-buttons" data-aos="fade-up" data-aos-delay="400">
+        <a href="#servicios" class="btn btn-primary">Nuestros Servicios</a>
+        <a href="#contacto" class="btn btn-secondary">Contáctanos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Wait for DOM to be ready
+  document.addEventListener('DOMContentLoaded', async () => {
+    const container = document.getElementById('shaders-slider-container');
+    
+    if (!container) return;
+
+    try {
+      // Load the advanced shader
+      const response = await fetch('/shaders/transition.glsl');
+      if (!response.ok) {
+        throw new Error('Failed to load shader');
+      }
+      const fragmentShader = await response.text();
+
+      // Import ShadersSlider from the lib directory
+      const { ShadersSlider } = await import('../../lib/shaders-slider.js');
+
+      // Get screen width to determine image resolution
+      const screenWidth = window.innerWidth;
+      let imageWidth = 1920;
+      let imageHeight = 1080;
+      
+      if (screenWidth <= 480) {
+        imageWidth = 480;
+        imageHeight = 640; // 4:3 ratio for mobile
+      } else if (screenWidth <= 768) {
+        imageWidth = 768;
+        imageHeight = 432; // 16:9 ratio for tablet
+      } else if (screenWidth <= 1200) {
+        imageWidth = 1200;
+        imageHeight = 675; // 16:9 ratio for desktop
+      } else {
+        imageWidth = 1920;
+        imageHeight = 1080; // 16:9 ratio for large desktop
+      }
+
+      // Initialize the slider with responsive Cloudinary images
+      const slider = new ShadersSlider({
+        container: container,
+        images: [
+          `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1742920360/firstsection4_eb9qfy.jpg`,
+          `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1742920359/firstsection2_vvtaae.jpg`,
+          `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1742920359/firstsection3_e4au5x.jpg`,
+          `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1744659060/escalera_cm3lbb.jpg`
+        ],
+        fragmentShader: fragmentShader
+      });
+
+      // Handle responsive image loading on resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(async () => {
+          const newScreenWidth = window.innerWidth;
+          let newImageWidth = 1920;
+          let newImageHeight = 1080;
+          
+          if (newScreenWidth <= 480) {
+            newImageWidth = 480;
+            newImageHeight = 640;
+          } else if (newScreenWidth <= 768) {
+            newImageWidth = 768;
+            newImageHeight = 432;
+          } else if (newScreenWidth <= 1200) {
+            newImageWidth = 1200;
+            newImageHeight = 675;
+          } else {
+            newImageWidth = 1920;
+            newImageHeight = 1080;
+          }
+
+          // Update images if resolution changed significantly
+          if (Math.abs(newImageWidth - imageWidth) > 100) {
+            imageWidth = newImageWidth;
+            imageHeight = newImageHeight;
+            
+            // Update slider images with new resolution
+            const newImages = [
+              `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1742920360/firstsection4_eb9qfy.jpg`,
+              `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1742920359/firstsection2_vvtaae.jpg`,
+              `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1742920359/firstsection3_e4au5x.jpg`,
+              `https://res.cloudinary.com/drwacbtjf/image/upload/f_auto,q_auto,w_${imageWidth},h_${imageHeight},c_fill,g_auto/v1744659060/escalera_cm3lbb.jpg`
+            ];
+            
+            // If the slider has a method to update images, call it here
+            if (slider.updateImages) {
+              slider.updateImages(newImages);
+            }
+          }
+        }, 250);
+      });
+
+      // Hide loading spinner when slider is ready
+      setTimeout(() => {
+        container.style.setProperty('--loading-hidden', 'true');
+      }, 1000);
+
+      // Add smooth scrolling for buttons
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = btn.getAttribute('href')?.substring(1);
+          if (targetId) {
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+              targetElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          }
+        });
+      });
+
+      // Add keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && slider.prev) {
+          slider.prev();
+        } else if (e.key === 'ArrowRight' && slider.next) {
+          slider.next();
+        }
+      });
+
+      // Add touch/swipe support for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      });
+
+      container.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0 && slider.next) {
+            slider.next();
+          } else if (diff < 0 && slider.prev) {
+            slider.prev();
+          }
+        }
+      }
+
+    } catch (error) {
+      console.error('Error initializing shaders slider:', error);
+      
+      // Fallback to static background if shader fails
+      container.style.background = `linear-gradient(135deg, #667eea 0%, #764ba2 100%)`;
+      container.innerHTML = `
+        <div class="slider-overlay">
+          <div class="slider-content">
+            <h1 class="slider-title">RGB Corporation</h1>
+            <p class="slider-subtitle">Transformando espacios con excelencia y calidad</p>
+            <div class="slider-buttons">
+              <a href="#servicios" class="btn btn-primary">Nuestros Servicios</a>
+              <a href="#contacto" class="btn btn-secondary">Contáctanos</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  });
+</script>
+
+<style>
+  .shaders-slider-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .slider-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.1) 50%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slider-content {
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 2rem;
+  }
+
+  .slider-title {
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .slider-subtitle {
+    font-size: clamp(1.2rem, 4vw, 1.8rem);
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+  }
+
+  .slider-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border-color: white;
+  }
+
+  .btn-secondary:hover {
+    background: white;
+    color: #333;
+    transform: translateY(-2px);
+  }
+
+  /* Canvas styling */
+  #shaders-slider-container canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  @media (max-width: 768px) {
+    .slider-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn {
+      width: 200px;
+      text-align: center;
+    }
+  }
+
+  /* Hide loading spinner when slider is ready */
+  .shaders-slider-container[style*="--loading-hidden: true"]::before {
+    display: none;
+  }
+</style> 
