@@ -1,6 +1,6 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
-import FirstSection from '../../components/FirstSection/FirstSection.astro';
+import FirstSection from '../../components/FirstSection/FirstSection.tsx';
 import QuienesSomos from '../../components/QuienesSomos/QuienesSomos.astro';
 import FlooringSection from '../../components/flooringSection/FlooringSection.astro';
 import ProjectSection from '../../components/ProjectSection/ProjectSection.astro';
@@ -15,7 +15,7 @@ const t = useTranslations(lang);
 
 <MainLayout title={t('Menu.home')} lang={lang}>
   <main>
-    <FirstSection lang={lang} />
+    <FirstSection client:only="react" lang={lang} />
     <QuienesSomos lang={lang} />
     <FlooringSection client:load lang={lang} />
     <ProjectSection client:load lang={lang} />

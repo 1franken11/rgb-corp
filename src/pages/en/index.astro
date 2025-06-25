@@ -1,7 +1,7 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import type { Language } from '../../i18n/utils';
-import FirstSection from '../../components/FirstSection/FirstSection.astro';
+import FirstSection from '../../components/FirstSection/FirstSection.tsx';
 import { QuienesSomos } from '@/components';
 import {FlooringSection} from '@/components';
 import ProjectSection from '@/components/ProjectSection/ProjectSection.astro';
@@ -15,7 +15,7 @@ const lang: Language = 'en';
 
 <MainLayout title="Home | RGB Corp" lang={lang}>
     <main>
-  <FirstSection lang={lang} />
+  <FirstSection client:only="react" lang={lang} />
   <QuienesSomos lang={lang} />
   <FlooringSection lang={lang} />
   <ProjectSection lang={lang} />

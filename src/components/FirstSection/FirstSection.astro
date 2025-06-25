@@ -1,7 +1,12 @@
 ---
 import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
 import { SlideData } from './SlideData';
-import { PiArrowSquareRightFill, PiArrowSquareLeftFill } from "react-icons/pi";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+import 'swiper/css/autoplay';
 import './FirstSection.css';
 
 interface Props {
@@ -30,143 +35,29 @@ const getResponsiveImage = (srcSet: Record<string, string>, width: number): stri
 const initialWidth = 1920; // Ancho por defecto para SSR
 ---
 
-<section id="first-section" class="firstSection" data-aos="fade-up">
-  <div class="slideshow" data-aos="zoom-in" data-aos-delay="200">
-    {SlideData.map((slide, index) => {
-      const initialImage = getResponsiveImage(slide.srcSet, initialWidth);
-      return (
-        <div class={`slide ${index === 0 ? 'active' : ''}`} data-aos="fade-in" data-aos-delay={index * 100}>
+<section id="first-section" class="firstSection">
+  <Swiper
+    effect="fade"
+    autoplay={{ delay: 4000, disableOnInteraction: false }}
+    loop={true}
+    speed={900}
+    pagination={{ clickable: true }}
+    navigation={true}
+    className="swiper-main"
+  >
+    {SlideData.map((slide, index) => (
+      <SwiperSlide>
+        <div class="slide-image-container">
           <img
-            src={initialImage}
-            srcset={`
-              ${initialImage} 1x,
-              ${initialImage.replace("/upload/", "/upload/dpr_2.0/")} 2x
-            `}
+            src={slide.srcSet["16x9"]}
             alt={slide.alt}
             loading={index === 0 ? "eager" : "lazy"}
           />
-          <div class="caption" data-aos="fade-up" data-aos-delay="500">
+          <div class="caption">
             {t(`SLIDES.${index}.caption`) || slide.alt}
           </div>
         </div>
-      );
-    })}
-
-    <!-- Controles -->
-    <button class="carouselControlPrev" aria-label="Previous slide" data-aos="fade-right" data-aos-delay="300">
-      <PiArrowSquareLeftFill size={60} />
-    </button>
-    <button class="carouselControlNext" aria-label="Next slide" data-aos="fade-left" data-aos-delay="300">
-      <PiArrowSquareRightFill size={60} />
-    </button>
-
-    <div class="dots" data-aos="fade-up" data-aos-delay="400">
-      {SlideData.map((_, i) => (
-        <button
-          class={`dot ${i === 0 ? 'active' : ''}`}
-          aria-label={`Go to slide ${i + 1}`}
-          data-index={i}
-        />
-      ))}
-    </div>
-  </div>
-</section>
-
-<script>
-  import { SlideData } from './SlideData';
-
-  // Función para convertir URL a formato optimizado
-  const toWebp = (url: any) => url.replace("/upload/", "/upload/f_auto,q_auto/");
-
-  // Función para obtener la imagen ideal según el ancho
-  const getResponsiveImage = (srcSet: any, width: any): string => {
-    const key =
-      width <= 480 ? "9x16" :
-      width <= 768 ? "4x5" :
-      width <= 1024 ? "3x2" :
-      width <= 1440 ? "4x3" :
-      "16x9";
-    return toWebp(srcSet[key]);
-  };
-
-  let current = 0;
-  let intervalRef: any = null;
-  let viewportWidth = window.innerWidth;
-
-  const slideshow = document.querySelector('.slideshow');
-  const slides = document.querySelectorAll('.slide');
-  const dots = document.querySelectorAll('.dot');
-  const prevButton = document.querySelector('.carouselControlPrev');
-  const nextButton = document.querySelector('.carouselControlNext');
-
-  function updateSlide() {
-    slides.forEach((slide: any, i: any) => {
-      if (i === current) {
-        slide.classList.add('active');
-        const img = slide.querySelector('img');
-        if (img) {
-          const optimizedSrc = getResponsiveImage(SlideData[i].srcSet, viewportWidth);
-          img.src = optimizedSrc;
-          img.srcset = `
-            ${optimizedSrc} 1x,
-            ${optimizedSrc.replace("/upload/", "/upload/dpr_2.0/")} 2x
-          `;
-        }
-      } else {
-        slide.classList.remove('active');
-      }
-    });
-
-    dots.forEach((dot: any, i: any) => {
-      dot.classList.toggle('active', i === current);
-    });
-  }
-
-  function goToNext() {
-    current = (current + 1) % SlideData.length;
-    updateSlide();
-  }
-
-  function goToPrev() {
-    current = (current - 1 + SlideData.length) % SlideData.length;
-    updateSlide();
-  }
-
-  function goToIndex(i: any) {
-    current = i;
-    updateSlide();
-  }
-
-  function resetTimer() {
-    if (intervalRef) clearInterval(intervalRef);
-    intervalRef = window.setInterval(goToNext, 5000);
-  }
-
-  prevButton?.addEventListener('click', () => {
-    goToPrev();
-    resetTimer();
-  });
-
-  nextButton?.addEventListener('click', () => {
-    goToNext();
-    resetTimer();
-  });
-
-  dots.forEach((dot: any, i: any) => {
-    dot.addEventListener('click', () => {
-      goToIndex(i);
-      resetTimer();
-    });
-  });
-
-  window.addEventListener('resize', () => {
-    viewportWidth = window.innerWidth;
-    updateSlide();
-  });
-
-  resetTimer();
-
-  window.addEventListener('beforeunload', () => {
-    if (intervalRef) clearInterval(intervalRef);
-  });
-</script> 
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</section> 

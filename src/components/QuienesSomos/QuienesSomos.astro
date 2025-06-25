@@ -27,43 +27,37 @@ const materials = t('QuienesSomos.materials.items');
 ---
 
 <section id="quienes-somos" class="quienes-somos" data-aos="fade-up">
-
-  
-  <div class="container">
-    <div class="specialty" data-aos="fade-right" data-aos-delay="200">
-      
-    <div class="services" data-aos="fade-up" data-aos-delay="300">
+  <div class="qs-logo-container">
+    <img src="/img/logo_optimized.png" alt="RGB Construction Corporation Logo" class="qs-logo" />
+  </div>
+  <div class="card-grid">
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <h2>{specialtyTitle}</h2>
+      <p>{specialtyDescription}</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
       <h2>{servicesTitle}</h2>
       <ul>
         {Array.isArray(servicesDescription) && servicesDescription.map((service) => (
-          <li data-aos="fade-left" data-aos-delay="400">{service}</li>
+          <li>{service}</li>
         ))}
       </ul>
     </div>
-
-      <h2 data-aos="fade-up" data-aos-delay="100">{specialtyTitle}</h2>
-      <p data-aos="fade-up" data-aos-delay="150">{specialtyDescription}</p>
-
-    <div class="why-choose-us" data-aos="fade-up" data-aos-delay="250">
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <h2>{whyChooseUsTitle}</h2>
       <ul>
-        {Array.isArray(whyChooseUsItems) && whyChooseUsItems.map((item, index) => (
-          <li data-aos="fade-left" data-aos-delay={300 + index * 50}>{item}</li>
+        {Array.isArray(whyChooseUsItems) && whyChooseUsItems.map((item) => (
+          <li>{item}</li>
         ))}
       </ul>
     </div>
-    </div>
-
-
-    <div class="commitment" data-aos="fade-left" data-aos-delay="200">
-      <h2 data-aos="fade-up" data-aos-delay="100">{commitmentTitle}</h2>
-      <div class="commitment-items">
-        {Array.isArray(commitmentDescription) && commitmentDescription.map((item, index) => (
-          <div class="commitment-item" data-aos="fade-up" data-aos-delay={200 + index * 100}>
-            <p>{item}</p>
-          </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <h2>{commitmentTitle}</h2>
+      <ul>
+        {Array.isArray(commitmentDescription) && commitmentDescription.map((item) => (
+          <li>{item}</li>
         ))}
-      </div>
+      </ul>
     </div>
-
   </div>
 </section> 
