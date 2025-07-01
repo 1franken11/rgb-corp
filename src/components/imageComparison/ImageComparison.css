@@ -38,33 +38,38 @@
 .image-comparison-section .comparison-dots {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
-  gap: 0.5rem;
-  z-index: 4;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 8px;
   position: relative;
-  visibility: visible;
-  opacity: 1;
+  z-index: 10;
 }
 
 .image-comparison-section .dot {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background-color: #ccc;
+  background: #cfd8dc;
+  border: 2px solid #8bbaca;
+  opacity: 0.7;
+  transition: background 0.3s, transform 0.2s, opacity 0.2s;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  display: block;
-  visibility: visible;
-  opacity: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .image-comparison-section .dot.active {
-  background-color: #333;
+  background: #8bbaca;
+  opacity: 1;
+  transform: scale(1.2);
+  border-color: #4a90e2;
 }
 
 .image-comparison-section .dot:hover {
-  background-color: #999;
+  opacity: 1;
+  background: #4a90e2;
+  border-color: #8bbaca;
+  transform: scale(1.15);
 }
 
 /* --- ESTILOS ESPECÍFICOS DEL CUSTOM ELEMENT <image-comparison-element> --- */
@@ -179,25 +184,39 @@ image-comparison-element {
 .comparison-dots {
   display: flex;
   justify-content: center;
-  margin-top: 1rem; /* Espacio arriba de los puntos */
-  gap: 0.5rem; /* Espacio entre los puntos */
-  z-index: 4; /* Asegura que estén por encima del comparador si hay superposición */
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 10;
 }
 
-.dot {
-  width: 12px;
-  height: 12px;
+.comparison-dots .dot {
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  background-color: #ccc; /* Color por defecto */
+  background: #cfd8dc;
+  border: 2px solid #8bbaca;
+  opacity: 0.7;
+  transition: background 0.3s, transform 0.2s, opacity 0.2s;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
-  border: 1px solid rgba(0, 0, 0, 0.1); /* Borde sutil */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.dot.active {
-  background-color: #333; /* Color del punto activo */
+.comparison-dots .dot.active {
+  background: #8bbaca;
+  opacity: 1;
+  transform: scale(1.2);
+  border-color: #4a90e2;
 }
 
+.comparison-dots .dot:hover {
+  opacity: 1;
+  background: #4a90e2;
+  border-color: #8bbaca;
+  transform: scale(1.15);
+}
 
 /* --- Media Queries para responsividad --- */
 
@@ -272,11 +291,11 @@ image-comparison-element {
   }
 
   .comparison-dots {
-    margin-top: 0.75rem; /* Menos margen en dispositivos pequeños */
-    gap: 0.4rem;
+    gap: 8px;
+    margin-top: 16px;
   }
 
-  .dot {
+  .comparison-dots .dot {
     width: 10px;
     height: 10px;
   }
@@ -313,8 +332,13 @@ image-comparison-element {
     border-left: 6px solid white;
   }
 
-  .dot {
-    width: 8px;
-    height: 8px;
+  .comparison-dots {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .comparison-dots .dot {
+    width: 10px;
+    height: 10px;
   }
 }

@@ -32,20 +32,22 @@ function getNewPath(lang: Language) {
 <div class="language-selector-container">
   <div class="language-selector-wrapper">
     <div class="language-selector">
-      {Object.entries(languages).map(([lang, code]) => {
-        const typedLang = lang as Language;
-        const path = getNewPath(typedLang);
-        return (
-          <a
-            href={path}
-            class={`flag-option ${currentLang === typedLang ? 'active' : ''}`}
-            data-lang={typedLang}
-          >
-            <img src={languageFlags[typedLang]} alt={`${code} flag`} />
-            <span>{typedLang.toUpperCase()}</span>
-          </a>
-        );
-      })}
+      <div class="language-selector-flags">
+        {Object.entries(languages).map(([lang, code]) => {
+          const typedLang = lang as Language;
+          const path = getNewPath(typedLang);
+          return (
+            <a
+              href={path}
+              class={`flag-option ${currentLang === typedLang ? 'active' : ''}`}
+              data-lang={typedLang}
+            >
+              <img src={languageFlags[typedLang]} alt={`${code} flag`} />
+              <span>{typedLang.toUpperCase()}</span>
+            </a>
+          );
+        })}
+      </div>
     </div>
   </div>
 </div>
@@ -103,20 +105,35 @@ function getNewPath(lang: Language) {
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s;
+    text-decoration: none;
+    color: inherit;
   }
 
   .flag-option img {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    object-fit: contain;
+    background: #fff;
+    display: block;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    transition: all 0.2s ease;
   }
 
   .flag-option:hover {
     transform: scale(1.1);
   }
 
+  .flag-option:hover img {
+    border-color: #007a99;
+  }
+
   .flag-option span {
     font-size: 12px;
     margin-top: 4px;
+    font-weight: 500;
   }
 
   .flag-icons {
@@ -171,6 +188,19 @@ function getNewPath(lang: Language) {
     .language-selector {
       width: 100%;
       max-width: 100px; 
+    }
+    
+    .language-selector-flags {
+      gap: 10px;
+    }
+    
+    .flag-option img {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .flag-option span {
+      font-size: 10px;
     }
   }
 

@@ -148,22 +148,28 @@
 }
 
 @media (max-width: 768px) {
+  .modal-overlay {
+    padding: 10px 0;
+    align-items: flex-start;
+  }
+
   .modal-card-two-columns {
     flex-direction: column;
     width: 95%;
-    max-height: none;
+    max-height: 90vh;
     border-radius: 10px;
+    position: relative;
   }
 
   .modal-image-column {
     width: 100%;
-    max-height: none;
+    max-height: 40vh;
   }
   
   .modal-image-column img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
     display: block;
     border-radius: 10px 10px 0 0;
   }
@@ -172,11 +178,15 @@
     width: 100%;
     padding: 20px;
     text-align: left;
+    max-height: 50vh;
+    overflow-y: auto;
+    position: relative;
   }
 
   .modal-content-scroll {
-    max-height: none;
-    overflow-y: visible;
+    max-height: calc(50vh - 120px);
+    overflow-y: auto;
+    padding: 0 0 20px 0;
   }
 
   .modal-title {
@@ -186,16 +196,22 @@
     padding: 10px;
     border-radius: 10px;
     margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
 
   .close-btn {
+    position: sticky;
+    bottom: 0;
     width: 100%;
     margin-top: 20px;
     background-color: #8bbaca;
     padding: 12px;
     font-size: 1.1rem;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
     color: black;
+    z-index: 10;
   }
 }
 

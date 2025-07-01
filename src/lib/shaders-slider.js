@@ -18,6 +18,12 @@ export class ShadersSlider {
     this.nextImageIndex = 1;
     this.progress = 0;
     this.isAnimating = false;
+    this.currentEffect = 'dots';
+    this.effects = [
+      'dots', 'dots-circle', 
+      'page-curl', 'peel-x', 'peel-y', 'polygons-fall', 
+      'polygons-morph', 'polygons-wind', 'pixelize', 'ripple'
+    ];
     
     this.init();
   }
@@ -62,7 +68,8 @@ export class ShadersSlider {
         uTexture2: { value: null },
         uTextureSize1: { value: new THREE.Vector2(1, 1) },
         uTextureSize2: { value: new THREE.Vector2(1, 1) },
-        uResolution: { value: new THREE.Vector2(this.width, this.height) }
+        uResolution: { value: new THREE.Vector2(this.width, this.height) },
+        uEffect: { value: 0.0 } // Index of current effect
       }
     });
     this.mesh = new THREE.Mesh(this.geometry, this.material);
@@ -98,11 +105,28 @@ export class ShadersSlider {
     });
   }
 
+  getRandomEffect() {
+    const randomIndex = Math.floor(Math.random() * this.effects.length);
+    return this.effects[randomIndex];
+  }
+
+  getEffectIndex(effectName) {
+    return this.effects.indexOf(effectName) / (this.effects.length - 1);
+  }
+
+  getCurrentEffect() {
+    return this.currentEffect;
+  }
+
   async next() {
     if (this.isAnimating) return;
     
     this.isAnimating = true;
     this.nextImageIndex = (this.currentImageIndex + 1) % this.images.length;
+    
+    // Select random effect
+    this.currentEffect = this.getRandomEffect();
+    this.material.uniforms.uEffect.value = this.getEffectIndex(this.currentEffect);
     
     const textureLoader = new THREE.TextureLoader();
     const nextTexture = await this.loadTexture(textureLoader, this.images[this.nextImageIndex]);
@@ -140,6 +164,10 @@ export class ShadersSlider {
     
     this.isAnimating = true;
     this.nextImageIndex = this.currentImageIndex === 0 ? this.images.length - 1 : this.currentImageIndex - 1;
+    
+    // Select random effect
+    this.currentEffect = this.getRandomEffect();
+    this.material.uniforms.uEffect.value = this.getEffectIndex(this.currentEffect);
     
     const textureLoader = new THREE.TextureLoader();
     const nextTexture = await this.loadTexture(textureLoader, this.images[this.nextImageIndex]);
@@ -180,6 +208,20 @@ export class ShadersSlider {
     this.material.uniforms.uResolution.value.set(this.width, this.height);
   }
 
+  async updateImages(newImages) {
+    if (this.isAnimating) return;
+    
+    this.images = newImages;
+    
+    // Load the first image if no current texture
+    if (!this.material.uniforms.uTexture1.value) {
+      const textureLoader = new THREE.TextureLoader();
+      const texture = await this.loadTexture(textureLoader, this.images[0]);
+      this.material.uniforms.uTexture1.value = texture;
+      this.material.uniforms.uTextureSize1.value.set(texture.image.width, texture.image.height);
+    }
+  }
+
   animate() {
     this.material.uniforms.uTime.value += 0.01;
     this.renderer.render(this.scene, this.camera);
@@ -206,6 +248,7 @@ export class ShadersSlider {
       uniform vec2 uTextureSize1;
       uniform vec2 uTextureSize2;
       uniform vec2 uResolution;
+      uniform float uEffect;
       
       varying vec2 vUv;
       
@@ -220,15 +263,148 @@ export class ShadersSlider {
         );
       }
       
+      // Noise functions
+      float random(vec2 st) {
+        return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+      }
+      
+      float noise(vec2 st) {
+        vec2 i = floor(st);
+        vec2 f = fract(st);
+        f = f * f * (3.0 - 2.0 * f);
+        
+        float a = random(i);
+        float b = random(i + vec2(1.0, 0.0));
+        float c = random(i + vec2(0.0, 1.0));
+        float d = random(i + vec2(1.0, 1.0));
+        
+        return mix(mix(a, b, f.x), mix(c, d, f.x), f.y);
+      }
+      
+      // Transition effects
+      float dots(vec2 uv, float progress) {
+        float scale = 20.0;
+        vec2 st = uv * scale;
+        float d = distance(fract(st), vec2(0.5));
+        float mask = step(d, 0.1);
+        return step(progress, mask);
+      }
+      
+      float dotsCircle(vec2 uv, float progress) {
+        vec2 center = vec2(0.5);
+        float dist = distance(uv, center);
+        float radius = progress * 0.7;
+        float dots = dots(uv, 1.0);
+        return step(dist, radius) * dots;
+      }
+      
+      float flyeye(vec2 uv, float progress) {
+        vec2 center = vec2(0.5);
+        float dist = distance(uv, center);
+        float scale = 1.0 + progress * 2.0;
+        vec2 distorted = center + (uv - center) * scale;
+        return step(dist, 0.5 - progress * 0.3);
+      }
+      
+      float morphX(vec2 uv, float progress) {
+        float wave = sin(uv.y * 20.0 + progress * 10.0) * 0.1;
+        return step(uv.x + wave, progress);
+      }
+      
+      float morphY(vec2 uv, float progress) {
+        float wave = sin(uv.x * 20.0 + progress * 10.0) * 0.1;
+        return step(uv.y + wave, progress);
+      }
+      
+      float pageCurl(vec2 uv, float progress) {
+        float curl = 1.0 - progress;
+        float angle = progress * 3.14159;
+        vec2 rotated = vec2(
+          uv.x * cos(angle) - uv.y * sin(angle),
+          uv.x * sin(angle) + uv.y * cos(angle)
+        );
+        return step(rotated.x, curl);
+      }
+      
+      float peelX(vec2 uv, float progress) {
+        return step(uv.x, progress);
+      }
+      
+      float peelY(vec2 uv, float progress) {
+        return step(uv.y, progress);
+      }
+      
+      float polygonsFall(vec2 uv, float progress) {
+        float scale = 10.0;
+        vec2 st = uv * scale;
+        float n = noise(st + uTime);
+        float mask = step(n, progress);
+        return mask;
+      }
+      
+      float polygonsMorph(vec2 uv, float progress) {
+        float scale = 8.0;
+        vec2 st = uv * scale;
+        float n1 = noise(st);
+        float n2 = noise(st + vec2(10.0));
+        float mask = mix(n1, n2, progress);
+        return step(mask, 0.5);
+      }
+      
+      float polygonsWind(vec2 uv, float progress) {
+        float scale = 15.0;
+        vec2 st = uv * scale;
+        float wind = sin(uTime * 2.0 + uv.x * 10.0) * 0.1;
+        float n = noise(st + vec2(wind, 0.0));
+        return step(n, progress);
+      }
+      
+      float pixelize(vec2 uv, float progress) {
+        float pixelSize = mix(0.01, 0.1, progress);
+        vec2 pixelated = floor(uv / pixelSize) * pixelSize;
+        return step(distance(uv, pixelated), progress * 0.1);
+      }
+      
+      float ripple(vec2 uv, float progress) {
+        vec2 center = vec2(0.5);
+        float dist = distance(uv, center);
+        float wave = sin(dist * 20.0 - progress * 10.0) * 0.1;
+        return step(dist + wave, progress * 0.7);
+      }
+      
+      float getTransitionMask(vec2 uv, float progress) {
+        float effectIndex = uEffect * 12.0; // 13 effects total
+        
+        if (effectIndex < 1.0) return dots(uv, progress);
+        else if (effectIndex < 2.0) return dotsCircle(uv, progress);
+        else if (effectIndex < 3.0) return flyeye(uv, progress);
+        else if (effectIndex < 4.0) return morphX(uv, progress);
+        else if (effectIndex < 5.0) return morphY(uv, progress);
+        else if (effectIndex < 6.0) return pageCurl(uv, progress);
+        else if (effectIndex < 7.0) return peelX(uv, progress);
+        else if (effectIndex < 8.0) return peelY(uv, progress);
+        else if (effectIndex < 9.0) return polygonsFall(uv, progress);
+        else if (effectIndex < 10.0) return polygonsMorph(uv, progress);
+        else if (effectIndex < 11.0) return polygonsWind(uv, progress);
+        else if (effectIndex < 12.0) return pixelize(uv, progress);
+        else return ripple(uv, progress);
+      }
+      
       void main() {
-        vec2 uv1 = getUv(vUv, uTextureSize1, uResolution);
-        vec2 uv2 = getUv(vUv, uTextureSize2, uResolution);
+        vec2 uv = vUv;
+        
+        // Get textures with proper UV mapping
+        vec2 uv1 = getUv(uv, uTextureSize1, uResolution);
+        vec2 uv2 = getUv(uv, uTextureSize2, uResolution);
         
         vec4 color1 = texture2D(uTexture1, uv1);
         vec4 color2 = texture2D(uTexture2, uv2);
         
-        // Simple crossfade transition
-        gl_FragColor = mix(color1, color2, uProgress);
+        // Get transition mask based on current effect
+        float mask = getTransitionMask(uv, uProgress);
+        
+        // Apply transition
+        gl_FragColor = mix(color1, color2, mask);
       }
     `;
   }

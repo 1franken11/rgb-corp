@@ -10,7 +10,7 @@ export default defineConfig({
     tailwind()
   ],
   output: 'static',
-  site: 'https://rgb-corp.com',
+  site: 'https://rgb-corporation.com',
   trailingSlash: 'always',
   compressHTML: true,
   build: {

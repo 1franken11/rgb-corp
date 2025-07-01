@@ -5,7 +5,7 @@
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  background: #000;
+  background: none;
 }
 
 /* Loading animation */
@@ -71,7 +71,6 @@
   transform: translateX(-50%);
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, transparent, #ff6b35, transparent);
   border-radius: 2px;
 }
 
@@ -144,7 +143,6 @@
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #ff6b35, #f7931e, #ff6b35);
   background-size: 200% 200%;
   color: white;
   box-shadow: 

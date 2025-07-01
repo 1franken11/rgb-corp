@@ -83,10 +83,10 @@ const closeButtonText = t('Button.Close');
 <script>
   // Asegurarnos de que el script se ejecute después de que el DOM esté cargado
   document.addEventListener('DOMContentLoaded', () => {
-    let selectedFloor = null;
-    let bgImage = null;
+    let selectedFloor: string | null = null;
+    let bgImage: string | null = null;
     let fadeOut = false;
-    let fixedBgImage = null;
+    let fixedBgImage: string | null = null;
 
     const flooringBgOverlay = document.getElementById('flooring-bg-overlay');
     const flooringCards = document.querySelectorAll('.flooring-card');
@@ -116,6 +116,9 @@ const closeButtonText = t('Button.Close');
           const modal = document.createElement('div');
           modal.className = 'modal-overlay';
           
+          // Prevent body scroll when modal is open
+          document.body.style.overflow = 'hidden';
+          
           // Get the content for the selected floor type
           const contentElement = document.getElementById(`${floorKey.toLowerCase()}-content`);
           const content = contentElement ? contentElement.innerHTML : '';
@@ -139,33 +142,28 @@ const closeButtonText = t('Button.Close');
 
           // Handle modal close
           const closeBtn = modal.querySelector('.close-btn');
-          closeBtn?.addEventListener('click', () => {
+          const closeModal = () => {
             modal.remove();
             selectedFloor = null;
             fixedBgImage = null;
             updateBackground();
+            document.body.style.overflow = '';
             document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
-          });
+          };
+
+          closeBtn?.addEventListener('click', closeModal);
 
           // Close on outside click
           modal.addEventListener('click', (e) => {
             if (e.target === modal) {
-              modal.remove();
-              selectedFloor = null;
-              fixedBgImage = null;
-              updateBackground();
-              document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
+              closeModal();
             }
           });
 
           // Close on Escape key
-          const handleEscape = (e) => {
+          const handleEscape = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
-              modal.remove();
-              selectedFloor = null;
-              fixedBgImage = null;
-              updateBackground();
-              document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
+              closeModal();
               document.removeEventListener('keydown', handleEscape);
             }
           };
