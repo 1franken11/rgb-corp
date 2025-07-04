@@ -5,6 +5,7 @@ import Navbar from '../components/common/navbar/Navbar.astro';
 import type { Language } from '../i18n/utils';
 import { getLangFromUrl } from '../i18n/utils';
 import { getSeoData } from '../utils/seo';
+import GoogleAnalytics from '../components/common/GoogleAnalytics.astro';
 
 const url = new URL(Astro.request.url);
 const { lang } = getLangFromUrl(url);
@@ -21,17 +22,37 @@ const seo = getSeoData(lang, url.pathname);
 
 <!-- SEO Metadata -->
     <meta name="description" content={seo.description} />
+    <meta name="keywords" content={seo.keywords} />
+    <meta name="author" content="RGB Corporation" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- Open Graph -->
     <meta property="og:title" content={seo.title} />
     <meta property="og:description" content={seo.description} />
     <meta property="og:image" content={seo.ogImage} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content={lang} />
+    <meta property="og:url" content={seo.canonicalUrl} />
+    <meta property="og:site_name" content="RGB Corporation" />
+    
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={seo.title} />
     <meta name="twitter:description" content={seo.description} />
     <meta name="twitter:image" content={seo.ogImage} />
-    <link rel="canonical" href={`https://rgb-corporation.com/${lang}${url.pathname}`} />
+    <meta name="twitter:site" content="@rgb_corp" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href={seo.canonicalUrl} />
+    
+    <!-- Local Business Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(seo.schemaMarkup)} />
+    
     <title>{seo.title}</title>
+
+    <!-- Google Analytics -->
+    <GoogleAnalytics />
 
     <!-- Fonts and CSS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -7,7 +7,7 @@ import {FlooringSection} from '@/components';
 import {ImageComparison} from '@/components';
 import ProjectSection from '../../components/ProjectSection/ProjectSection.astro';
 import {OpinionesCarousel} from '@/components';
-import {ContactForm} from '@/components';
+import {ContactForm, ShadersSliderMultilingual} from '@/components';
 import Footer from '@/components/layout/Footer.astro';
 const lang: Language = 'pt';
 
@@ -15,13 +15,13 @@ const lang: Language = 'pt';
 
 <MainLayout title="Home | RGB Corp" lang={lang}>
     <main>
-  <FirstSection lang={lang} />
+  <ShadersSliderMultilingual lang={lang} />
   <QuienesSomos lang={lang} />
   <FlooringSection lang={lang} />
   <ProjectSection lang={lang} />
-  <OpinionesCarousel lang={lang} client:visible />
-  <ContactForm lang={lang} client:visible />
-  <Footer lang={lang} client:visible />
+  <OpinionesCarousel lang={lang} />
+  <ContactForm lang={lang} />
+  <Footer lang={lang} />
 
   </main>
 </MainLayout> 

@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils
 import { languages } from '../../i18n/utils';
 
 export async function getStaticPaths() {
-  const pages = ['about', 'services', 'contact', 'privacy-policy'];
+  const pages = ['about', 'contact'];
   const paths = [];
 
   for (const lang of Object.keys(languages)) {
@@ -25,9 +25,7 @@ const t = useTranslations(lang);
 // Mapeo de páginas a componentes
 const pageComponents = {
   'about': () => import('../../components/QuienesSomos/QuienesSomos.astro'),
-  'services': () => import('../../components/Services/Services.astro'),
-  'contact': () => import('../../components/Contact/Contact.astro'),
-  'privacy-policy': () => import('../../components/PrivacyPolicy/PrivacyPolicy.astro')
+  'contact': () => import('../../components/contactForm/ContactForm.astro')
 };
 
 const module = await pageComponents[page as keyof typeof pageComponents]();

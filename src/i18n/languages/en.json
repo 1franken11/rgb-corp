@@ -200,6 +200,30 @@
     "title": "About Us - RGB Corporation",
     "description": "Learn about RGB Corporation, your trusted flooring partner in Jacksonville, Florida."
   },
+  "ShadersSlider": {
+    "slides": [
+      {
+        "title": "RGB Corporation",
+        "subtitle": "Transforming spaces with excellence and quality"
+      },
+      {
+        "title": "Innovation in every detail",
+        "subtitle": "Quality and design for your spaces"
+      },
+      {
+        "title": "Commitment and excellence",
+        "subtitle": "Your project, our passion"
+      },
+      {
+        "title": "Spaces that inspire",
+        "subtitle": "Solutions tailored to your needs"
+      }
+    ],
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
   "Services": {
     "title": "Our Services - RGB Corporation",
     "description": "Discover our comprehensive flooring solutions in Jacksonville, Florida.",

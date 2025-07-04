@@ -196,6 +196,30 @@
     "title": "Quem Somos - RGB Corporation",
     "description": "Conheça a RGB Corporation, seu parceiro de confiança em pisos em Jacksonville, Flórida."
   },
+  "ShadersSlider": {
+    "slides": [
+      {
+        "title": "RGB Corporation",
+        "subtitle": "Transformando espaços com excelência e qualidade"
+      },
+      {
+        "title": "Inovação em cada detalhe",
+        "subtitle": "Qualidade e design para seus espaços"
+      },
+      {
+        "title": "Compromisso e excelência",
+        "subtitle": "Seu projeto, nossa paixão"
+      },
+      {
+        "title": "Espaços que inspiram",
+        "subtitle": "Soluções sob medida"
+      }
+    ],
+    "navigation": {
+      "previous": "Anterior",
+      "next": "Próximo"
+    }
+  },
   "Services": {
     "title": "Nossos Serviços - RGB Corporation",
     "description": "Descubra nossas soluções completas de pisos em Jacksonville, Flórida.",

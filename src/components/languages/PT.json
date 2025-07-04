@@ -249,6 +249,30 @@
     "celPlaceholder": "Opcional",
     "quote": "Solicite um orçamento"
   },
+  "ShadersSlider": {
+    "slides": [
+      {
+        "title": "RGB Corporation",
+        "subtitle": "Transformando espaços com excelência e qualidade"
+      },
+      {
+        "title": "Inovação em cada detalhe",
+        "subtitle": "Qualidade e design para seus espaços"
+      },
+      {
+        "title": "Compromisso e excelência",
+        "subtitle": "Seu projeto, nossa paixão"
+      },
+      {
+        "title": "Espaços que inspiram",
+        "subtitle": "Soluções sob medida"
+      }
+    ],
+    "navigation": {
+      "previous": "Anterior",
+      "next": "Próximo"
+    }
+  },
   "Footer": {
     "title": "RGB Corp",
     "quickLinksTitle": "Links Rápidos",

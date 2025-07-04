@@ -179,6 +179,30 @@
     "celPlaceholder": "Optional",
     "quote": "Request a quote"
   },
+  "ShadersSlider": {
+    "slides": [
+      {
+        "title": "RGB Corporation",
+        "subtitle": "Transforming spaces with excellence and quality"
+      },
+      {
+        "title": "Innovation in every detail",
+        "subtitle": "Quality and design for your spaces"
+      },
+      {
+        "title": "Commitment and excellence",
+        "subtitle": "Your project, our passion"
+      },
+      {
+        "title": "Spaces that inspire",
+        "subtitle": "Solutions tailored to your needs"
+      }
+    ],
+    "navigation": {
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
   "Footer": {
     "title": "RGB Corp",
     "quickLinksTitle": "Quick Links",

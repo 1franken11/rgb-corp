@@ -6,4 +6,4 @@ export { default as FlooringSection } from './flooringSection/FlooringSection.as
 export { default as ImageComparison } from './imageComparison/ImageComparison.astro';
 export { default as OpinionesCarousel } from './opinionesCarousel/OpinionesCarousel.astro';
 export { default as ContactForm } from './contactForm/ContactForm.astro';
-export { default as Welcome } from './Welcome.astro';
+export { default as ShadersSliderMultilingual } from './ShadersSlider/ShadersSliderMultilingual.astro';

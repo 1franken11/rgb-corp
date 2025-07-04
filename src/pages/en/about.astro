@@ -1,14 +1,13 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+import MainLayout from '../../layouts/MainLayout.astro';
+import type { Language } from '../../i18n/utils';
 import QuienesSomos from '../../components/QuienesSomos/QuienesSomos.astro';
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang: Language = 'en';
 ---
 
-<Layout title="About Us | RGB Corp" description="Learn more about RGB Corp">
+<MainLayout title="About Us | RGB Corp" lang={lang}>
   <main>
-    <QuienesSomos />
+    <QuienesSomos lang={lang} />
   </main>
-</Layout> 
+</MainLayout> 
