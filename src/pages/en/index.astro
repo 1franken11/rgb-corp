@@ -1,13 +1,12 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import type { Language } from '../../i18n/utils';
-import FirstSection from '../../components/FirstSection/FirstSection.tsx';
+import FirstSection from '../../components/FirstSection.tsx';
 import { QuienesSomos } from '@/components';
 import {FlooringSection} from '@/components';
-import ProjectSection from '@/components/ProjectSection/ProjectSection.astro';
-import {OpinionesCarousel} from '@/components';
-import {ContactForm, ShadersSliderMultilingual} from '@/components';
-import Footer from '@/components/layout/Footer.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import {ContactForm, ShadersSliderMultilingual, ReviewsCarousel} from '../../components';
+import Footer from '../../components/Footer.astro';
 
 const lang: Language = 'en';
 
@@ -15,12 +14,11 @@ const lang: Language = 'en';
 
 <MainLayout title="Home | RGB Corp" lang={lang}>
     <main>
-  <FirstSection client:only="react" lang={lang} />
   <ShadersSliderMultilingual lang={lang} />
   <QuienesSomos lang={lang} />
   <FlooringSection lang={lang} />
   <ProjectSection lang={lang} />
-  <OpinionesCarousel lang={lang} />
+  <ReviewsCarousel lang={lang} />
   <ContactForm lang={lang} />
   <Footer lang={lang} />
 

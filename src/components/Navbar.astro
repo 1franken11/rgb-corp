@@ -1,9 +1,9 @@
 ---
-import { getLangFromUrl, useTranslations } from '../../../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import './Navbar.css';
 import MenuToggle from './MenuToggle.astro';
 import NavbarMenu from './NavbarMenu.astro';
-import TopBar from '../topbar/TopBar.astro';
+import TopBar from './TopBar.astro';
 
 const { lang } = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);

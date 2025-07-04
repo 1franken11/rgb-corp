@@ -27,23 +27,10 @@ export default defineConfig({
     }
   },
   vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks: {
-            'react-vendor': ['react', 'react-dom'],
-            'ui-vendor': ['@astrojs/react']
-          }
-        }
-      }
-    },
     ssr: {
       noExternal: ['@astrojs/react']
     }
   },
 
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'hover'
-  }
+
 });

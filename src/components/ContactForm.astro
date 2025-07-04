@@ -1,7 +1,7 @@
 ---
-import { getLanguageFromURL } from '../../i18n/utils';
-import type { Language } from '../../i18n/utils';
-import ImageComparison from '../imageComparison/ImageComparison.astro';
+import { getLanguageFromURL } from '../i18n/utils';
+import type { Language } from '../i18n/utils';
+import ImageComparison from './imageComparison/ImageComparison.astro';
 import './ContactForm.css';
 
 interface Props {
@@ -55,11 +55,12 @@ const translations = {
     after: "Depois"
   }
 };
+
 const imageComparisonsData = [
   {
-    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854663/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_e9174645_lgkbqk.jpg', // Ruta a tu imagen "antes"
-    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854747/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.14_023dbe16_ylkdxr.jpg', // Ruta a tu imagen "después"
-    alt: 'Cocina reformada' // Texto alternativo descriptivo
+    after: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854663/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_e9174645_lgkbqk.jpg',
+    before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854747/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.14_023dbe16_ylkdxr.jpg',
+    alt: 'Cocina reformada'
   },
   {
     before: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742854491/Imagen_de_WhatsApp_2025-02-06_a_las_18.38.13_3294c619_mqj5ug.jpg',
@@ -72,16 +73,13 @@ const imageComparisonsData = [
     alt: 'Living room renovado'
   }
 ];
-const encodedMessage = encodeURIComponent(
-    "Hello, I would like more information about your services"
-  );
+
 const t = translations[currentLang];
 ---
 
 <section id="contact-container" class="contact-container" data-aos="fade-up">
   <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
-    <ImageComparison comparisons={imageComparisonsData}
-    lang ={currentLang} />
+    <ImageComparison comparisons={imageComparisonsData} lang={currentLang} />
   </div>
 
   <div class="contact-form" data-aos="fade-left" data-aos-delay="300">
@@ -112,7 +110,7 @@ const t = translations[currentLang];
     </form>
     <div id="successMessage" class="success-message hidden">{t.success}</div>
     <div id="errorMessage" class="error-message hidden">{t.error}</div>
-        <div class="social-icons" data-aos="fade-up" data-aos-delay="550">
+    <div class="social-icons" data-aos="fade-up" data-aos-delay="550">
       <a href="https://instagram.com/rgbcorp" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram icon instagram"></i>
       </a>
@@ -124,29 +122,24 @@ const t = translations[currentLang];
       </a>
     </div>
   </div>
-  
 </section>
-</div>
 
 <script>
-  const form = document.getElementById('contactForm') as HTMLFormElement;
+  const form = document.getElementById('contactForm');
   const successMessage = document.getElementById('successMessage');
   const errorMessage = document.getElementById('errorMessage');
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      
       // Aquí irá la lógica de EmailJS cuando se configure
       console.log('Form submitted');
-      
       if (successMessage) {
         successMessage.classList.remove('hidden');
         setTimeout(() => {
           successMessage.classList.add('hidden');
         }, 5000);
       }
-
       form.reset();
     });
   }

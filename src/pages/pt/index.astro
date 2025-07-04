@@ -1,14 +1,13 @@
 ---
 import MainLayout from '../../layouts/MainLayout.astro';
 import type { Language } from '../../i18n/utils';
-import FirstSection from '../../components/FirstSection/FirstSection.astro';
+import FirstSection from '../../components/FirstSection.astro';
 import { QuienesSomos } from '@/components';
 import {FlooringSection} from '@/components';
 import {ImageComparison} from '@/components';
-import ProjectSection from '../../components/ProjectSection/ProjectSection.astro';
-import {OpinionesCarousel} from '@/components';
-import {ContactForm, ShadersSliderMultilingual} from '@/components';
-import Footer from '@/components/layout/Footer.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import {ContactForm, ShadersSliderMultilingual, ReviewsCarousel} from '../../components';
+import Footer from '../../components/Footer.astro';
 const lang: Language = 'pt';
 
 ---
@@ -19,7 +18,7 @@ const lang: Language = 'pt';
   <QuienesSomos lang={lang} />
   <FlooringSection lang={lang} />
   <ProjectSection lang={lang} />
-  <OpinionesCarousel lang={lang} />
+  <ReviewsCarousel lang={lang} />
   <ContactForm lang={lang} />
   <Footer lang={lang} />
 

@@ -6,9 +6,9 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/autoplay';
-import '../FirstSection/FirstSection.css';
+import './FirstSection.css';
 import { SlideData } from './SlideData';
-import { useTranslations, type Language } from '../../i18n/utils';
+import { useTranslations, type Language } from '../i18n/utils';
 
 type Props = {
   lang?: Language;
