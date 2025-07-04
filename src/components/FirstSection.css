@@ -1,35 +1,23 @@
 .firstSection {
-  width: 100%;
-  height: 100vh;
-  background: #000;
+  width: 100vw;
+  min-height: 60vh;
+  background: linear-gradient(135deg, #f5f7fa, #ffffff);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   position: relative;
+  overflow: hidden;
 }
 
 .swiper-main {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
-
-.swiper-main .swiper-wrapper {
-  height: 100vh;
-  align-items: center;
-}
-
-.swiper-main .swiper-slide {
-  height: 100vh;
-  width: 100%;
-  transition: all 0.3s ease;
+  width: 100vw;
+  min-height: 60vh;
 }
 
 .slide-image-container {
   position: relative;
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  min-height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,75 +25,46 @@
 }
 
 .slide-image-container img {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 60vh;
   object-fit: cover;
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
-  min-width: 100%;
-  min-height: 100%;
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
 
 .caption {
   position: absolute;
+  left: 0;
+  right: 0;
   bottom: 2rem;
-  left: 2rem;
-  background: rgba(0,0,0,0.8);
+  margin: 0 auto;
   color: #fff;
+  background: rgba(42, 120, 146, 0.7);
   padding: 1rem 2rem;
   border-radius: 8px;
-  font-size: 1.2rem;
-  max-width: 80vw;
-  z-index: 10;
-  backdrop-filter: blur(10px);
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  max-width: 90vw;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Optimizar efecto coverflow */
-.swiper-main .swiper-slide-active {
-  transform: scale(1);
-  z-index: 2;
-}
-
-.swiper-main .swiper-slide-prev,
-.swiper-main .swiper-slide-next {
-  transform: scale(0.9);
-  z-index: 1;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .swiper-main,
-  .swiper-main .swiper-wrapper,
-  .swiper-main .swiper-slide,
-  .slide-image-container,
+@media (max-width: 900px) {
   .slide-image-container img {
-    height: 100vh;
+    height: 40vh;
   }
-  
   .caption {
     font-size: 1rem;
     padding: 0.7rem 1.2rem;
-    left: 1rem;
-    bottom: 1rem;
-    max-width: 95vw;
   }
 }
 
-@media (max-width: 480px) {
-  .swiper-main,
-  .swiper-main .swiper-wrapper,
-  .swiper-main .swiper-slide,
-  .slide-image-container,
+@media (max-width: 600px) {
   .slide-image-container img {
-    height: 100vh;
+    height: 30vh;
   }
-  
   .caption {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 0.5rem 0.7rem;
-    left: 0.5rem;
-    bottom: 0.5rem;
-    max-width: 98vw;
   }
 } 

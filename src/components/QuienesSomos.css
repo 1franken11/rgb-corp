@@ -138,7 +138,6 @@
   }
 }
 
-/* Elimina outline, box-shadow y highlight azul en todo lo clickeable */
 .menuToggle,
 .menuToggle:focus,
 .menuToggle:active,

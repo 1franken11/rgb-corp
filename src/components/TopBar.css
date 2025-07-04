@@ -8,7 +8,7 @@
 }
 
 .topbar {
-  background-color: #000000;
+  background: linear-gradient(135deg, #16404e 0%, #000000 100%);
   color: #feffff;
   width: 100%;
   padding: 5px 10px;

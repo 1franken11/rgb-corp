@@ -1,6 +1,6 @@
 export { default as TopBar } from './TopBar.astro';
 export { default as Navbar } from './Navbar.astro';
-export { default as Footer } from './Footer.astro';
+// export { default as Footer } from './Footer.astro';
 export { default as QuienesSomos } from './QuienesSomos.astro';
 export { default as FlooringSection } from './FlooringSection.astro';
 export { default as ImageComparison } from './imageComparison/ImageComparison.astro';

@@ -2,11 +2,11 @@
 import MainLayout from '../../layouts/MainLayout.astro';
 import type { Language } from '../../i18n/utils';
 import FirstSection from '../../components/FirstSection.tsx';
-import { QuienesSomos } from '@/components';
-import {FlooringSection} from '@/components';
+import QuienesSomos from '../../components/QuienesSomos.astro';
+import FlooringSection from '../../components/FlooringSection.astro';
 import ProjectSection from '../../components/ProjectSection.astro';
 import {ContactForm, ShadersSliderMultilingual, ReviewsCarousel} from '../../components';
-import Footer from '../../components/Footer.astro';
+// import Footer from '../../components/Footer.astro';
 
 const lang: Language = 'en';
 
@@ -20,7 +20,7 @@ const lang: Language = 'en';
   <ProjectSection lang={lang} />
   <ReviewsCarousel lang={lang} />
   <ContactForm lang={lang} />
-  <Footer lang={lang} />
+  <!-- <Footer lang={lang} /> -->
 
   </main>
 </MainLayout> 

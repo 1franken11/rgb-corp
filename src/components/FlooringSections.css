@@ -1,223 +1,71 @@
 .flooring-sections {
-  position: relative;
-  min-height: 100vh;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #f5f7fa, #ffffff);
 }
 
-.flooring-bg-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.1;
-  transition: opacity 0.3s ease-in-out;
-  z-index: 0;
-}
-
-.flooring-bg-overlay.fade-out {
-  opacity: 0;
-}
-
-.flooring-title {
-  position: relative;
-  z-index: 1;
-  font-size: 2.5rem;
+.section-title {
+  color: #2a7892;
+  font-size: 2rem;
   margin-bottom: 2rem;
   text-align: center;
-  color: var(--text-color);
 }
 
 .flooring-grid {
-  position: relative;
-  z-index: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
-  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .flooring-card {
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s, transform 0.3s;
 }
 
 .flooring-card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.16);
+  transform: translateY(-8px);
+  z-index: 2;
 }
 
 .flooring-card img {
   width: 100%;
-  height: 200px;
+  max-width: 220px;
+  border-radius: 8px;
+  margin-bottom: 1.2rem;
   object-fit: cover;
 }
 
-.floor-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: white;
+.flooring-card h3 {
+  color: #2a7892;
   font-size: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.flooring-card p {
+  color: #555;
+  font-size: 1rem;
   text-align: center;
 }
 
-/* Modal styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 2rem;
-}
-
-.modal-card-two-columns {
-  background-color: white;
-  border-radius: 8px;
-  width: 100%;
-  max-width: 1000px;
-  max-height: 90vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  overflow: hidden;
-  position: relative;
-}
-
-.modal-image-column {
-  position: relative;
-  overflow: hidden;
-}
-
-.modal-image-column img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.modal-text-column {
-  padding: 2rem;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-title {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  color: var(--text-color);
-}
-
-.modal-content-scroll {
-  flex: 1;
-  overflow-y: auto;
-  margin-bottom: 1.5rem;
-}
-
-.modal-content-scroll p {
-  margin-bottom: 1rem;
-  line-height: 1.6;
-  color: var(--text-color);
-}
-
-.close-btn {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--primary-color);
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease;
-  align-self: flex-end;
-}
-
-.close-btn:hover {
-  background-color: var(--primary-color-dark);
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .modal-card-two-columns {
-    grid-template-columns: 1fr;
-    max-height: 80vh;
-  }
-
-  .modal-image-column {
-    height: 200px;
-  }
-
+@media (max-width: 900px) {
   .flooring-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  }
-
-  .flooring-title {
-    font-size: 2rem;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-@media (max-width: 480px) {
-  .flooring-sections {
-    padding: 1rem;
-  }
-
+@media (max-width: 600px) {
   .flooring-grid {
     grid-template-columns: 1fr;
   }
-
-  .flooring-title {
-    font-size: 1.75rem;
+  .flooring-card {
+    padding: 1.2rem 0.7rem;
   }
-
-  .modal-overlay {
-    padding: 1rem;
-  }
-
-  .modal-text-column {
-    padding: 1rem;
-  }
-
-  .modal-title {
-    font-size: 1.5rem;
-  }
-}
-
-/* Elimina outline, box-shadow y highlight azul en todo lo clickeable */
-button,
-button:focus,
-button:active,
-a,
-a:focus,
-a:active,
-.flooring-card,
-.flooring-card:focus,
-.flooring-card:active,
-.close-btn,
-.close-btn:focus,
-.close-btn:active {
-  outline: none !important;
-  box-shadow: none !important;
-  -webkit-tap-highlight-color: transparent !important;
 } 

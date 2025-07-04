@@ -22,13 +22,17 @@ export default defineConfig({
     defaultLocale: 'en',
     locales: ['en', 'es', 'pt'],
     routing: {
-      prefixDefaultLocale: true,
-      strategy: 'pathname'
+      prefixDefaultLocale: true
     }
   },
   vite: {
     ssr: {
       noExternal: ['@astrojs/react']
+    },
+    resolve: {
+      alias: {
+        '@': new URL('./src', import.meta.url).pathname
+      }
     }
   },
 

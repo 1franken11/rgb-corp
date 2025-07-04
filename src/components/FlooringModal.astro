@@ -1,3 +1,4 @@
+---
 import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
 import './FlooringModal.css';
 
@@ -8,6 +9,7 @@ interface Props {
 const { lang: propLang } = Astro.props;
 const currentLang: Language = typeof propLang === 'string' ? propLang as Language : getLangFromUrl(Astro.url).lang;
 const t = useTranslations(currentLang);
+---
 
 <div class="modal-backdrop">
   <div class="modal-content">
