@@ -54,15 +54,12 @@ const uniqueId = `image-comparison-${Math.random().toString(36).substr(2, 9)}`;
 </section>
 
 <script type="module" is:inline>
-  // Importa la CLASE de tu Custom Element desde el archivo JavaScript.
-  // Usa ruta relativa para compatibilidad producción/dev.
-  import { ImageComparisonElement } from './ImageComparisonElement.js'; 
+  // Importa la CLASE de tu Custom Element desde el archivo JavaScript en public.
+  import { ImageComparisonElement } from '/imageComparison/ImageComparisonElement.js';
 
-  // Define tu Custom Element globalmente si no está ya definido.
   if (!customElements.get('image-comparison-element')) {
     customElements.define('image-comparison-element', ImageComparisonElement);
   }
-  // Dots funcionalidad
   document.addEventListener('DOMContentLoaded', () => {
     const section = document.querySelector('[data-component-id="' + uniqueId + '"]');
     if (!section) return;
