@@ -55,12 +55,10 @@ const uniqueId = `image-comparison-${Math.random().toString(36).substr(2, 9)}`;
 
 <script type="module" is:inline>
   // Importa la CLASE de tu Custom Element desde el archivo JavaScript.
-  // Astro se encargará de transpilá-lo y bundléa-lo para el cliente.
-  // Asegúrate de que el archivo 'imageComparisonElement.js' exista en la misma carpeta.
-  import { ImageComparisonElement } from '/src/components/imageComparison/ImageComparisonElement.js'; 
+  // Usa ruta relativa para compatibilidad producción/dev.
+  import { ImageComparisonElement } from './ImageComparisonElement.js'; 
 
   // Define tu Custom Element globalmente si no está ya definido.
-  // Esto evita errores si el script se ejecuta varias veces.
   if (!customElements.get('image-comparison-element')) {
     customElements.define('image-comparison-element', ImageComparisonElement);
   }
