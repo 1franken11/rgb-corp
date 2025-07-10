@@ -1,6 +1,9 @@
 {
     "Menu": {
-      "home": "Home",
+      "home": {
+        "title": "Spaces that inspire",
+        "description": "Tailor-made solutions"
+      },
       "instagram": "Instagram",
       "QuienesSomos": "About Us",
       "floors": "Explore Our Floor Types",
