@@ -1,0 +1,24 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils.ts';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
+const t = useTranslations(currentLang);
+
+const descriptions = t('FlooringSections.descriptions.Wood') as { title: string; description: string }[];
+---
+
+<div class="flooring-item">
+  <div class="flooring-description">
+    {descriptions.map((item, index) => (
+      <div>
+        <h4>{item.title}</h4>
+        <p>{item.description}</p>
+      </div>
+    ))}
+  </div>
+</div> 

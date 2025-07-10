@@ -1,0 +1,234 @@
+{
+    "Menu": {
+      "home": "Home",
+      "instagram": "Instagram",
+      "QuienesSomos": "About Us",
+      "floors": "Explore Our Floor Types",
+      "improveSpace": "We Improve Your Space",
+      "Reviews": "Reviews",
+      "contact": "Contact",
+      "corp": "CONSTRUCTION CORPORATION"
+    },
+    "SLIDES": [
+      { "caption": "Ejemplo de imagen 1" },
+      { "caption": "Ejemplo de imagen 2" },
+      { "caption": "Ejemplo de imagen 3" },
+      { "caption": "Ejemplo de imagen 4" }
+    ],
+    "Instagram": {
+      "title": "Latest Posts",
+      "prev": "Previous",
+      "next": "Next",
+      "page": "Page",
+      "of": "of",
+      "alt": [
+        "Post 1",
+        "Post 2",
+        "Post 3",
+        "Post 4",
+        "Post 5",
+        "Post 6",
+        "Post 7",
+        "Post 8"
+      ]
+    },
+    "ImageComparison": {
+      "title": "Remodeled Spaces",
+      "description": "See the significant improvements in interior and exterior design.",
+      "before": "Before",
+      "after": "After"
+    },
+    "VideoSection": {
+      "title": "Improving Your Space",
+      "videoTitle": "Floor Coverings"
+    },
+    "QuienesSomos": {
+      "title": "RGB LOGO",
+      "specialty": {
+        "title": "WHO ARE WE?",
+        "description": "At RGB CORPORATION, we are specialists in construction with a focus on installation, remodeling, and demolition, as well as selling high-quality materials. We have a team of experts that guarantees durable, safe, and aesthetically perfect results. Our mission is to transform spaces with innovative solutions and top-tier materials, ensuring satisfaction and excellence in every project. From small renovations to large constructions, we work with commitment, professionalism, and attention to detail. Trust us to make your project a reality with the quality and efficiency that define us."
+      },
+      "whyChooseUs": {
+        "title": "WHY CHOOSE US?",
+        "items": [
+          "Floor installation",
+          "Wood, vinyl, linoleum, and laminate floors",
+          "Carpet installation",
+          "Tile and grout placement",
+          "Concrete, brick, and stone floors",
+          "All types of floors",
+          "Fast response",
+          "High customer satisfaction",
+          "Residential and commercial service",
+          "Professional attention"
+        ]
+      },
+      "commitment": {
+        "title": "WHY CHOOSE US?",
+        "description": [
+          "Experience and Professionalism: With years of experience in the construction sector, we specialize in high-quality floor installation and remodeling. Our team consists of trained professionals who guarantee lasting and excellent results.",
+          "Commitment to Quality: We work only with top-quality materials, ensuring that every project, big or small, meets the highest standards of strength and aesthetics.",
+          "Personalized Attention: We make sure to understand the needs and desires of our clients, offering customized solutions and advice at every stage of the project.",
+          "Variety of Options: We offer a wide range of floors, from wood to ceramic, porcelain, and vinyl, suitable for all styles and budgets.",
+          "Fast and Efficient Process: We know how important time is, so we guarantee a quick and effective service without compromising work quality.",
+          "Competitive Prices: We offer fair and transparent rates, with no hidden costs, ensuring that our clients get the best value for their investment.",
+          "Guaranteed Satisfaction: Customer satisfaction is our priority. We make sure every job is completed as promised, with no exceptions."
+        ]
+      },
+      "services": {
+    "title": "SERVICES:",
+    "description": [
+      "Facility",
+      "remodeling",
+      "demolition",
+      "sale of materials"
+    ]
+  },
+      "floorTypes": [
+        "Wood",
+        "Laminate",
+        "Vinyl",
+        "Ceramic"
+      ],
+      "cabinets": [
+        "Kitchens",
+        "Bathrooms",
+        "Storage spaces"
+      ],
+      "materials": [
+        "Floors",
+        "Cabinets",
+        "Kitchen countertop",
+        "Kitchen island"
+      ]
+    },
+    "FlooringSections": {
+      "title": "Explore Our Flooring Options",
+      "options": {
+        "Vinyl": "Vinyl",
+        "Tile": "Tile",
+        "Laminate": "Laminate",
+        "Wood": "Wood"
+      },
+      "descriptions": {
+        "Vinyl": [
+          {"title": "Durability", "description": "Highly durable, resistant to scratches, stains, and moisture. Ideal for high-traffic areas."},
+          {"title": "Variety", "description": "A wide range of styles that mimic natural materials like wood, stone, or ceramic. Available in tiles, rolls, or planks."},
+          {"title": "Maintenance", "description": "Very easy to maintain. Requires sweeping and mopping. Stain and water-resistant."},
+          {"title": "Comfort", "description": "Flexible and soft underfoot, making it comfortable in spaces like kitchens and bathrooms."},
+          {"title": "Sensitivity", "description": "Highly resistant to stains and moisture, not sensitive to factors like humidity or heat."},
+          {"title": "Resistance", "description": "High wear and moisture resistance. Ideal for busy areas."},
+          {"title": "Aesthetics", "description": "Realistic imitations of natural materials with modern finishes. Visually versatile with a variety of designs."}
+        ],
+        "Tile": [
+          {"title": "Durability", "description": "Extremely durable, water-resistant, and wear-resistant. Perfect for high-traffic areas like kitchens, bathrooms, and entryways."},
+          {"title": "Variety", "description": "Available in a wide variety of colors, shapes, sizes, and finishes. Porcelain is denser and stronger than ceramic."},
+          {"title": "Maintenance", "description": "Requires regular cleaning with mild products. Grout can stain over time and needs maintenance."},
+          {"title": "Comfort", "description": "Can feel cold and hard underfoot, so rugs or radiant heating are recommended in cold climates."},
+          {"title": "Sensitivity", "description": "Sensitive to heavy impacts, like falling heavy objects, which can damage it."},
+          {"title": "Resistance", "description": "Very resistant to moisture, scratches, stains, and fading."},
+          {"title": "Aesthetics", "description": "Elegant, sophisticated, and available in a wide range of colors, patterns, and textures. Realistic wood or stone imitations."}
+        ],
+        "Laminate": [
+          {"title": "Durability", "description": "Highly durable and wear-resistant, suitable for high-traffic areas."},
+          {"title": "Variety", "description": "Offered in many colors and textures, mimicking wood or stone."},
+          {"title": "Maintenance", "description": "Requires gentle cleaning. Avoid excess water."},
+          {"title": "Comfort", "description": "Softer underfoot compared to tile, good for living spaces."},
+          {"title": "Sensitivity", "description": "Sensitive to water and heavy impacts. Use with care."},
+          {"title": "Resistance", "description": "Good resistance to stains and scratches, but not waterproof."},
+          {"title": "Aesthetics", "description": "Beautiful, realistic visuals that resemble wood or stone, adaptable to various decors."}
+        ],
+        "Wood": [
+          {"title": "Durability", "description": "Very durable, especially with proper care. Prone to scratches, stains, and moisture damage if not maintained."},
+          {"title": "Variety", "description": "Available in hardwoods (oak, walnut, cherry) and softwoods (pine, fir). Engineered wood offers more stability."},
+          {"title": "Maintenance", "description": "Requires periodic polishing and sealing. Keep dry to avoid damage."},
+          {"title": "Comfort", "description": "Warm and pleasant to the touch. Ideal for creating cozy, natural environments."},
+          {"title": "Sensitivity", "description": "Sensitive to humidity, direct sunlight, and scratches. Sealers are recommended."},
+          {"title": "Resistance", "description": "Resistant to abrasion but can be damaged by moisture or strong impacts."},
+          {"title": "Aesthetics", "description": "Classic and elegant. Natural wood provides a unique, warm, and sophisticated look that fits many decor styles."}
+        ]
+      }
+    },
+    "ProjectSection":{
+      "title": "Projects"
+    },
+    "Reviews":{
+      "title": "Reviews"
+    },
+    "Button":{
+      "Close": "Close"
+    },
+    "ContactForm": {
+      "title": "Contact Us",
+      "description": "Have a question? Send us a message and we'll get back to you as soon as possible.",
+      "name": "First Name",
+      "namePlaceholder": "Your first name",
+      "subject": "Reason for contact",
+      "ask": "Request quote",
+      "another": "Other",
+      "surname": "Last Name",
+      "surnamePlaceholder": "Your last name",
+      "email": "Email",
+      "emailPlaceholder": "Your email",
+      "message": "Message",
+      "messagePlaceholder": "Your message",
+      "sendButton": "Send",
+      "successMessage": "Email sent successfully!",
+      "errorMessage": "There was an error sending the email. Please try again.",
+      "cel": "Cellphone number",
+      "celPlaceholder": "Optional",
+      "quote": "Request a quote"
+    },
+    "ShadersSlider": {
+      "slides": [
+        {
+          "title": "RGB Corporation",
+          "subtitle": "Transforming spaces with excellence and quality"
+        },
+        {
+          "title": "Innovation in every detail",
+          "subtitle": "Quality and design for your spaces"
+        },
+        {
+          "title": "Commitment and excellence",
+          "subtitle": "Your project, our passion"
+        },
+        {
+          "title": "Spaces that inspire",
+          "subtitle": "Solutions tailored to your needs"
+        }
+      ],
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next"
+      }
+    },
+    "Footer": {
+      "title": "RGB Corp",
+      "quickLinksTitle": "Quick Links",
+      "contactTitle": "Contact",
+      "description": "Experts in high-quality flooring for your home or business. We offer professional and durable solutions.",
+      "quickLinks": [
+        { "href": "/", "text": "Home" },
+        { "href": "/about", "text": "About Us" },
+        { "href": "/services", "text": "Services" },
+        { "href": "/projects", "text": "Projects" },
+        { "href": "/contact", "text": "Contact" }
+      ],
+      "socialLinks": [
+        { "href": "https://www.facebook.com/profile.php?id=61562097362152", "icon": "fab fa-facebook", "label": "Facebook" },
+        { "href": "https://www.instagram.com/rgb_corp/", "icon": "fab fa-instagram", "label": "Instagram" }
+      ],
+      "contact": {
+        "phone": "+1 (904) 422-5380",
+        "phone2": "+1 (904) 728-9872",
+        "email": "rgbconstructioncorp@gmail.com"
+      },
+      "legalLinks": [
+        { "href": "/privacy", "text": "Privacy Policy" },
+        { "href": "/terms", "text": "Terms and Conditions" }
+      ],
+      "copyright": "&copy; {year} RGB Corp. All rights reserved."
+    }
+  }
+  

@@ -1,0 +1,304 @@
+{
+    "Menu": {
+      "home": "Inicio",
+      "instagram": "Instagram",
+      "QuienesSomos": "Quienes Somos",
+      "floors": "Explora nuestros tipo de pisos",
+      "improveSpace": "Proyectos",
+      "Reviews": "Reseña",
+      "contact": "Contacto",
+      "corp": "CORPORACIÓN DE CONSTRUCCIÓN"
+    },
+    "SLIDES": [
+      { "caption": "Ejemplo de imagen 1" },
+      { "caption": "Ejemplo de imagen 2" },
+      { "caption": "Ejemplo de imagen 3" },
+      { "caption": "Ejemplo de imagen 4" }
+    ],
+    "Instagram": {
+      "title": "Últimas Publicaciones",
+      "prev": "Anterior",
+      "next": "Siguiente",
+      "page": "Página",
+      "of": "de",
+      "alt": [
+        "Publicación 1",
+        "Publicación 2",
+        "Publicación 3",
+        "Publicación 4",
+        "Publicación 5",
+        "Publicación 6",
+        "Publicación 7",
+        "Publicación 8"
+      ]
+    },
+    "ImageComparison": {
+      "title": "Mapas Remodelados",
+      "description": "Observa las mejoras significativas en el diseño de interiores y exteriores.",
+      "before": "Antes",
+      "after": "Después"
+    },
+    "VideoSection": {
+      "title": "Mejorando tu Espacio",
+      "videoTitle": "Revestimientos de Pisos"
+    },
+    "QuienesSomos": {
+      "title": "LOGO RGB",
+      "specialty": {
+        "title": "¿QUIÉNES SOMOS?",
+        "description": "En RGB CORPORATION somos especialistas en construcción con un enfoque en la instalación, remodelación y demolición, además de ofrecer venta de materiales de alta calidad. Contamos con un equipo de expertos que garantiza resultados duraderos, seguros y estéticamente impecables. Nuestra misión es transformar espacios con soluciones innovadoras y materiales de primera, asegurando satisfacción y excelencia en cada proyecto. Desde pequeñas renovaciones hasta grandes construcciones, trabajamos con compromiso, profesionalismo y atención al detalle. Confía en nosotros para hacer realidad tu proyecto con la calidad y eficiencia que nos caracterizan."
+      },
+      "whyChooseUs": {
+        "title": "¿POR QUÉ ELEGIRNOS?",
+        "items": [
+          "Instalación de pisos",
+          "Pisos de madera, vinilo, linóleo y laminados",
+          "Instalación de alfombras",
+          "Colocación de azulejos y lechada",
+          "Pisos de concreto, ladrillo y piedra",
+          "Todo tipo de pisos",
+          "Respuesta rápida",
+          "Alta satisfacción del cliente",
+          "Servicio residencial y comercial",
+          "Atención profesional"
+        ]
+      },
+      "commitment": {
+        "title": "¿POR QUÉ ELEGIRNOS?",
+        "description": [
+          "Experiencia y Profesionalismo: Con años de experiencia en el sector de la construcción, nos especializamos en la instalación y remodelación de pisos de alta calidad. Nuestro equipo está compuesto por profesionales capacitados que garantizan resultados duraderos y de excelencia.",
+          "Compromiso con la Calidad: Trabajamos solo con materiales de primera calidad, asegurando que cada proyecto, grande o pequeño, cumpla con los más altos estándares de resistencia y estética.",
+          "Atención Personalizada: Nos aseguramos de entender las necesidades y deseos de nuestros clientes, ofreciendo soluciones a medida y asesoramiento en cada etapa del proyecto.",
+          "Variedad de Opciones: Ofrecemos una amplia gama de pisos, desde madera hasta cerámica, porcelanato y vinílicos, adaptados a todos los estilos y presupuestos.",
+          "Proceso Ágil y Eficiente: Sabemos lo importante que es el tiempo, por lo que garantizamos un servicio rápido y efectivo, sin comprometer la calidad del trabajo.",
+          "Precios Competitivos: Ofrecemos tarifas justas y transparentes, sin costos ocultos, asegurando que nuestros clientes obtengan el mejor valor por su inversión.",
+          "Satisfacción Garantizada: La satisfacción del cliente es nuestra prioridad. Nos aseguramos de que cada trabajo esté terminado según lo prometido, sin excepciones."
+        ]
+      },
+      "services": {
+        "title": "SERVICIOS:",
+        "description": [
+          "Instalación",
+          "Remodelación",
+          "Demolición",
+          "Venta de materiales"
+        ]
+      },
+      "floorTypes": ["Madera", "Laminados", "Vinil", "Cerámica"],
+      "cabinets": ["Cocinas", "Baños", "Espacios de almacenamiento"],
+      "materials": ["Pisos", "Gabinetes", "Mesón de cocina", "Isla de cocina"]
+    },
+    "FlooringSections": {
+      "title": "Explora Nuestras Opciones de Pisos",
+      "options": {
+        "Vinyl": "Vinyl",
+        "Tile": "Tile",
+        "Laminate": "Laminate",
+        "Wood": "Wood"
+      },
+      "descriptions": {
+        "Vinyl": [
+          {
+            "title": "Durabilidad",
+            "description": "Alta durabilidad, resistente a los arañazos, manchas y a la humedad. Ideal para áreas con alto tráfico."
+          },
+          {
+            "title": "Variedad",
+            "description": "Amplia gama de estilos que imitan materiales naturales como madera, piedra o cerámica. Se encuentra en losetas, rollos o tablones."
+          },
+          {
+            "title": "Mantenimiento",
+            "description": "Muy fácil de mantener. Requiere barrido y limpieza con mopa. Resistente a las manchas y al agua."
+          },
+          {
+            "title": "Comodidad",
+            "description": "Flexible y suave bajo los pies, lo que lo hace cómodo en espacios como cocinas y baños."
+          },
+          {
+            "title": "Sensibilidad",
+            "description": "Muy resistente a las manchas y la humedad, no es sensible a factores como la humedad o el calor."
+          },
+          {
+            "title": "Resistencia",
+            "description": "Alta resistencia al desgaste y a la humedad. Es ideal para áreas con mucho tránsito."
+          },
+          {
+            "title": "Estética",
+            "description": "Imitaciones realistas de materiales naturales, con acabados modernos. Estéticamente versátil, disponible en una variedad de diseños."
+          }
+        ],
+        "Tile": [
+          {
+            "title": "Durabilidad",
+            "description": "Extremadamente duradero, resistente al agua, la humedad y el desgaste. Ideal para áreas de alto tráfico como cocinas, baños y entradas."
+          },
+          {
+            "title": "Variedad",
+            "description": "Disponible en una gran variedad de colores, formas, tamaños y acabados. El porcelanato es más denso y resistente que la cerámica."
+          },
+          {
+            "title": "Mantenimiento",
+            "description": "Requiere limpieza regular con productos suaves. El rejunte puede mancharse con el tiempo y necesita mantenimiento."
+          },
+          {
+            "title": "Comodidad",
+            "description": "Puede ser frío y duro bajo los pies, por lo que es recomendable usar alfombras o calefacción radiante en climas fríos."
+          },
+          {
+            "title": "Sensibilidad",
+            "description": "Es sensible a los impactos fuertes, como caídas de objetos pesados, que pueden dañarlo."
+          },
+          {
+            "title": "Resistencia",
+            "description": "Muy resistente a la humedad, rayones, manchas y a la decoloración."
+          },
+          {
+            "title": "Estética",
+            "description": "Elegante, sofisticado y disponible en una amplia gama de colores, patrones y texturas. Imitaciones realistas de madera o piedra."
+          }
+        ],
+        "Laminate": [
+          {
+            "title": "Durabilidad",
+            "description": "Extremadamente duradero, resistente al agua, la humedad y el desgaste. Ideal para áreas de alto tráfico como cocinas, baños y entradas."
+          },
+          {
+            "title": "Variedad",
+            "description": "Disponible en una gran variedad de colores, formas, tamaños y acabados. El porcelanato es más denso y resistente que la cerámica."
+          },
+          {
+            "title": "Mantenimiento",
+            "description": "Requiere limpieza regular con productos suaves. El rejunte puede mancharse con el tiempo y necesita mantenimiento."
+          },
+          {
+            "title": "Comodidad",
+            "description": "Puede ser frío y duro bajo los pies, por lo que es recomendable usar alfombras o calefacción radiante en climas fríos."
+          },
+          {
+            "title": "Sensibilidad",
+            "description": "Es sensible a los impactos fuertes, como caídas de objetos pesados, que pueden dañarlo."
+          },
+          {
+            "title": "Resistencia",
+            "description": "Muy resistente a la humedad, rayones, manchas y a la decoloración."
+          },
+          {
+            "title": "Estética",
+            "description": "Elegante, sofisticado y disponible en una amplia gama de colores, patrones y texturas. Imitaciones realistas de madera o piedra."
+          }
+        ],
+        "Wood": [
+          {
+            "title": "Durabilidad",
+            "description": "Muy duradero, especialmente si se cuida bien. Susceptible a rayones, manchas y daño por humedad si no se mantiene adecuadamente."
+          },
+          {
+            "title": "Variedad",
+            "description": "Disponible en una variedad de maderas duras (roble, nogal, cerezo) o blandas (pino, abeto). También en maderas de ingeniería, que son más estables."
+          },
+          {
+            "title": "Mantenimiento",
+            "description": "Requiere pulido y sellado periódico. Es importante mantenerlo seco para evitar daños por humedad."
+          },
+          {
+            "title": "Comodidad",
+            "description": "Muy cómodo, cálido y agradable al tacto. Es ideal para quienes buscan una sensación natural y acogedora en su hogar."
+          },
+          {
+            "title": "Sensibilidad",
+            "description": "Sensible a la humedad, el sol directo y los arañazos. Se recomienda aplicar un sellador para protegerlo."
+          },
+          {
+            "title": "Resistencia",
+            "description": "Resistente a la abrasión, pero puede dañarse con humedad o impactos fuertes."
+          },
+          {
+            "title": "Estética",
+            "description": "Clásica y elegante. La madera natural tiene una apariencia única, cálida y sofisticada, que se adapta a varios estilos de decoración."
+          }
+        ]
+      }
+    },
+    "ProjectSection":{
+        "title": "Proyectos"
+    },
+    "Reviews":{
+        "title": "Reseñas"
+    },
+    "Button":{
+        "Close": "Cerrar"
+    },
+    "ContactForm": {
+      "title": "Contáctanos",
+      "description": "¿Tienes alguna pregunta? Envíanos un mensaje y nos pondremos en contacto contigo lo antes posible.",
+      "name": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "ask": "Solicitar cotizacion",
+      "another": "Otro",
+      "subject": "Motivo del contacto",
+      "surname": "Apellido",
+      "surnamePlaceholder": "Tu apellido",
+      "email": "Email",
+      "emailPlaceholder": "Tu email",
+      "message": "Mensaje",
+      "messagePlaceholder": "Tu mensaje",
+      "sendButton": "Enviar",
+      "successMessage": "¡Email enviado con éxito!",
+      "errorMessage": "Hubo un error al enviar el email. Inténtalo nuevamente.",
+      "cel": "Numero de celular",
+      "celPlaceholder": "Opcional",
+      "quote": "Solicitar cotización"
+    },
+    "ShadersSlider": {
+      "slides": [
+        {
+          "title": "RGB Corporation",
+          "subtitle": "Transformando espacios con excelencia y calidad"
+        },
+        {
+          "title": "Innovación en cada detalle",
+          "subtitle": "Calidad y diseño para tus espacios"
+        },
+        {
+          "title": "Compromiso y excelencia",
+          "subtitle": "Tu proyecto, nuestra pasión"
+        },
+        {
+          "title": "Espacios que inspiran",
+          "subtitle": "Soluciones a tu medida"
+        }
+      ],
+      "navigation": {
+        "previous": "Anterior",
+        "next": "Siguiente"
+      }
+    },
+    "Footer": {
+      "title": "RGB Corp",
+      "quickLinksTitle": "Enlaces Rápidos",
+      "contactTitle": "Contacto",
+      "description": "Expertos en revestimientos de alta calidad para tu hogar o negocio. Ofrecemos soluciones profesionales y duraderas.",
+      "quickLinks": [
+        { "href": "/", "text": "Inicio" },
+        { "href": "/about", "text": "Quiénes Somos" },
+        { "href": "/services", "text": "Servicios" },
+        { "href": "/projects", "text": "Proyectos" },
+        { "href": "/contact", "text": "Contacto" }
+      ],
+      "socialLinks": [
+        { "href": "https://www.facebook.com/profile.php?id=61562097362152", "icon": "fab fa-facebook", "label": "Facebook" },
+        { "href": "https://www.instagram.com/rgb_corp/", "icon": "fab fa-instagram", "label": "Instagram" }
+      ],
+      "contact": {
+        "phone": "+1 (904) 422-5380",
+        "phone2": "+1 (904) 728-9872",
+        "email": "rgbconstructioncorp@gmail.com"
+      },
+      "legalLinks": [
+        { "href": "/privacy", "text": "Política de Privacidad" },
+        { "href": "/terms", "text": "Términos y Condiciones" }
+      ],
+      "copyright": "&copy; {year} RGB Corp. Todos los derechos reservados."
+    }
+  }
+  

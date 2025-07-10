@@ -1,0 +1,304 @@
+{
+    "Menu": {
+      "home": "Início",
+      "instagram": "Instagram",
+      "QuienesSomos": "Quem Somos",
+      "floors": "Explore nossos tipos de pisos",
+      "improveSpace": "Melhoramos seu espaço",
+      "Reviews": "comentários",
+      "contact": "Contato",
+      "corp": "CORPORAÇÃO DE CONSTRUÇÃO"
+    },
+    "SLIDES": [
+      { "caption": "Ejemplo de imagen 1" },
+      { "caption": "Ejemplo de imagen 2" },
+      { "caption": "Ejemplo de imagen 3" },
+      { "caption": "Ejemplo de imagen 4" }
+    ],
+    "Instagram": {
+      "title": "Últimas Publicações",
+      "prev": "Anterior",
+      "next": "Próximo",
+      "page": "Página",
+      "of": "de",
+      "alt": [
+        "Publicação 1",
+        "Publicação 2",
+        "Publicação 3",
+        "Publicação 4",
+        "Publicação 5",
+        "Publicação 6",
+        "Publicação 7",
+        "Publicação 8"
+      ]
+    },
+    "ImageComparison": {
+      "title": "Espaços Reformados",
+      "description": "Veja as melhorias significativas no design de interiores e exteriores.",
+      "before": "Antes",
+      "after": "Depois"
+    },
+    "VideoSection": {
+      "title": "Melhorando seu Espaço",
+      "videoTitle": "Revestimentos de Piso"
+    },
+    "QuienesSomos": {
+      "title": "LOGO RGB",
+      "specialty": {
+        "title": "QUEM SOMOS?",
+        "description": "Na RGB CORPORATION somos especialistas em construção com foco na instalação, reforma e demolição, além da venda de materiais de alta qualidade. Contamos com uma equipe de especialistas que garante resultados duradouros, seguros e esteticamente perfeitos. Nossa missão é transformar espaços com soluções inovadoras e materiais de primeira linha, garantindo satisfação e excelência em cada projeto. Desde pequenas reformas até grandes construções, trabalhamos com compromisso, profissionalismo e atenção aos detalhes. Confie em nós para realizar o seu projeto com a qualidade e eficiência que nos definem."
+      },
+      "whyChooseUs": {
+        "title": "POR QUE ESCOLHER-NOS?",
+        "items": [
+          "Instalação de pisos",
+          "Pisos de madeira, vinil, linóleo e laminados",
+          "Instalação de carpetes",
+          "Colocação de azulejos e rejuntes",
+          "Pisos de concreto, tijolo e pedra",
+          "Todos os tipos de piso",
+          "Resposta rápida",
+          "Alta satisfação do cliente",
+          "Serviço residencial e comercial",
+          "Atendimento profissional"
+        ]
+      },
+      "commitment": {
+        "title": "POR QUE ESCOLHER-NOS?",
+        "description": [
+          "Experiência e Profissionalismo: Com anos de experiência no setor da construção, somos especializados na instalação e reforma de pisos de alta qualidade. Nossa equipe é composta por profissionais qualificados que garantem resultados duradouros e excelentes.",
+          "Compromisso com a Qualidade: Trabalhamos apenas com materiais de primeira linha, garantindo que cada projeto, grande ou pequeno, atenda aos mais altos padrões de resistência e estética.",
+          "Atendimento Personalizado: Procuramos entender as necessidades e desejos dos nossos clientes, oferecendo soluções personalizadas e assessoria em todas as etapas do projeto.",
+          "Variedade de Opções: Oferecemos uma ampla variedade de pisos, desde madeira até cerâmica, porcelanato e vinílico, adaptando-se a todos os estilos e orçamentos.",
+          "Processo Ágil e Eficiente: Sabemos o quanto o tempo é importante, por isso garantimos um serviço rápido e eficaz, sem comprometer a qualidade do trabalho.",
+          "Preços Competitivos: Oferecemos tarifas justas e transparentes, sem custos ocultos, garantindo o melhor retorno sobre o investimento.",
+          "Satisfação Garantida: A satisfação do cliente é nossa prioridade. Garantimos que cada trabalho seja concluído conforme o prometido, sem exceções."
+        ]
+      },
+      "services": {
+        "title": "SERVIÇOS:",
+        "description": [
+          "Instalação",
+          "remodelação",
+          "demolição",
+          "venda de materiais"
+        ]
+      },
+      "floorTypes": ["Madeira", "Laminados", "Vinil", "Cerâmica"],
+      "cabinets": ["Cozinhas", "Banheiros", "Espaços de armazenamento"],
+      "materials": ["Pisos", "Armários", "Bancada de cozinha", "Ilha de cozinha"]
+    },
+    "FlooringSections": {
+      "title": "Explore Nossas Opções de Pisos",
+      "options": {
+        "Vinyl": "Vinil de Luxo",
+        "Tile": "Azulejo",
+        "Laminate": "Laminado",
+        "Wood": "Madeira"
+      },
+      "descriptions": {
+        "Vinyl": [
+          {
+            "title": "Durabilidade",
+            "description": "Altamente durável, resistente a arranhões, manchas e umidade. Ideal para áreas de alto tráfego."
+          },
+          {
+            "title": "Variedade",
+            "description": "Grande variedade de estilos que imitam materiais naturais como madeira, pedra ou cerâmica. Disponível em placas, rolos ou tábuas."
+          },
+          {
+            "title": "Manutenção",
+            "description": "Muito fácil de manter. Requer varredura e limpeza com pano úmido. Resistente a manchas e à água."
+          },
+          {
+            "title": "Conforto",
+            "description": "Flexível e macio ao pisar, ideal para cozinhas e banheiros."
+          },
+          {
+            "title": "Sensibilidade",
+            "description": "Muito resistente a manchas e umidade, não é sensível à umidade ou calor."
+          },
+          {
+            "title": "Resistência",
+            "description": "Alta resistência ao desgaste e à umidade. Ideal para áreas movimentadas."
+          },
+          {
+            "title": "Estética",
+            "description": "Imitações realistas de materiais naturais, com acabamentos modernos. Versátil e disponível em diversos designs."
+          }
+        ],
+        "Tile": [
+          {
+            "title": "Durabilidade",
+            "description": "Extremamente durável, resistente à água, umidade e desgaste. Perfeito para cozinhas, banheiros e entradas."
+          },
+          {
+            "title": "Variedade",
+            "description": "Disponível em diversas cores, formas, tamanhos e acabamentos. O porcelanato é mais denso e resistente que a cerâmica."
+          },
+          {
+            "title": "Manutenção",
+            "description": "Requer limpeza regular com produtos suaves. O rejunte pode manchar e necessita manutenção."
+          },
+          {
+            "title": "Conforto",
+            "description": "Pode ser frio e duro ao pisar, sendo recomendado o uso de tapetes ou aquecimento radiante em climas frios."
+          },
+          {
+            "title": "Sensibilidade",
+            "description": "Sensível a impactos fortes, como quedas de objetos pesados, que podem causar danos."
+          },
+          {
+            "title": "Resistência",
+            "description": "Muito resistente à umidade, riscos, manchas e desbotamento."
+          },
+          {
+            "title": "Estética",
+            "description": "Elegante e sofisticado, disponível em uma ampla variedade de cores, padrões e texturas. Imitações realistas de madeira ou pedra."
+          }
+        ],
+        "Laminate": [
+          {
+            "title": "Durabilidade",
+            "description": "Altamente durável e resistente ao desgaste, adequado para áreas de alto tráfego."
+          },
+          {
+            "title": "Variedade",
+            "description": "Disponível em muitas cores e texturas, imitando madeira ou pedra."
+          },
+          {
+            "title": "Manutenção",
+            "description": "Requer limpeza delicada. Evitar excesso de água."
+          },
+          {
+            "title": "Conforto",
+            "description": "Mais confortável do que o azulejo, bom para áreas de estar."
+          },
+          {
+            "title": "Sensibilidade",
+            "description": "Sensível à água e impactos pesados. Usar com cuidado."
+          },
+          {
+            "title": "Resistência",
+            "description": "Boa resistência a manchas e riscos, mas não é à prova d'água."
+          },
+          {
+            "title": "Estética",
+            "description": "Visual bonito e realista, adaptando-se a vários estilos de decoração."
+          }
+        ],
+        "Wood": [
+          {
+            "title": "Durabilidade",
+            "description": "Muito durável, especialmente com a manutenção adequada. Pode riscar, manchar ou ser danificado pela umidade."
+          },
+          {
+            "title": "Variedade",
+            "description": "Disponível em madeiras nobres (carvalho, nogueira, cerejeira) e macias (pinheiro, abeto). Madeira engenheirada é mais estável."
+          },
+          {
+            "title": "Manutenção",
+            "description": "Requer polimento e selagem periódicos. Manter seco para evitar danos."
+          },
+          {
+            "title": "Conforto",
+            "description": "Quente e agradável ao toque. Ideal para quem procura ambientes aconchegantes."
+          },
+          {
+            "title": "Sensibilidade",
+            "description": "Sensível à umidade, luz solar direta e riscos. Recomenda-se selador."
+          },
+          {
+            "title": "Resistência",
+            "description": "Resistente à abrasão, mas pode ser danificado por umidade ou impactos fortes."
+          },
+          {
+            "title": "Estética",
+            "description": "Clássico e elegante. A madeira natural proporciona um visual único, quente e sofisticado."
+          }
+        ]
+      }
+    },
+    "ProjectSection":{
+      "title": "Projetos"
+    },
+    "Reviews":{
+      "title": "Avaliações"
+    },
+    "Button":{
+      "Close": "Fechar"
+    },
+    "ContactForm": {
+      "title": "Fale Conosco",
+      "description": "Tem alguma dúvida? Envie-nos uma mensagem e entraremos em contato o mais rápido possível.",
+      "name": "Nome",
+      "namePlaceholder": "Seu nome",
+      "subject": "Motivo do contato",
+      "ask": "Solicitar orçamento",
+      "another": "Outro",
+      "surname": "Sobrenome",
+      "surnamePlaceholder": "Seu sobrenome",
+      "email": "E-mail",
+      "emailPlaceholder": "Seu e-mail",
+      "message": "Mensagem",
+      "messagePlaceholder": "Sua mensagem",
+      "sendButton": "Enviar",
+      "successMessage": "E-mail enviado com sucesso!",
+      "errorMessage": "Ocorreu um erro ao enviar o e-mail. Por favor, tente novamente.",
+      "cel": "Numero de celular",
+      "celPlaceholder": "Opcional",
+      "quote": "Solicite um orçamento"
+    },
+    "ShadersSlider": {
+      "slides": [
+        {
+          "title": "RGB Corporation",
+          "subtitle": "Transformando espaços com excelência e qualidade"
+        },
+        {
+          "title": "Inovação em cada detalhe",
+          "subtitle": "Qualidade e design para seus espaços"
+        },
+        {
+          "title": "Compromisso e excelência",
+          "subtitle": "Seu projeto, nossa paixão"
+        },
+        {
+          "title": "Espaços que inspiram",
+          "subtitle": "Soluções sob medida"
+        }
+      ],
+      "navigation": {
+        "previous": "Anterior",
+        "next": "Próximo"
+      }
+    },
+    "Footer": {
+      "title": "RGB Corp",
+      "quickLinksTitle": "Links Rápidos",
+      "contactTitle": "Contato",
+      "description": "Especialistas em revestimentos de alta qualidade para sua casa ou negócio. Oferecemos soluções profissionais e duradouras.",
+      "quickLinks": [
+        { "href": "/", "text": "Início" },
+        { "href": "/about", "text": "Quem Somos" },
+        { "href": "/services", "text": "Serviços" },
+        { "href": "/projects", "text": "Projetos" },
+        { "href": "/contact", "text": "Contato" }
+      ],
+      "socialLinks": [
+        { "href": "https://facebook.com", "icon": "fab fa-facebook", "label": "Facebook" },
+        { "href": "https://instagram.com", "icon": "fab fa-instagram", "label": "Instagram" }
+      ],
+      "contact": {
+        "phone": "+1 (904) 422-5380",
+        "phone2": "+1 (904) 728-9872",
+        "email": "rgbconstructioncorp@gmail.com"
+      },
+      "legalLinks": [
+        { "href": "/privacy", "text": "Política de Privacidade" },
+        { "href": "/terms", "text": "Termos e Condições" }
+      ],
+      "copyright": "&copy; {year} RGB Corp. Todos os direitos reservados."
+    }
+  }
+  

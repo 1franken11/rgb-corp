@@ -1,0 +1,270 @@
+---
+import './ProjectSection.css';
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+
+interface Props {
+  gallery: string[];
+  lang?: Language; // Aseguramos que lang sea del tipo Language si es posible
+}
+
+const { gallery, lang: propLang } = Astro.props;
+// Solución para el primer error de tipo:
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
+const t = useTranslations(currentLang);
+
+const parsedGallery = typeof gallery === 'string' ? JSON.parse(gallery) : gallery;
+---
+
+<div class="project-modal">
+  <div class="modal-content">
+    <button class="close-button">&times;</button>
+    <button class="nav-button prev-button">&lt;</button>
+    <button class="nav-button next-button">&gt;</button>
+    <div class="modal-gallery"></div>
+  </div>
+</div>
+
+<script>
+  class ProjectModal extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      // Dispatch evento personalizado para indicar que un modal está abierto
+      window.dispatchEvent(new Event('modal:open'));
+    }
+
+    connectedCallback() {
+      const gallery = JSON.parse(this.getAttribute('gallery') || '[]');
+      const currentIndex = parseInt(this.getAttribute('current-index') || '0');
+      let currentGalleryIndex = 0;
+
+      const modal = document.createElement('div');
+      modal.className = 'project-modal';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <button class="close-button">&times;</button>
+          <button class="nav-button prev-button">&lt;</button>
+          <button class="nav-button next-button">&gt;</button>
+          <div class="modal-gallery"></div>
+        </div>
+      `;
+
+      const style = document.createElement('style');
+      style.textContent = `
+        .project-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+
+        .modal-content {
+          position: relative;
+          width: 90%;
+          height: 90%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .close-button {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          background: none;
+          border: none;
+          color: white;
+          font-size: 30px;
+          cursor: pointer;
+          z-index: 1001;
+        }
+
+        .nav-button {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255, 255, 255, 0.2);
+          border: none;
+          color: white;
+          font-size: 24px;
+          padding: 10px 15px;
+          cursor: pointer;
+          z-index: 1001;
+        }
+
+        .prev-button {
+          left: 20px;
+        }
+
+        .next-button {
+          right: 20px;
+        }
+
+        .modal-gallery {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .modal-gallery img,
+        .modal-gallery video {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+        }
+      `;
+
+      this.shadowRoot?.appendChild(style);
+      this.shadowRoot?.appendChild(modal);
+
+      const modalGallery = this.shadowRoot?.querySelector('.modal-gallery');
+      const closeButton = this.shadowRoot?.querySelector('.close-button');
+      const prevButton = this.shadowRoot?.querySelector('.prev-button');
+      const nextButton = this.shadowRoot?.querySelector('.next-button');
+
+      const showMedia = (index: number) => {
+        if (!modalGallery) return;
+        const media = gallery[index];
+        const isVideo = media.endsWith('.mp4');
+        
+        modalGallery.innerHTML = isVideo
+          ? `<video src="${media}" controls autoplay></video>`
+          : `<img src="${media}" alt="Gallery image" />`;
+      };
+
+      const nextMedia = () => {
+        currentGalleryIndex = (currentGalleryIndex + 1) % gallery.length;
+        showMedia(currentGalleryIndex);
+      };
+
+      const prevMedia = () => {
+        currentGalleryIndex = (currentGalleryIndex - 1 + gallery.length) % gallery.length;
+        showMedia(currentGalleryIndex);
+      };
+
+      closeButton?.addEventListener('click', () => {
+        this.remove();
+        // Dispatch evento personalizado para indicar que el modal se cerró
+        window.dispatchEvent(new Event('modal:close'));
+      });
+
+      prevButton?.addEventListener('click', prevMedia);
+      nextButton?.addEventListener('click', nextMedia);
+
+      // Mostrar el primer elemento
+      showMedia(currentGalleryIndex);
+
+      // Cerrar con la tecla Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          this.remove();
+          // Dispatch evento personalizado para indicar que el modal se cerró
+          window.dispatchEvent(new Event('modal:close'));
+        }
+      });
+
+      // Cerrar al hacer clic fuera del contenido
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          this.remove();
+          // Dispatch evento personalizado para indicar que el modal se cerró
+          window.dispatchEvent(new Event('modal:close'));
+        }
+      });
+    }
+  }
+
+  // Registrar el componente personalizado
+  if (!customElements.get('project-modal')) {
+    customElements.define('project-modal', ProjectModal);
+  }
+</script>
+
+<style>
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .close-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+
+  .close-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .media-wrapper {
+    margin: 2rem 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+
+  .media-item {
+    position: relative;
+    cursor: pointer;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+
+  .media-item:hover {
+    transform: scale(1.05);
+  }
+
+  .media-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 1rem;
+    }
+
+    .media-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

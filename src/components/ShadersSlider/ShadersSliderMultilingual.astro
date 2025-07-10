@@ -1,0 +1,298 @@
+---
+import { useTranslations, type Language } from '../../i18n/utils';
+import './ShadersSlider.css';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+// Obtener los slides y navigation usando la función t
+const slides = t('ShadersSlider.slides');
+const navigation = t('ShadersSlider.navigation');
+---
+
+<div id="image-slider" class="image-slider" tabindex="0" aria-label="Slider de imágenes fullscreen">
+  {/** Imágenes del slider, se renderizan todas pero solo una es visible a la vez */}
+  <div class="slider-images">
+    <img class="slider-img active" src="https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg" alt="Obra 1" data-title={slides[0].title} data-subtitle={slides[0].subtitle} />
+    <img class="slider-img" src="https://res.cloudinary.com/drwacbtjf/image/upload/v1742920359/firstsection2_vvtaae.jpg" alt="Obra 2" data-title={slides[1].title} data-subtitle={slides[1].subtitle} />
+    <img class="slider-img" src="https://res.cloudinary.com/drwacbtjf/image/upload/v1742920359/firstsection3_e4au5x.jpg" alt="Obra 3" data-title={slides[2].title} data-subtitle={slides[2].subtitle} />
+    <img class="slider-img" src="https://res.cloudinary.com/drwacbtjf/image/upload/v1744659060/escalera_cm3lbb.jpg" alt="Obra 4" data-title={slides[3].title} data-subtitle={slides[3].subtitle} />
+  </div>
+  <div class="slider-overlay-text" id="slider-overlay-text">
+    <h1 class="slider-title"></h1>
+    <p class="slider-subtitle"></p>
+  </div>
+  <div class="slider-nav">
+    <button class="slider-btn prev" id="slider-prev" aria-label={navigation.previous}>
+      <svg width="32" height="32" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
+    </button>
+    <button class="slider-btn next" id="slider-next" aria-label={navigation.next}>
+      <svg width="32" height="32" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke="#fff" stroke-width="2" fill="none"/></svg>
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+console.log('SLIDER SCRIPT INICIADO');
+window.addEventListener('DOMContentLoaded', () => {
+  const images = Array.from(document.querySelectorAll('.slider-img'));
+  const overlay = document.getElementById('slider-overlay-text');
+  const titleEl = overlay?.querySelector('.slider-title');
+  const subtitleEl = overlay?.querySelector('.slider-subtitle');
+  const prevBtn = document.getElementById('slider-prev');
+  const nextBtn = document.getElementById('slider-next');
+  const slider = document.getElementById('image-slider');
+
+  let current = 0;
+  let timer = null;
+  let isTransitioning = false;
+  const DURATION = 1500;
+  const INTERVAL = 5000;
+  const EFFECTS = ['fade-zoom', 'slide-skew', 'wave'];
+
+  // Mostrar el primer texto inmediatamente y nunca ocultarlo hasta la primera transición
+  function showFirstSlide() {
+    const img = images[0];
+    if (titleEl) titleEl.textContent = img.getAttribute('data-title') || '';
+    if (subtitleEl) subtitleEl.textContent = img.getAttribute('data-subtitle') || '';
+    if (overlay) {
+      overlay.classList.add('show');
+      overlay.style.visibility = 'visible';
+    }
+    current = 0;
+    console.log('[SLIDER] showFirstSlide: overlay visible, current=0, title=', titleEl?.textContent, 'subtitle=', subtitleEl?.textContent);
+  }
+
+  function showSlide(idx, effect = 'fade-zoom', direction = 1) {
+    if (isTransitioning || idx === current) return;
+    isTransitioning = true;
+    // Ocultar texto antes de la transición y limpiar contenido
+    if (overlay) {
+      overlay.classList.remove('show');
+      overlay.style.visibility = 'hidden';
+      console.log('[SLIDER] showSlide: overlay oculto antes de transición, idx=', idx, 'current=', current);
+    }
+    setTimeout(() => {
+      // Cambiar el texto y mostrarlo solo después de la transición
+      const img = images[idx];
+      if (titleEl) titleEl.textContent = img.getAttribute('data-title') || '';
+      if (subtitleEl) subtitleEl.textContent = img.getAttribute('data-subtitle') || '';
+      if (overlay) {
+        overlay.classList.add('show');
+        overlay.style.visibility = 'visible';
+        console.log('[SLIDER] showSlide: overlay visible después de transición, idx=', idx, 'current=', current, 'title=', titleEl?.textContent, 'subtitle=', subtitleEl?.textContent);
+      }
+      isTransitioning = false;
+      current = idx;
+    }, DURATION);
+    images.forEach((img, i) => {
+      img.classList.remove('active', 'fade-zoom', 'slide-skew', 'wave', 'out-left', 'out-right');
+      if (i === idx) {
+        img.classList.add('active', effect);
+      } else if (i === current) {
+        img.classList.add(effect, direction > 0 ? 'out-left' : 'out-right');
+      }
+    });
+  }
+
+  function nextSlide(effect) {
+    if (isTransitioning) return;
+    resetAuto();
+    const next = (current + 1) % images.length;
+    showSlide(next, effect || randomEffect(), 1);
+  }
+  function prevSlide(effect) {
+    if (isTransitioning) return;
+    resetAuto();
+    const prev = (current - 1 + images.length) % images.length;
+    showSlide(prev, effect || randomEffect(), -1);
+  }
+  function randomEffect() {
+    return EFFECTS[Math.floor(Math.random() * EFFECTS.length)];
+  }
+  function startAuto() {
+    if (timer) clearInterval(timer);
+    timer = setInterval(() => {
+      if (!isTransitioning) nextSlide(undefined);
+    }, INTERVAL);
+  }
+  function stopAuto() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+  function resetAuto() {
+    stopAuto();
+    startAuto();
+  }
+  if (slider) {
+    slider.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') prevSlide(undefined);
+      if (e.key === 'ArrowRight') nextSlide(undefined);
+    });
+    // Touch
+    let touchStartX = 0;
+    slider.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    slider.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (dx > 40) prevSlide(undefined);
+      if (dx < -40) nextSlide(undefined);
+    });
+  }
+  if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(undefined); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(undefined); });
+  // Init: mostrar primer slide correctamente y arrancar auto-advance
+  showFirstSlide();
+  startAuto();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.body.classList.add('reduced-motion');
+  }
+});
+</script>
+
+<style>
+.image-slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #222;
+  outline: none;
+}
+.slider-images {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.slider-img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0;
+  z-index: 1;
+  pointer-events: none;
+  transition: none;
+}
+.slider-img.active {
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+/* Fade + Zoom */
+.slider-img.fade-zoom {
+  animation: fadeZoomIn 1.5s ease-in-out;
+}
+@keyframes fadeZoomIn {
+  0% { opacity: 0; transform: scale(1.08); filter: blur(4px); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+/* Slide + Skew */
+.slider-img.slide-skew {
+  animation: slideSkewIn 1.5s ease-in-out;
+}
+.slider-img.out-left.slide-skew {
+  animation: slideSkewOutLeft 1.5s ease-in-out;
+}
+.slider-img.out-right.slide-skew {
+  animation: slideSkewOutRight 1.5s ease-in-out;
+}
+@keyframes slideSkewIn {
+  0% { opacity: 0; transform: translateX(60vw) skewX(-12deg) scale(1.05); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes slideSkewOutLeft {
+  0% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateX(-60vw) skewX(12deg) scale(1.05); }
+}
+@keyframes slideSkewOutRight {
+  0% { opacity: 1; transform: none; }
+  100% { opacity: 0; transform: translateX(60vw) skewX(-12deg) scale(1.05); }
+}
+/* Wave/Ripple (simulado) */
+.slider-img.wave {
+  animation: waveIn 1.5s cubic-bezier(.77,0,.18,1);
+  filter: url(#wave-filter);
+}
+@keyframes waveIn {
+  0% { opacity: 0; filter: blur(8px) contrast(1.2); }
+  60% { opacity: 1; filter: blur(2px) contrast(1.1); }
+  100% { opacity: 1; filter: blur(0) contrast(1); }
+}
+/* Overlay de texto animado */
+.slider-overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  min-width: 300px;
+  max-width: 90vw;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s, filter 0.5s, transform 0.5s;
+  filter: blur(8px) translateY(40px);
+}
+.slider-overlay-text.show {
+  opacity: 1;
+  filter: blur(0) translateY(0);
+  transition-delay: 0.5s;
+}
+.slider-title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.slider-subtitle {
+  font-size: clamp(1.2rem, 4vw, 1.8rem);
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  opacity: 0.9;
+}
+.slider-nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2rem;
+  z-index: 20;
+}
+.slider-btn {
+  background: rgba(0,0,0,0.7);
+  border: none;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  outline: none;
+}
+.slider-btn:hover, .slider-btn:focus {
+  background: #8bbaca;
+  transform: scale(1.1);
+}
+@media (max-width: 768px) {
+  .slider-title { font-size: 2rem; }
+  .slider-subtitle { font-size: 1rem; }
+  .slider-btn { width: 40px; height: 40px; }
+  .slider-nav { bottom: 20px; gap: 1rem; }
+}
+.reduced-motion *, .reduced-motion .slider-img, .reduced-motion .slider-overlay-text {
+  transition: none !important;
+  animation: none !important;
+  filter: none !important;
+}
+</style> 

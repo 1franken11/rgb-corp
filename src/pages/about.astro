@@ -1,0 +1,16 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import type { Language } from '../i18n/utils';
+import MainLayout from '../layouts/MainLayout.astro';
+
+const { lang } = Astro.props;
+const currentLang = (lang || getLangFromUrl(Astro.url)) as Language;
+const t = useTranslations(currentLang);
+---
+
+<MainLayout lang={currentLang}>
+  <section class="about-section" style="max-width:800px;margin:3rem auto;padding:2rem;text-align:center;">
+    <h1 style="color:#8bbaca;">{t('QuienesSomos.title', 'Quiénes Somos')}</h1>
+    <p style="margin-top:1.5rem;">{t('QuienesSomos.description', 'Somos una empresa dedicada a la excelencia en pisos y reformas, con años de experiencia y cientos de clientes satisfechos.')}</p>
+  </section>
+</MainLayout> 

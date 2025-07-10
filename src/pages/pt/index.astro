@@ -1,0 +1,26 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import type { Language } from '../../i18n/utils';
+import QuienesSomos from '../../components/QuienesSomos.astro';
+import FlooringSection from '../../components/FlooringSection.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import {ContactForm, ShadersSliderMultilingual, ReviewsCarousel} from '../../components';
+import Footer from '../../components/Footer.astro';
+const lang: Language = 'pt';
+
+---
+
+<MainLayout title="Home | RGB Corp" lang={lang}>
+    <main>
+  <div style="margin-top: var(--header-total-height);">
+    <ShadersSliderMultilingual lang={lang} />
+  </div>
+  <QuienesSomos lang={lang} />
+  <FlooringSection lang={lang} />
+  <ProjectSection lang={lang} />
+  <ReviewsCarousel lang={lang} />
+  <ContactForm lang={lang} />
+  <Footer lang={lang} /> 
+
+  </main>
+</MainLayout> 

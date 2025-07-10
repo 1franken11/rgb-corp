@@ -1,0 +1,111 @@
+---
+// src/components/LanguageChanger.astro
+import { useTranslations, type Language } from '../i18n/utils';
+
+interface Props {
+  initialLang: Language;
+}
+
+const { initialLang } = Astro.props;
+const t = useTranslations(initialLang);
+---
+
+<div class="language-switcher">
+  {/* Ejemplo de cómo usar `t` para textos */}
+  <p>{t('COMMON.selectLanguage')}</p>
+
+  {/* Botones para cambiar el idioma */}
+  <button
+    class:list={['lang-button', { 'active': initialLang === 'es' }]}
+    data-lang="es"
+  >
+    Español
+  </button>
+  <button
+    class:list={['lang-button', { 'active': initialLang === 'en' }]}
+    data-lang="en"
+  >
+    English
+  </button>
+  <button
+    class:list={['lang-button', { 'active': initialLang === 'pt' }]}
+    data-lang="pt"
+  >
+    Português
+  </button>
+</div>
+
+<style>
+  .language-switcher {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .lang-button {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .lang-button:hover {
+    background-color: #e0e0e0;
+  }
+  .lang-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+</style>
+
+<script is:inline>
+  document.querySelectorAll('.lang-button').forEach(button => {
+    button.addEventListener('click', (event) => {
+      // Usamos event.currentTarget para asegurarnos de que sea el botón el que se ha clicado
+      const newLangElement = event.currentTarget; // <--- ¡AQUÍ ESTÁ EL CAMBIO! Ya no 'as HTMLElement'
+      const newLang = newLangElement.dataset.lang; // Obtenemos el idioma del atributo data-lang
+
+      // Validamos para asegurarnos de que es uno de los idiomas esperados
+      if (newLang && ['es', 'en', 'pt'].includes(newLang)) {
+        const path = window.location.pathname;
+        const parts = path.split('/');
+        let newPathParts = [...parts];
+
+        // Asegurarse de que el primer elemento vacío para URLs como "/" se maneje
+        if (newPathParts[0] === '' && newPathParts.length > 1) {
+          // Si la URL es "/lang/page" -> parts = ["", "lang", "page"]
+          // Si la URL es "/page" -> parts = ["", "page"]
+          // Si la URL es "/" -> parts = ["", ""]
+          
+          // Verificar si el segundo segmento es un idioma existente
+          if (newPathParts[1] && ['es', 'en', 'pt'].includes(newPathParts[1])) {
+            newPathParts[1] = newLang; // Reemplaza el idioma existente
+          } else {
+            // Si no hay idioma o el segundo segmento no es un idioma, insertarlo
+            newPathParts.splice(1, 0, newLang);
+          }
+        } else if (newPathParts[0] !== '' && newPathParts.length === 1) {
+            // Caso como "mypage" sin slash inicial. Añadir el idioma al principio
+            newPathParts.unshift(newLang);
+        } else if (newPathParts[0] === '' && newPathParts.length === 1) {
+            // Caso de la raíz "/", parts = [""]
+            newPathParts = ['', newLang]; // Resulta en "/lang"
+        }
+        
+        // Unir las partes y limpiar posibles dobles barras o barras al final
+        let finalPath = newPathParts.join('/').replace(/\/\/+/g, '/'); // Reemplaza múltiples barras por una sola
+        if (!finalPath.startsWith('/')) { // Asegura que la ruta comience con '/'
+            finalPath = '/' + finalPath;
+        }
+        if (finalPath.length > 1 && finalPath.endsWith('/')) { // Eliminar barra final si no es solo '/'
+            finalPath = finalPath.slice(0, -1);
+        }
+
+        window.location.pathname = finalPath;
+      } else {
+        console.warn('Idioma no válido detectado:', newLang);
+      }
+    });
+  });
+</script>

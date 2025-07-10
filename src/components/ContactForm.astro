@@ -1,0 +1,129 @@
+---
+import { getLanguageFromURL } from '../i18n/utils';
+import type { Language } from '../i18n/utils';
+import ImageComparison from './imageComparison/ImageComparison.astro';
+import { imageComparisonsData } from './imageComparison/ImageComparisonData';
+import './ContactForm.css';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang } = Astro.props;
+const currentLang = lang || getLanguageFromURL(Astro.url.pathname);
+
+const translations = {
+  es: {
+    title: "Contáctanos",
+    subtitle: "Estamos aquí para ayudarte",
+    name: "Nombre",
+    surname: "Apellido",
+    email: "Correo electrónico",
+    phone: "Teléfono",
+    message: "Mensaje",
+    submit: "Enviar",
+    success: "¡Mensaje enviado con éxito!",
+    error: "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
+    before: "Antes",
+    after: "Después"
+  },
+  en: {
+    title: "Contact Us",
+    subtitle: "We're here to help",
+    name: "Name",
+    surname: "Surname",
+    email: "Email",
+    phone: "Phone",
+    message: "Message",
+    submit: "Submit",
+    success: "Message sent successfully!",
+    error: "Error sending message. Please try again.",
+    before: "Before",
+    after: "After"
+  },
+  pt: {
+    title: "Contate-nos",
+    subtitle: "Estamos aqui para ajudar",
+    name: "Nome",
+    surname: "Sobrenome",
+    email: "Email",
+    phone: "Telefone",
+    message: "Mensagem",
+    submit: "Enviar",
+    success: "Mensagem enviada com sucesso!",
+    error: "Erro ao enviar mensagem. Por favor, tente novamente.",
+    before: "Antes",
+    after: "Depois"
+  }
+};
+
+const t = translations[currentLang];
+---
+
+<section id="contact-container" class="contact-container" data-aos="fade-up">
+  <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
+    <ImageComparison comparisons={imageComparisonsData} lang={currentLang} />
+  </div>
+
+  <div class="contact-form" data-aos="fade-left" data-aos-delay="300">
+    <h2 data-aos="fade-up" data-aos-delay="100">{t.title}</h2>
+    <p data-aos="fade-up" data-aos-delay="150">{t.subtitle}</p>
+    <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+      <div data-aos="fade-up" data-aos-delay="250">
+        <label for="name">{t.name}</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="300">
+        <label for="surname">{t.surname}</label>
+        <input type="text" id="surname" name="surname" required />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="350">
+        <label for="email">{t.email}</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="400">
+        <label for="phone">{t.phone}</label>
+        <input type="tel" id="phone" name="phone" required />
+      </div>
+      <div data-aos="fade-up" data-aos-delay="450">
+        <label for="message">{t.message}</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+      <button type="submit" data-aos="fade-up" data-aos-delay="500">{t.submit}</button>
+    </form>
+    <div id="successMessage" class="success-message hidden">{t.success}</div>
+    <div id="errorMessage" class="error-message hidden">{t.error}</div>
+    <div class="social-icons" data-aos="fade-up" data-aos-delay="550">
+      <a href="https://instagram.com/rgbcorp" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-instagram icon instagram"></i>
+      </a>
+      <a href="https://facebook.com/rgbcorp" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-facebook icon facebook"></i>
+      </a>
+      <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp icon whatsapp"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const successMessage = document.getElementById('successMessage');
+  const errorMessage = document.getElementById('errorMessage');
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Aquí irá la lógica de EmailJS cuando se configure
+      console.log('Form submitted');
+      if (successMessage) {
+        successMessage.classList.remove('hidden');
+        setTimeout(() => {
+          successMessage.classList.add('hidden');
+        }, 5000);
+      }
+      form.reset();
+    });
+  }
+</script> 

@@ -1,0 +1,95 @@
+---
+import type { Language } from '../../i18n/utils';
+
+interface Props {
+  lang: Language;
+  title: string;
+  description: string;
+  keywords: string;
+  canonicalUrl: string;
+  ogImage?: string;
+  schemaMarkup?: object;
+  noindex?: boolean;
+}
+
+const {
+  lang,
+  title,
+  description,
+  keywords,
+  canonicalUrl,
+  ogImage = 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
+  schemaMarkup,
+  noindex = false
+} = Astro.props;
+---
+
+<!-- SEO Metadata -->
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content="RGB Corporation" />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+<meta name="googlebot" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content={lang} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content="RGB Corporation" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:site" content="@rgb_corp" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Schema Markup -->
+{ schemaMarkup && (
+  <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+)}
+
+<!-- Local Business Schema for Jacksonville, FL -->
+<script type="application/ld+json" set:html={JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "RGB Corporation",
+  "description": "Professional flooring installation specialists in Jacksonville, Florida",
+  "url": "https://rgb-corporation.com",
+  "telephone": "+1-904-422-5380",
+  "email": "rgbconstructioncorp@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Jacksonville",
+    "addressRegion": "FL",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "30.3322",
+    "longitude": "-81.6557"
+  },
+  "openingHours": "Mo-Fr 08:00-18:00",
+  "priceRange": "$$",
+  "serviceArea": {
+    "@type": "GeoCircle",
+    "geoMidpoint": {
+      "@type": "GeoCoordinates",
+      "latitude": "30.3322",
+      "longitude": "-81.6557"
+    },
+    "geoRadius": "50000"
+  },
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61562097362152",
+    "https://www.instagram.com/rgb_corp/"
+  ]
+})} />
+
+<title>{title}</title> 

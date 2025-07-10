@@ -1,0 +1,50 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import type { Language } from '../../i18n/utils';
+import QuienesSomos from '../../components/QuienesSomos.astro';
+import FlooringSection from '../../components/FlooringSection.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import {ContactForm, ShadersSliderMultilingual, ReviewsCarousel} from '../../components';
+import Footer from '../../components/Footer.astro';
+
+const lang: Language = 'en';
+
+---
+
+<MainLayout title="Home | RGB Corp" lang={lang}>
+    <main>
+  <div id="inicio" style="margin-top: var(--header-total-height);">
+    <ShadersSliderMultilingual lang={lang} />
+  </div>
+  <div id="quienes-somos">
+    <QuienesSomos lang={lang} />
+  </div>
+  <div id="servicios">
+    <FlooringSection lang={lang} />
+  </div>
+  <div id="proyectos">
+    <ProjectSection lang={lang} />
+  </div>
+  <ReviewsCarousel lang={lang} />
+  <div id="contacto">
+    <ContactForm lang={lang} />
+  </div>
+  <Footer lang={lang} />
+
+  </main>
+</MainLayout> 
+<script is:inline>
+  // Scroll suave para los links del navbar
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href').replace('#', '');
+        const target = document.getElementById(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  });
+</script> 

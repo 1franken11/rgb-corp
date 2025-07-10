@@ -1,0 +1,63 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../i18n/utils';
+import './QuienesSomos.css';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang: Language = propLang || getLangFromUrl(Astro.url).lang;
+const t = useTranslations(currentLang);
+
+const specialtyTitle = t('QuienesSomos.specialty.title');
+const specialtyDescription = t('QuienesSomos.specialty.description');
+const whyChooseUsTitle = t('QuienesSomos.whyChooseUs.title');
+const whyChooseUsItems = t('QuienesSomos.whyChooseUs.items');
+const commitmentTitle = t('QuienesSomos.commitment.title');
+const commitmentDescription = t('QuienesSomos.commitment.description');
+const servicesTitle = t('QuienesSomos.services.title');
+const servicesDescription = t('QuienesSomos.services.description');
+const floorTypesTitle = t('QuienesSomos.floorTypes.title');
+const floorTypes = t('QuienesSomos.floorTypes.items');
+const cabinetsTitle = t('QuienesSomos.cabinets.title');
+const cabinets = t('QuienesSomos.cabinets.items');
+const materialsTitle = t('QuienesSomos.materials.title');
+const materials = t('QuienesSomos.materials.items');
+---
+
+<section id="quienes-somos" class="quienes-somos" data-aos="fade-up">
+  <div class="qs-logo-container">
+    <img src="/img/logo_optimized.png" alt="RGB Construction Corporation Logo" class="qs-logo" />
+  </div>
+  <div class="card-grid">
+    <div class="card" data-aos="fade-up" data-aos-delay="100">
+      <h2>{specialtyTitle}</h2>
+      <p>{specialtyDescription}</p>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="200">
+      <h2>{servicesTitle}</h2>
+      <ul>
+        {Array.isArray(servicesDescription) && servicesDescription.map((service: string) => (
+          <li>{service}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="300">
+      <h2>{whyChooseUsTitle}</h2>
+      <ul>
+        {Array.isArray(whyChooseUsItems) && whyChooseUsItems.map((item: string) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+    <div class="card" data-aos="fade-up" data-aos-delay="400">
+      <h2>{commitmentTitle}</h2>
+      <ul>
+        {Array.isArray(commitmentDescription) && commitmentDescription.map((item: string) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section> 

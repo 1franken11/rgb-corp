@@ -1,0 +1,138 @@
+.footer {
+    background: linear-gradient(135deg, #16404e 0%, #000000 100%);
+    color: #fff;
+    padding: 2.5rem 0 1.2rem 0;
+    text-align: center;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 0 -4px 24px rgba(42,120,146,0.08);
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    padding-bottom: 1.5rem;
+  }
+  
+  .footer-logo img {
+    width: 120px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.10));
+  }
+  
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    position: relative;
+  }
+  
+  .footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .footer-links a:hover,
+  .footer-links a:focus {
+    color: var(--color-accent);
+  }
+  
+  .footer-links a:hover::after,
+  .footer-links a:focus::after {
+    width: 100%;
+  }
+  
+  .footer-links a:active {
+    color: var(--color-accent);
+  }
+  
+  .footer-links a {
+    border-bottom: none;
+  }
+  
+  .footer-links a:hover,
+  .footer-links a:focus {
+    border-bottom: none;
+  }
+  
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+  
+  .footer-social .icon {
+    font-size: 2rem;
+    color: #2a7892;
+    transition: color 0.2s;
+  }
+  
+  .footer-social .icon:hover,
+  .footer-social .icon:focus {
+    color: var(--color-accent);
+  }
+  
+  .footer-social a {
+    color: #2a7892;
+    transition: color 0.2s;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .footer-social a:hover,
+  .footer-social a:focus {
+    color: var(--color-accent);
+  }
+  
+  .footer-bottom {
+    margin-top: 2rem;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+    letter-spacing: 0.02em;
+  }
+  
+  @media (max-width: 600px) {
+    .footer-content {
+      gap: 1.2rem;
+      padding-bottom: 1rem;
+    }
+    .footer-links {
+      gap: 0.7rem;
+      font-size: 1rem;
+    }
+    .footer-logo img {
+      width: 80px;
+    }
+    .footer {
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      padding: 1.2rem 0 0.7rem 0;
+    }
+  } 

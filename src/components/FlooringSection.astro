@@ -1,0 +1,190 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../i18n/utils';
+import { flooringData } from './FlooringData';
+import './FlooringSection.css';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang: Language = typeof propLang === 'string' ? propLang as Language : getLangFromUrl(Astro.url).lang;
+const t = useTranslations(currentLang);
+const closeButtonText = t('Button.Close');
+---
+
+<section id="flooring-section" data-aos="fade-up">
+  <div class="flooring-sections" data-aos="zoom-in" data-aos-delay="200">
+    <div id="flooring-bg-overlay" class="flooring-bg-overlay"></div>
+    <h2 class="flooring-title" data-aos="fade-up" data-aos-delay="100">{t('FlooringSections.title')}</h2>
+    <div class="flooring-grid" data-aos="fade-up" data-aos-delay="300">
+      {flooringData.map((floor, index) => (
+        <div
+          class="flooring-card"
+          data-floor={floor.key}
+          data-bg-image={floor.bgImage}
+          data-modal-image={floor.modalImage}
+          data-aos="fade-up"
+          data-aos-delay={400 + index * 100}
+        >
+          <img src={floor.image} alt={floor.label} />
+          <div class="floor-label">{floor.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Hidden content for each flooring type -->
+  <div id="vinyl-content" style="display: none;">
+    {(t('FlooringSections.descriptions.Vinyl') as { title: string; description: string }[]).map(
+      (item, index) => (
+        <div>
+          <h4>{item.title}</h4>
+          <p>{item.description}</p>
+        </div>
+      )
+    )}
+  </div>
+
+  <div id="laminate-content" style="display: none;">
+    {(t('FlooringSections.descriptions.Laminate') as { title: string; description: string }[]).map(
+      (item, index) => (
+        <div>
+          <h4>{item.title}</h4>
+          <p>{item.description}</p>
+        </div>
+      )
+    )}
+  </div>
+
+  <div id="tile-content" style="display: none;">
+    {(t('FlooringSections.descriptions.Tile') as { title: string; description: string }[]).map(
+      (item, index) => (
+        <div>
+          <h4>{item.title}</h4>
+          <p>{item.description}</p>
+        </div>
+      )
+    )}
+  </div>
+
+  <div id="wood-content" style="display: none;">
+    {(t('FlooringSections.descriptions.Wood') as { title: string; description: string }[]).map(
+      (item, index) => (
+        <div>
+          <h4>{item.title}</h4>
+          <p>{item.description}</p>
+        </div>
+      )
+    )}
+  </div>
+</section>
+
+<script>
+  // Asegurarnos de que el script se ejecute después de que el DOM esté cargado
+  document.addEventListener('DOMContentLoaded', () => {
+    let selectedFloor: string | null = null;
+    let bgImage: string | null = null;
+    let fadeOut = false;
+    let fixedBgImage: string | null = null;
+
+    const flooringBgOverlay = document.getElementById('flooring-bg-overlay');
+    const flooringCards = document.querySelectorAll('.flooring-card');
+
+    function updateBackground() {
+      if (!flooringBgOverlay) return;
+      
+      const backgroundImage = fixedBgImage || bgImage;
+      if (backgroundImage) {
+        flooringBgOverlay.style.backgroundImage = `url(${backgroundImage})`;
+        flooringBgOverlay.classList.toggle('fade-out', fadeOut && !fixedBgImage);
+      } else {
+        flooringBgOverlay.style.backgroundImage = 'none';
+      }
+    }
+
+    flooringCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const floorKey = card.getAttribute('data-floor');
+        const modalImage = card.getAttribute('data-modal-image');
+        if (floorKey && modalImage) {
+          selectedFloor = floorKey;
+          fixedBgImage = card.getAttribute('data-bg-image');
+          updateBackground();
+          
+          // Create and show modal
+          const modal = document.createElement('div');
+          modal.className = 'modal-overlay';
+          
+          // Prevent body scroll when modal is open
+          document.body.style.overflow = 'hidden';
+          // Dispatch evento personalizado para indicar que un modal está abierto
+          window.dispatchEvent(new Event('modal:open'));
+          
+          // Get the content for the selected floor type
+          const contentElement = document.getElementById(`${floorKey.toLowerCase()}-content`);
+          const content = contentElement ? contentElement.innerHTML : '';
+          
+          modal.innerHTML = `
+            <div class="modal-card-two-columns">
+              <div class="modal-image-column">
+                <img src="${modalImage}" alt="${floorKey}" />
+              </div>
+              <div class="modal-text-column">
+                <h2 class="modal-title">${floorKey}</h2>
+                <div class="modal-content-scroll">
+                  ${content}
+                </div>
+                <button class="close-btn">Cerrar</button>
+              </div>
+            </div>
+          `;
+
+          document.body.appendChild(modal);
+
+          // Handle modal close
+          const closeBtn = modal.querySelector('.close-btn');
+          const closeModal = () => {
+            modal.remove();
+            selectedFloor = null;
+            fixedBgImage = null;
+            updateBackground();
+            document.body.style.overflow = '';
+            document.getElementById('flooring-section')?.scrollIntoView({ behavior: 'smooth' });
+            // Dispatch evento personalizado para indicar que el modal se cerró
+            window.dispatchEvent(new Event('modal:close'));
+          };
+
+          closeBtn?.addEventListener('click', closeModal);
+
+          // Close on outside click
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              closeModal();
+            }
+          });
+
+          // Close on Escape key
+          const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') {
+              closeModal();
+              document.removeEventListener('keydown', handleEscape);
+            }
+          };
+          document.addEventListener('keydown', handleEscape);
+        }
+      });
+
+      card.addEventListener('mouseenter', () => {
+        bgImage = card.getAttribute('data-bg-image');
+        fadeOut = false;
+        updateBackground();
+      });
+
+      card.addEventListener('mouseleave', () => {
+        fadeOut = true;
+        updateBackground();
+      });
+    });
+  });
+</script>

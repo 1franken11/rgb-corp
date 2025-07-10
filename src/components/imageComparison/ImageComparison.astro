@@ -1,0 +1,121 @@
+---
+// src/components/imageComparison/ImageComparison.astro
+
+import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
+import './ImageComparison.css';
+// import '../../i18n/utils.ts'; // --> **He comentado esta línea.** Solo descoméntala si estás seguro de que 'utils.ts' contiene lógica que necesitas ejecutar en el servidor para este componente específico. Generalmente, los archivos utilitarios de i18n se importan solo cuando se usan funciones específicas.
+// ELIMINADAS LAS IMPORTACIONES DE JAVASCRIPT/TYPESCRIPT DEL FRONTMATTER.
+// El Custom Element se importará en el script del cliente.
+
+// Interfaz para la estructura de las comparaciones, es importante mantenerla en Astro para la tipificación de props.
+interface Comparison {
+  before: string;
+  after: string;
+  alt: string;
+}
+
+interface Props {
+  lang?: Language;
+  comparisons: Comparison[];
+}
+
+const {
+  lang: propLang,
+  comparisons
+} = Astro.props;
+
+const currentLang: Language = (propLang || getLangFromUrl(Astro.url)) as Language;
+const t = useTranslations(currentLang);
+
+const title = t('ImageComparison.title');
+const description = t('ImageComparison.description');
+const beforeLabel = t('ImageComparison.before');
+const afterLabel = t('ImageComparison.after');
+
+// Convertimos el array de comparaciones a una cadena JSON para pasarlo al Custom Element
+const comparisonsJson = JSON.stringify(comparisons);
+
+// Generar un ID único para este componente
+const uniqueId = `image-comparison-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<section class="image-comparison-section" data-component-id={uniqueId}>
+  <h2>{title}</h2>
+  <p>{description}</p>
+  <div class="comparison-container">
+    <image-comparison-element
+      data-component-id={uniqueId}
+      data-comparisons={comparisonsJson}
+      data-before-label={beforeLabel}
+      data-after-label={afterLabel}
+    >
+    </image-comparison-element>
+  </div>
+</section>
+
+<script type="module" is:inline>
+  // Importa la CLASE de tu Custom Element desde el archivo JavaScript.
+  // Astro se encargará de transpilá-lo y bundléa-lo para el cliente.
+  // Asegúrate de que el archivo 'imageComparisonElement.js' exista en la misma carpeta.
+  import { ImageComparisonElement } from '/src/components/imageComparison/ImageComparisonElement.js'; 
+
+  // Define tu Custom Element globalmente si no está ya definido.
+  // Esto evita errores si el script se ejecuta varias veces.
+  if (!customElements.get('image-comparison-element')) {
+    customElements.define('image-comparison-element', ImageComparisonElement);
+  }
+  // Dots funcionalidad
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('[data-component-id="' + uniqueId + '"]');
+    if (!section) return;
+    const dots = section.querySelectorAll('.dot-astro');
+    const comparisonElement = section.querySelector('image-comparison-element');
+    if (!comparisonElement) return;
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const idx = parseInt(dot.getAttribute('data-index'));
+        if (typeof comparisonElement.setCurrentIndex === 'function') {
+          comparisonElement.setCurrentIndex(idx);
+        }
+        dots.forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+      });
+    });
+  });
+</script>
+
+<style>
+  .comparison-dots-astro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 10;
+  }
+  .dot-astro {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #cfd8dc;
+    border: 2px solid #8bbaca;
+    opacity: 0.7;
+    transition: background 0.3s, transform 0.2s, opacity 0.2s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .dot-astro.active {
+    background: #8bbaca;
+    opacity: 1;
+    transform: scale(1.2);
+    border-color: #4a90e2;
+  }
+  .dot-astro:hover {
+    opacity: 1;
+    background: #4a90e2;
+    border-color: #8bbaca;
+    transform: scale(1.15);
+  }
+</style>

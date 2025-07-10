@@ -1,0 +1,292 @@
+---
+import { languages, languageFlags, type Language, defaultLang } from '../i18n/utils';
+import './LanguageSelector.css';
+
+interface Props {
+  currentLang: Language;
+  currentPath?: string;
+}
+
+const { currentLang = defaultLang, currentPath = '' } = Astro.props;
+
+function getNewPath(lang: Language) {
+  if (!currentPath) return `/${lang}`;
+  
+  // Si la ruta actual no tiene prefijo de idioma, lo agregamos
+  if (!currentPath.startsWith('/')) {
+    return `/${lang}/${currentPath}`;
+  }
+  
+  // Si la ruta actual tiene un prefijo de idioma, lo reemplazamos
+  const pathParts = currentPath.split('/');
+  if (pathParts[1] in languages) {
+    pathParts[1] = lang;
+    return pathParts.join('/');
+  }
+  
+  // Si no hay prefijo de idioma, lo agregamos al principio
+  return `/${lang}${currentPath}`;
+}
+---
+
+<div class="language-selector-container">
+  <div class="language-selector-wrapper">
+    <div class="language-selector">
+      <div class="language-selector-flags">
+        {Object.entries(languages).map(([lang, code]) => {
+          const typedLang = lang as Language;
+          const path = getNewPath(typedLang);
+          return (
+            <a
+              href={path}
+              class={`flag-option ${currentLang === typedLang ? 'active' : ''}`}
+              data-lang={typedLang}
+            >
+              <img src={languageFlags[typedLang]} alt={`${code} flag`} />
+              <span>{typedLang.toUpperCase()}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .language-selector-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+  }
+
+  .language-selector-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .language-selector {
+    min-width: 120px;
+    max-width: 220px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+  }
+
+  .language-selector-flags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .flag-option {
+    min-width: 40px;
+    max-width: 60px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    color: var(--color-primary);
+    font-weight: 500;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .flag-option::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .flag-option:hover::after,
+  .flag-option.active::after {
+    width: 100%;
+  }
+
+  .flag-option:hover {
+    color: var(--color-accent);
+    transform: scale(1.05);
+  }
+
+  .flag-option img {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    object-fit: contain;
+    background: #fff;
+    display: block;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .flag-option span {
+    font-size: 12px;
+    margin-top: 4px;
+    font-weight: 500;
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .flag-option:hover span {
+    color: var(--color-accent);
+  }
+
+  .flag-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .flag-icons img {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .flag-icons img:hover {
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 1300px) {
+    .language-selector {
+      width: 90%;
+      max-width: 100px; 
+      min-width: auto;
+    }
+    .navbar-menu {
+        flex-wrap: wrap; 
+        justify-content: center;
+      }
+    .language-selector-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1300px) {
+    .language-selector {
+      width: auto;
+      min-width: 160px;
+      max-width: 200px;
+      padding: 6px 8px;
+    }
+    
+    .language-selector-flags {
+      gap: 12px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    
+    .flag-option img {
+      width: 28px;
+      height: 28px;
+    }
+    
+    .flag-option span {
+      font-size: 10px;
+      margin-top: 3px;
+    }
+    
+    .language-selector-container {
+      width: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .language-selector-wrapper {
+      width: auto;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  @media (min-width: 1301px) and (max-width: 1350px) {
+    .language-menu {
+      position: static; 
+      text-align: right;
+      margin-left: auto;
+    }
+
+    .language-selector {
+      width: auto;
+      min-width: 140px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .language-selector {
+      width: 100%;
+      max-width: 180px;
+      min-width: 140px;
+      padding: 8px 4px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+    }
+    .language-selector-flags {
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      flex-wrap: nowrap;
+      overflow: visible;
+    }
+    .flag-option img {
+      width: 24px;
+      height: 24px;
+    }
+    .flag-option span {
+      font-size: 9px;
+      margin-top: 2px;
+    }
+    .flag-option::after {
+      display: none;
+    }
+  }
+
+  .flag-option,
+  .flag-option:focus,
+  .flag-option:active,
+  .flag-option img:focus,
+  .flag-option img:active {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @media (hover: none) {
+    .flag-option:hover::after {
+      width: 0;
+    }
+  }
+</style> 

@@ -1,0 +1,352 @@
+/* src/components/imageComparison/ImageComparison.css */
+
+/* Estilos de la sección general */
+.image-comparison-section {
+  background-color: var(--color-background, #f8f8f8); /* Color de fondo, usando variable CSS o fallback */
+}
+
+.image-comparison-section .container { /* Asumo que tienes un .container global */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.image-comparison-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--color-text, #333); /* Color de texto, usando variable CSS o fallback */
+}
+
+.image-comparison-section p {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--color-text, #555); /* Color de texto, usando variable CSS o fallback */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Contenedor principal del custom element en Astro */
+/* Esta es la envoltura alrededor de <image-comparison-element> */
+.image-comparison-section .comparison-container {
+  max-width: 1200px; /* Aumentado para pantallas más grandes */
+  margin: 0 auto;
+  padding: 0 2rem; /* Añadido padding para separar de los bordes */
+}
+
+/* Estilos para los dots externos del ImageComparison */
+.image-comparison-section .comparison-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 10;
+}
+
+.image-comparison-section .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #cfd8dc;
+  border: 2px solid #8bbaca;
+  opacity: 0.7;
+  transition: background 0.3s, transform 0.2s, opacity 0.2s;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.image-comparison-section .dot.active {
+  background: #8bbaca;
+  opacity: 1;
+  transform: scale(1.2);
+  border-color: #4a90e2;
+}
+
+.image-comparison-section .dot:hover {
+  opacity: 1;
+  background: #4a90e2;
+  border-color: #8bbaca;
+  transform: scale(1.15);
+}
+
+/* --- ESTILOS ESPECÍFICOS DEL CUSTOM ELEMENT <image-comparison-element> --- */
+
+/* El propio Custom Element, actúa como el contenedor principal */
+image-comparison-element {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative; /* Muy importante para posicionar a sus hijos */
+  border-radius: 12px;
+  overflow: visible; /* Permitir que los dots se vean fuera si es necesario */
+  user-select: none; /* Evita selección de texto */
+  touch-action: none; /* Mejora el comportamiento táctil para arrastrar */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  min-height: 500px; /* Aumentado para pantallas más grandes */
+  padding-bottom: 40px; /* Espacio para los dots */
+  box-shadow: none !important;
+}
+
+/* Contenedor interno que genera el render() del Custom Element */
+.image-comparison-container {
+  width: 100%;
+  height: 100%; /* Ocupa el 100% de la altura de 'image-comparison-element' */
+  position: relative;
+  overflow: hidden; /* Crucial para que clip-path funcione */
+}
+
+/* Imágenes "antes" y "después" */
+.image-before,
+.image-after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Recorta la imagen para cubrir el área, manteniendo la relación de aspecto */
+  display: block; /* Asegura que no haya espacios extra */
+  pointer-events: none; /* Permite que el ratón "pase" a los elementos de control */
+  user-select: none;
+  -webkit-user-drag: none; /* Deshabilita el arrastre nativo de imágenes */
+}
+
+/* Wrapper para la imagen "después" que usa clip-path */
+.comparison-after-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Necesario para que clip-path funcione visualmente */
+  will-change: clip-path; /* Optimización de rendimiento para animaciones */
+  transition: clip-path 0.05s ease-out; /* Transición para un movimiento más suave */
+}
+
+/* La línea divisoria */
+.comparison-divider {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 2px; /* Ancho de la línea */
+  background-color: white; /* Color de la línea */
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.35); /* Sombra para resaltar */
+  z-index: 2; /* Por encima de las imágenes */
+  transform: translateX(-50%); /* Ajusta para que el 'left' sea el centro de la línea */
+  pointer-events: none; /* Los eventos los maneja el slider */
+  will-change: left; /* Optimización de rendimiento */
+}
+
+/* El control deslizante (círculo con flechas) */
+.comparison-slider {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%); /* Centra el slider exactamente en el punto del mouse */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: rgba(255, 255, 255, 0.4); /* Fondo translúcido */
+  backdrop-filter: blur(7px); /* Efecto de desenfoque detrás del slider */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
+  z-index: 3; /* Por encima del divisor */
+  cursor: grab; /* Cursor para indicar que se puede arrastrar */
+  will-change: left; /* Optimización de rendimiento */
+}
+
+.comparison-slider:active {
+  cursor: grabbing; /* Cursor cuando se está arrastrando */
+}
+
+/* Flechas dentro del slider */
+.slider-arrow {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: relative; /* Para moverlas con margin-left/right */
+}
+
+.left-arrow {
+  border-right: 10px solid white;
+  margin-right: 8px; /* Espacio entre las flechas */
+}
+
+.right-arrow {
+  border-left: 10px solid white;
+  margin-left: 8px; /* Espacio entre las flechas */
+}
+
+/* Puntos de navegación */
+.comparison-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 10;
+  background: none;
+  min-height: 24px;
+  width: 100%;
+}
+
+.comparison-dots .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #cfd8dc;
+  border: 2px solid #8bbaca;
+  opacity: 0.7;
+  transition: background 0.3s, transform 0.2s, opacity 0.2s;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 0;
+}
+
+.comparison-dots .dot.active {
+  background: #8bbaca;
+  opacity: 1;
+  transform: scale(1.2);
+  border-color: #4a90e2;
+}
+
+.comparison-dots .dot:hover {
+  opacity: 1;
+  background: #4a90e2;
+  border-color: #8bbaca;
+  transform: scale(1.15);
+}
+
+/* --- Media Queries para responsividad --- */
+
+/* Para pantallas muy anchas */
+@media (min-width: 1600px) {
+  .image-comparison-section .comparison-container {
+    max-width: 1400px;
+  }
+
+  image-comparison-element {
+    aspect-ratio: 21 / 9;
+    height: auto;
+    min-height: 600px;
+  }
+}
+
+/* Para pantallas de escritorio */
+@media (min-width: 769px) and (max-width: 1599px) {
+  .image-comparison-section .comparison-container {
+    max-width: 1200px;
+  }
+
+  image-comparison-element {
+    aspect-ratio: 16 / 9;
+    height: auto;
+    min-height: 500px;
+  }
+
+  .comparison-slider {
+    width: 64px;
+    height: 64px;
+  }
+
+  .slider-arrow {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+
+  .left-arrow {
+    border-right: 12px solid white;
+  }
+
+  .right-arrow {
+    border-left: 12px solid white;
+  }
+}
+
+/* Para tablets y pantallas de escritorio pequeñas */
+@media (max-width: 768px) {
+  image-comparison-element {
+    aspect-ratio: 4 / 3; /* Relación de aspecto más cuadrada */
+    height: auto;
+    min-height: 320px;
+    padding-bottom: 32px;
+  }
+
+  .comparison-slider {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .slider-arrow {
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+  }
+
+  .left-arrow {
+    border-right: 8px solid white;
+  }
+
+  .right-arrow {
+    border-left: 8px solid white;
+  }
+
+  .comparison-dots {
+    margin-top: 16px;
+    min-height: 20px;
+  }
+
+  .comparison-dots .dot {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Para teléfonos móviles */
+@media (max-width: 500px) {
+  image-comparison-element {
+    aspect-ratio: 1 / 1; /* Cuadrado perfecto */
+    height: auto;
+    min-height: 250px; /* Altura mínima para móviles */
+  }
+
+  .image-comparison-container img {
+    /* Si las imágenes son muy altas, puedes ajustar el object-position */
+    /* object-position: center top; */ /* Esto mueve la parte visible de la imagen */
+  }
+  
+  .comparison-slider {
+    width: 40px;
+    height: 40px;
+  }
+
+  .slider-arrow {
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  .left-arrow {
+    border-right: 6px solid white;
+  }
+
+  .right-arrow {
+    border-left: 6px solid white;
+  }
+
+  .comparison-dots {
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .comparison-dots .dot {
+    width: 10px;
+    height: 10px;
+  }
+}

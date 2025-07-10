@@ -1,0 +1,106 @@
+.topbar-wrapper {
+    width: 100%;
+    background-color: #feffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  .topbar {
+    background: linear-gradient(135deg, #16404e 0%, #000000 100%);
+    color: #feffff;
+    width: 100%;
+    padding: 5px 10px;
+  }
+  
+  .topbar.centered {
+    background-color: #000000;
+    color: #cde4e7;
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.95rem;
+  }
+  
+  .topbar.centered a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 400;
+  }
+  
+  .topbar.centered svg {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .topbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1140px;
+    margin: 0 auto;
+  }
+  
+  .left-group,
+  .right-group {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .left-group a,
+  .right-group a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .right-group div {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.85rem;
+  }
+  
+  .topbar-container svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    .topbar-container {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+  
+    .left-group {
+      justify-content: flex-start;
+    }
+  
+    .right-group {
+      justify-content: flex-end;
+    }
+  
+    .topbar-container a {
+      font-size: 1rem;
+      gap: 4px;
+    }
+  
+    .topbar-container svg {
+      width: 14px;
+      height: 14px;
+    }
+  } 

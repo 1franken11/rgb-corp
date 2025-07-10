@@ -1,0 +1,30 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import type { Language } from '../../i18n/utils';
+import FlooringSection from '../../components/FlooringSection.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import Footer from '../../components/Footer.astro';
+import QuienesSomos from '../../components/QuienesSomos.astro';
+import ShadersSliderMultilingual from '../../components/ShadersSlider/ShadersSliderMultilingual.astro';
+
+const lang: Language = 'es';
+
+
+---
+
+<MainLayout title="RGB Corporation - Inicio" lang={lang}>
+    <main>
+  <div style="margin-top: var(--header-total-height);">
+    <ShadersSliderMultilingual lang={lang} />
+  </div>
+  <QuienesSomos lang={lang} />
+  <FlooringSection lang={lang} />
+  <ProjectSection lang={lang} />
+  <ReviewsCarousel lang={lang} />
+  <ContactForm lang={lang} />
+  <Footer lang={lang}/> 
+
+  </main>
+</MainLayout> 

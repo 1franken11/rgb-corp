@@ -1,0 +1,239 @@
+---
+import { getLangFromUrl, useTranslations, type Language } from '../i18n/utils';
+import { ProjectData } from './ProjectData';
+import './ProjectSection.css';
+
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const currentLang: Language = typeof propLang === 'string' ? propLang as Language : getLangFromUrl(Astro.url).lang;
+const t = useTranslations(currentLang);
+---
+
+<section id="project-section" class="projects-section" data-aos="fade-up">
+  <h2 class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">{t('ProjectSection.title')}</h2>
+  <div class="project-gallery" data-aos="fade-up" data-aos-delay="200">
+    {ProjectData.map((project, index) => {
+      const isVideo = project.media.endsWith(".mp4");
+      return (
+        <div
+          class="project-item"
+          data-gallery={JSON.stringify(project.gallery)}
+          data-index={index}
+          data-aos="fade-up"
+          data-aos-delay={300 + index * 100}
+        >
+          {isVideo ? (
+            <video
+              src={project.media}
+              class="project-thumbnail"
+              muted
+              loop
+              playsinline
+            />
+          ) : (
+            <img src={project.media} alt="Proyecto" />
+          )}
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<script>
+  // Definir el componente modal si no está definido
+  if (!customElements.get('project-modal')) {
+    class ProjectModal extends HTMLElement {
+      constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+      }
+
+      connectedCallback() {
+        const gallery = JSON.parse(this.getAttribute('gallery') || '[]');
+        const currentIndex = parseInt(this.getAttribute('current-index') || '0');
+        let currentGalleryIndex = 0;
+
+        const modal = document.createElement('div');
+        modal.className = 'project-modal';
+        modal.innerHTML = `
+          <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <button class="nav-button prev-button">&lt;</button>
+            <button class="nav-button next-button">&gt;</button>
+            <div class="modal-gallery"></div>
+          </div>
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = `
+          .project-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+          }
+
+          .modal-content {
+            position: relative;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .close-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+          }
+
+          .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 24px;
+            padding: 10px 15px;
+            cursor: pointer;
+            z-index: 1001;
+          }
+
+          .prev-button {
+            left: 20px;
+          }
+
+          .next-button {
+            right: 20px;
+          }
+
+          .modal-gallery {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .modal-gallery img,
+          .modal-gallery video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+          }
+        `;
+
+        this.shadowRoot?.appendChild(style);
+        this.shadowRoot?.appendChild(modal);
+
+        const modalGallery = this.shadowRoot?.querySelector('.modal-gallery');
+        const closeButton = this.shadowRoot?.querySelector('.close-button');
+        const prevButton = this.shadowRoot?.querySelector('.prev-button');
+        const nextButton = this.shadowRoot?.querySelector('.next-button');
+
+        const showMedia = (index: number) => {
+          if (!modalGallery) return;
+          const media = gallery[index];
+          const isVideo = media.endsWith('.mp4');
+          
+          modalGallery.innerHTML = isVideo
+            ? `<video src="${media}" controls autoplay></video>`
+            : `<img src="${media}" alt="Gallery image" />`;
+        };
+
+        const nextMedia = () => {
+          currentGalleryIndex = (currentGalleryIndex + 1) % gallery.length;
+          showMedia(currentGalleryIndex);
+        };
+
+        const prevMedia = () => {
+          currentGalleryIndex = (currentGalleryIndex - 1 + gallery.length) % gallery.length;
+          showMedia(currentGalleryIndex);
+        };
+
+        closeButton?.addEventListener('click', () => {
+          this.remove();
+        });
+
+        prevButton?.addEventListener('click', prevMedia);
+        nextButton?.addEventListener('click', nextMedia);
+
+        // Mostrar el primer elemento
+        showMedia(currentGalleryIndex);
+
+        // Cerrar con la tecla Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.remove();
+          }
+        });
+
+        // Cerrar al hacer clic fuera del contenido
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            this.remove();
+          }
+        });
+      }
+    }
+
+    customElements.define('project-modal', ProjectModal);
+  }
+
+  // Manejar la apertura de la galería
+  document.querySelectorAll('.project-item').forEach(card => {
+    card.addEventListener('click', (e) => {
+      const gallery = JSON.parse(card.getAttribute('data-gallery') || '[]');
+      const index = parseInt(card.getAttribute('data-index') || '0');
+      
+      // Crear y configurar el modal
+      const modal = document.createElement('project-modal');
+      modal.setAttribute('gallery', JSON.stringify(gallery));
+      modal.setAttribute('current-index', index.toString());
+      
+      // Asegurarnos de que el modal se agregue al body
+      document.body.appendChild(modal);
+      // Dispatch evento personalizado para indicar que un modal está abierto
+      window.dispatchEvent(new Event('modal:open'));
+      // Hook para saber cuándo se elimina el modal (cerrado)
+      const observer = new MutationObserver(() => {
+        if (!document.body.contains(modal)) {
+          window.dispatchEvent(new Event('modal:close'));
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { childList: true });
+    });
+  });
+
+  // Manejar la reproducción de videos
+  document.querySelectorAll('video').forEach(video => {
+    video.addEventListener('mouseenter', () => {
+      video.play();
+    });
+    video.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+    video.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+    });
+  });
+</script> 
