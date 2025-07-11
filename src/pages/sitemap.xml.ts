@@ -12,43 +12,43 @@ const pages = [
     priority: 1.0 
   },
   { 
-    path: '/about', 
+    path: '/about/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: 0.8 
   },
   { 
-    path: '/services', 
+    path: '/services/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: 0.9 
   },
   { 
-    path: '/projects', 
+    path: '/projects/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'weekly', 
     priority: 0.8 
   },
   { 
-    path: '/contact', 
+    path: '/contact/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: 0.7 
   },
   { 
-    path: '/flooring', 
+    path: '/flooring/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: 0.9 
   },
   { 
-    path: '/cabinets', 
+    path: '/cabinets/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: 0.9 
   },
   { 
-    path: '/renovation', 
+    path: '/renovation/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'monthly', 
     priority: 0.9 
@@ -62,14 +62,14 @@ export const GET: APIRoute = async () => {
 ${pages
   .map((page) => {
     const urls = languages.map((lang) => {
-      const url = lang === 'es' ? page.path : `/${lang}${page.path}`;
+      const url = lang === 'en' ? page.path : `/${lang}${page.path}`;
       return `  <url>
     <loc>${baseUrl}${url}</loc>
     <lastmod>${page.lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
 ${languages.map((hreflang) => {
-  const hreflangUrl = hreflang === 'es' ? page.path : `/${hreflang}${page.path}`;
+  const hreflangUrl = hreflang === 'en' ? page.path : `/${hreflang}${page.path}`;
   return `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${baseUrl}${hreflangUrl}" />`;
 }).join('\n')}
   </url>`;

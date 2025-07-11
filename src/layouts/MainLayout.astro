@@ -50,10 +50,10 @@ const faqSchema = getFAQSchema(lang);
     <link rel="canonical" href={seo.canonicalUrl} />
     
     <!-- Hreflang -->
-    <link rel="alternate" hreflang="es" href={seo.canonicalUrl.replace('/en/', '/').replace('/pt/', '/')} />
-    <link rel="alternate" hreflang="en" href={seo.canonicalUrl.replace('/es/', '/en/').replace('/pt/', '/en/')} />
-    <link rel="alternate" hreflang="pt" href={seo.canonicalUrl.replace('/es/', '/pt/').replace('/en/', '/pt/')} />
-    <link rel="alternate" hreflang="x-default" href={seo.canonicalUrl.replace('/en/', '/').replace('/pt/', '/')} />
+    <link rel="alternate" hreflang="en" href={seo.canonicalUrl.replace('/es/', '/').replace('/pt/', '/')} />
+    <link rel="alternate" hreflang="es" href={seo.canonicalUrl.replace('/en/', '/es/').replace('/pt/', '/es/')} />
+    <link rel="alternate" hreflang="pt" href={seo.canonicalUrl.replace('/en/', '/pt/').replace('/es/', '/pt/')} />
+    <link rel="alternate" hreflang="x-default" href={seo.canonicalUrl.replace('/es/', '/').replace('/pt/', '/')} />
     
     <!-- Local Business Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(seo.schemaMarkup)} />

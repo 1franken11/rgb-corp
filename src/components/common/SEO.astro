@@ -41,10 +41,10 @@ const twitterHandle = '@rgb_corp';
 // Generate hreflang URLs
 const getHreflangUrl = (targetLang: string) => {
   const currentPath = canonicalUrl.replace(baseUrl, '');
-  if (targetLang === 'es') {
-    return baseUrl + currentPath.replace(/^\/(en|pt)\//, '/');
+  if (targetLang === 'en') {
+    return baseUrl + currentPath.replace(/^\/(es|pt)\//, '/');
   }
-  return baseUrl + '/' + targetLang + currentPath.replace(/^\/(en|pt)\//, '/');
+  return baseUrl + '/' + targetLang + currentPath.replace(/^\/(es|pt)\//, '/');
 };
 
 const robotsContent = `${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow' : 'follow'}`;
@@ -80,11 +80,11 @@ const robotsContent = `${noindex ? 'noindex' : 'index'}, ${nofollow ? 'nofollow'
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalUrl} />
 
-<!-- Hreflang -->
-<link rel="alternate" hreflang="es" href={getHreflangUrl('es')} />
-<link rel="alternate" hreflang="en" href={getHreflangUrl('en')} />
-<link rel="alternate" hreflang="pt" href={getHreflangUrl('pt')} />
-<link rel="alternate" hreflang="x-default" href={getHreflangUrl('es')} />
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="en" href={getHreflangUrl('en')} />
+    <link rel="alternate" hreflang="es" href={getHreflangUrl('es')} />
+    <link rel="alternate" hreflang="pt" href={getHreflangUrl('pt')} />
+    <link rel="alternate" hreflang="x-default" href={getHreflangUrl('en')} />
 
 <!-- Article specific meta tags -->
 {type === 'article' && publishedTime && (
