@@ -1,5 +1,5 @@
 ---
-import { getLangFromUrl, useTranslations, type Language } from '../../i18n/utils';
+import { getLangFromUrl, useTranslations, type Language } from '../i18n/utils';
 import './FlooringModal.css';
 
 interface Props {
@@ -142,51 +142,51 @@ const t = useTranslations(currentLang);
       const nextButton = this.shadowRoot.querySelector('.next');
       const closeButton = this.shadowRoot.querySelector('.modal-close');
 
-      function showMedia(index: number) {
-        if (!container) return;
-        const media = gallery[index];
-        const isVideo = media.endsWith('.mp4');
-        
-        container.innerHTML = isVideo
-          ? `<video src="${media}" controls autoplay></video>`
-          : `<img src="${media}" alt="Gallery image" />`;
-      }
-
-      function updateNavigation() {
-        if (prevButton) prevButton.style.display = currentIndex > 0 ? 'block' : 'none';
-        if (nextButton) nextButton.style.display = currentIndex < gallery.length - 1 ? 'block' : 'none';
-      }
-
-      prevButton?.addEventListener('click', () => {
-        if (currentIndex > 0) {
-          currentIndex--;
-          showMedia(currentIndex);
-          updateNavigation();
+      if (container && prevButton && nextButton && closeButton) {
+        function showMedia(index: any) {
+          const media = gallery[index];
+          const isVideo = media.endsWith('.mp4');
+          container.innerHTML = isVideo
+            ? `<video src="${media}" controls autoplay></video>`
+            : `<img src="${media}" alt="Gallery image" />`;
         }
-      });
 
-      nextButton?.addEventListener('click', () => {
-        if (currentIndex < gallery.length - 1) {
-          currentIndex++;
-          showMedia(currentIndex);
-          updateNavigation();
+        function updateNavigation() {
+          (prevButton as HTMLElement).style.display = currentIndex > 0 ? 'block' : 'none';
+          (nextButton as HTMLElement).style.display = currentIndex < gallery.length - 1 ? 'block' : 'none';
         }
-      });
 
-      closeButton?.addEventListener('click', () => {
-        this.remove();
-      });
+        prevButton.addEventListener('click', () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            showMedia(currentIndex);
+            updateNavigation();
+          }
+        });
 
-      // Mostrar la primera imagen
-      showMedia(currentIndex);
-      updateNavigation();
+        nextButton.addEventListener('click', () => {
+          if (currentIndex < gallery.length - 1) {
+            currentIndex++;
+            showMedia(currentIndex);
+            updateNavigation();
+          }
+        });
 
-      // Cerrar con Escape
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
+        closeButton.addEventListener('click', () => {
           this.remove();
-        }
-      });
+        });
+
+        // Mostrar la primera imagen
+        showMedia(currentIndex);
+        updateNavigation();
+
+        // Cerrar con Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.remove();
+          }
+        });
+      }
     }
   }
 

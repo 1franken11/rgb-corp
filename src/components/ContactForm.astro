@@ -60,6 +60,13 @@ const translations = {
 const t = translations[currentLang];
 ---
 
+<!--
+.env example (ponlo en la raíz del proyecto):
+PUBLIC_EMAILJS_SERVICE_ID=tu_service_id
+PUBLIC_EMAILJS_TEMPLATE_ID=tu_template_id
+PUBLIC_EMAILJS_USER_ID=tu_public_key
+-->
+
 <section id="contact-container" class="contact-container" data-aos="fade-up">
   <div class="contact-info" data-aos="fade-right" data-aos-delay="200">
     <ImageComparison comparisons={imageComparisonsData} lang={currentLang} />
@@ -68,7 +75,7 @@ const t = translations[currentLang];
   <div class="contact-form" data-aos="fade-left" data-aos-delay="300">
     <h2 data-aos="fade-up" data-aos-delay="100">{t.title}</h2>
     <p data-aos="fade-up" data-aos-delay="150">{t.subtitle}</p>
-    <form id="contactForm" data-aos="fade-up" data-aos-delay="200">
+    <form id="contactForm" data-lang={currentLang} data-aos="fade-up" data-aos-delay="200">
       <div data-aos="fade-up" data-aos-delay="250">
         <label for="name">{t.name}</label>
         <input type="text" id="name" name="name" required />
@@ -91,8 +98,7 @@ const t = translations[currentLang];
       </div>
       <button type="submit" data-aos="fade-up" data-aos-delay="500">{t.submit}</button>
     </form>
-    <div id="successMessage" class="success-message hidden">{t.success}</div>
-    <div id="errorMessage" class="error-message hidden">{t.error}</div>
+    <!-- Eliminados los divs de mensajes de éxito/error -->
     <div class="social-icons" data-aos="fade-up" data-aos-delay="550">
       <a href="https://www.instagram.com/rgb_corp/" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram icon instagram"></i>
@@ -107,23 +113,5 @@ const t = translations[currentLang];
   </div>
 </section>
 
-<script>
-  const form = document.getElementById('contactForm') as HTMLFormElement | null;
-  const successMessage = document.getElementById('successMessage');
-  const errorMessage = document.getElementById('errorMessage');
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // Aquí irá la lógica de EmailJS cuando se configure
-      console.log('Form submitted');
-      if (successMessage) {
-        successMessage.classList.remove('hidden');
-        setTimeout(() => {
-          successMessage.classList.add('hidden');
-        }, 5000);
-      }
-      form.reset();
-    });
-  }
-</script> 
+<!-- Script externo para manejo de envío y SweetAlert2 -->
+<script type="module" src="/src/components/ContactForm.js"></script> 
