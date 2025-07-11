@@ -2,43 +2,87 @@ import type { APIRoute } from 'astro';
 
 const baseUrl = 'https://rgb-corporation.com';
 
+const languages = ['es', 'en', 'pt'] as const;
+
 const pages = [
-  { url: '/', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 1.0 },
-  { url: '/en', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 1.0 },
-  { url: '/es', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 1.0 },
-  { url: '/pt', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 1.0 },
-  { url: '/en/about', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.8 },
-  { url: '/es/about', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.8 },
-  { url: '/pt/about', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.8 },
-  { url: '/en/services', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.9 },
-  { url: '/es/services', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.9 },
-  { url: '/pt/services', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.9 },
-  { url: '/en/projects', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 0.8 },
-  { url: '/es/projects', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 0.8 },
-  { url: '/pt/projects', lastmod: new Date().toISOString(), changefreq: 'weekly', priority: 0.8 },
-  { url: '/en/contact', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.7 },
-  { url: '/es/contact', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.7 },
-  { url: '/pt/contact', lastmod: new Date().toISOString(), changefreq: 'monthly', priority: 0.7 },
+  { 
+    path: '/', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'weekly', 
+    priority: 1.0 
+  },
+  { 
+    path: '/about', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.8 
+  },
+  { 
+    path: '/services', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/projects', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'weekly', 
+    priority: 0.8 
+  },
+  { 
+    path: '/contact', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.7 
+  },
+  { 
+    path: '/flooring', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/cabinets', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/renovation', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  }
 ];
 
 export const GET: APIRoute = async () => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${pages
-  .map(
-    (page) => `  <url>
-    <loc>${baseUrl}${page.url}</loc>
+  .map((page) => {
+    const urls = languages.map((lang) => {
+      const url = lang === 'es' ? page.path : `/${lang}${page.path}`;
+      return `  <url>
+    <loc>${baseUrl}${url}</loc>
     <lastmod>${page.lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`
-  )
+${languages.map((hreflang) => {
+  const hreflangUrl = hreflang === 'es' ? page.path : `/${hreflang}${page.path}`;
+  return `    <xhtml:link rel="alternate" hreflang="${hreflang}" href="${baseUrl}${hreflangUrl}" />`;
+}).join('\n')}
+  </url>`;
+    });
+    return urls.join('\n');
+  })
   .join('\n')}
 </urlset>`;
 
   return new Response(sitemap, {
     headers: {
       'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=3600',
     },
   });
 }; 

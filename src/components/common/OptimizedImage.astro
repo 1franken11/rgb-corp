@@ -1,0 +1,93 @@
+---
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: 'lazy' | 'eager';
+  priority?: boolean;
+  className?: string;
+  sizes?: string;
+  placeholder?: string;
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  loading = 'lazy',
+  priority = false,
+  className = '',
+  sizes = '100vw',
+  placeholder
+} = Astro.props;
+
+// Generate responsive image URLs for Cloudinary
+const generateResponsiveImages = (imageUrl: string) => {
+  if (!imageUrl.includes('cloudinary.com')) return { src, srcSet: '' };
+  
+  const baseUrl = imageUrl.split('/upload/')[0] + '/upload/';
+  const imagePath = imageUrl.split('/upload/')[1];
+  
+  return {
+    src: imageUrl,
+    srcSet: [
+      `${baseUrl}f_auto,q_auto,w_400/${imagePath} 400w`,
+      `${baseUrl}f_auto,q_auto,w_800/${imagePath} 800w`,
+      `${baseUrl}f_auto,q_auto,w_1200/${imagePath} 1200w`,
+      `${baseUrl}f_auto,q_auto,w_1600/${imagePath} 1600w`
+    ].join(', ')
+  };
+};
+
+const { srcSet } = generateResponsiveImages(src);
+---
+
+<picture>
+  <!-- WebP format for better compression -->
+  <source 
+    type="image/webp" 
+    srcset={srcSet.replace(/f_auto/g, 'f_webp')}
+    sizes={sizes}
+  />
+  
+  <!-- Fallback image -->
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={priority ? 'eager' : loading}
+    decoding="async"
+    sizes={sizes}
+    srcset={srcSet}
+    class={className}
+    style={placeholder ? `background-image: url(${placeholder}); background-size: cover;` : ''}
+    onload={placeholder ? 'this.style.backgroundImage = "none";' : ''}
+  />
+</picture>
+
+<style>
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Blur-up placeholder effect */
+  img[style*="background-image"] {
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: blur(10px);
+    transition: filter 0.3s ease;
+  }
+  
+  img[style*="background-image"]:not([style*="background-image: none"]) {
+    filter: blur(10px);
+  }
+  
+  img[style*="background-image: none"] {
+    filter: none;
+  }
+</style> 

@@ -1,0 +1,102 @@
+---
+export interface Props {
+  items: Array<{
+    name: string;
+    url: string;
+  }>;
+  lang?: string;
+}
+
+const { items, lang = 'es' } = Astro.props;
+
+// Generate breadcrumb schema
+const generateBreadcrumbSchema = (items: Props['items']) => {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": `https://rgb-corporation.com${item.url}`
+    }))
+  };
+};
+
+const breadcrumbSchema = generateBreadcrumbSchema(items);
+---
+
+<!-- Breadcrumb Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+<!-- Visual Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="breadcrumb-nav">
+  <ol class="breadcrumb-list">
+    {items.map((item, index) => (
+      <li class="breadcrumb-item">
+        {index === items.length - 1 ? (
+          <span class="breadcrumb-current" aria-current="page">{item.name}</span>
+        ) : (
+          <>
+            <a href={item.url} class="breadcrumb-link">{item.name}</a>
+            <span class="breadcrumb-separator" aria-hidden="true">/</span>
+          </>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb-nav {
+    margin: 1rem 0;
+    padding: 0.5rem 0;
+  }
+
+  .breadcrumb-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+  }
+
+  .breadcrumb-link {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .breadcrumb-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+
+  .breadcrumb-current {
+    color: #333;
+    font-weight: 500;
+  }
+
+  .breadcrumb-separator {
+    margin: 0 0.5rem;
+    color: #ccc;
+  }
+
+  @media (max-width: 768px) {
+    .breadcrumb-list {
+      font-size: 0.75rem;
+      flex-wrap: wrap;
+    }
+    
+    .breadcrumb-separator {
+      margin: 0 0.25rem;
+    }
+  }
+</style> 

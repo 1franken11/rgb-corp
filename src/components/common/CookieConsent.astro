@@ -1,0 +1,177 @@
+---
+export interface Props {
+  lang?: string;
+}
+
+const { lang = 'es' } = Astro.props;
+
+const translations = {
+  es: {
+    title: 'Política de Cookies',
+    message: 'Utilizamos cookies para mejorar tu experiencia en nuestro sitio web. Al continuar navegando, aceptas nuestra política de cookies.',
+    accept: 'Aceptar',
+    decline: 'Rechazar',
+    learnMore: 'Más información',
+    privacyPolicy: 'Política de Privacidad'
+  },
+  en: {
+    title: 'Cookie Policy',
+    message: 'We use cookies to improve your experience on our website. By continuing to browse, you accept our cookie policy.',
+    accept: 'Accept',
+    decline: 'Decline',
+    learnMore: 'Learn more',
+    privacyPolicy: 'Privacy Policy'
+  },
+  pt: {
+    title: 'Política de Cookies',
+    message: 'Usamos cookies para melhorar sua experiência em nosso site. Ao continuar navegando, você aceita nossa política de cookies.',
+    accept: 'Aceitar',
+    decline: 'Recusar',
+    learnMore: 'Saiba mais',
+    privacyPolicy: 'Política de Privacidade'
+  }
+};
+
+const t = translations[lang as keyof typeof translations] || translations.es;
+---
+
+<div id="cookie-consent" class="cookie-banner" style="display: none;">
+  <div class="cookie-content">
+    <div class="cookie-text">
+      <h3>{t.title}</h3>
+      <p>{t.message}</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="cookie-btn cookie-decline" onclick="updateConsent(false)">
+        {t.decline}
+      </button>
+      <button class="cookie-btn cookie-accept" onclick="updateConsent(true)">
+        {t.accept}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Cookie consent management
+  document.addEventListener('DOMContentLoaded', function() {
+    const cookieBanner = document.getElementById('cookie-consent');
+    const consent = localStorage.getItem('cookie-consent');
+    
+    if (!consent && cookieBanner) {
+      cookieBanner.style.display = 'block';
+    }
+    
+    // Update consent function
+    window.updateConsent = function(accepted) {
+      localStorage.setItem('cookie-consent', accepted ? 'accepted' : 'denied');
+      
+      if (window.updateGtagConsent) {
+        window.updateGtagConsent(accepted);
+      }
+      
+      if (cookieBanner) {
+        cookieBanner.style.display = 'none';
+      }
+      
+      // Track consent event
+      if (window.gtag && accepted) {
+        gtag('event', 'cookie_consent', {
+          event_category: 'engagement',
+          event_label: 'accepted'
+        });
+      }
+    };
+  });
+</script>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    color: white;
+    z-index: 10000;
+    padding: 1rem;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .cookie-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .cookie-text h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--color-primary);
+  }
+
+  .cookie-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .cookie-decline {
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .cookie-decline:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .cookie-accept {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .cookie-accept:hover {
+    background: var(--color-accent);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 768px) {
+    .cookie-content {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .cookie-actions {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .cookie-text h3 {
+      font-size: 1rem;
+    }
+    
+    .cookie-text p {
+      font-size: 0.85rem;
+    }
+  }
+</style> 

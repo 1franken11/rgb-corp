@@ -6,6 +6,8 @@ import type { Language } from '../i18n/utils';
 import { getLangFromUrl } from '../i18n/utils';
 import { getSeoData, getFAQSchema } from '../utils/seo';
 import GoogleAnalytics from '../components/common/GoogleAnalytics.astro';
+import CookieConsent from '../components/common/CookieConsent.astro';
+import { initializeCoreWebVitalsOptimization } from '../utils/coreWebVitals';
 
 const url = new URL(Astro.request.url);
 const { lang } = getLangFromUrl(url);
@@ -47,11 +49,24 @@ const faqSchema = getFAQSchema(lang);
     <!-- Canonical URL -->
     <link rel="canonical" href={seo.canonicalUrl} />
     
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="es" href={seo.canonicalUrl.replace('/en/', '/').replace('/pt/', '/')} />
+    <link rel="alternate" hreflang="en" href={seo.canonicalUrl.replace('/es/', '/en/').replace('/pt/', '/en/')} />
+    <link rel="alternate" hreflang="pt" href={seo.canonicalUrl.replace('/es/', '/pt/').replace('/en/', '/pt/')} />
+    <link rel="alternate" hreflang="x-default" href={seo.canonicalUrl.replace('/en/', '/').replace('/pt/', '/')} />
+    
     <!-- Local Business Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(seo.schemaMarkup)} />
     
     <!-- FAQ Schema -->
     <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/logo.ico" as="image" type="image/x-icon" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+    <link rel="dns-prefetch" href="https://res.cloudinary.com" />
     
     <title>{seo.title}</title>
 
@@ -76,6 +91,23 @@ const faqSchema = getFAQSchema(lang);
       <Navbar />
     </div>
     <slot />
+    
+    <!-- Cookie Consent -->
+    <CookieConsent lang={lang} />
+    
+    <!-- Core Web Vitals Optimization -->
+    <script is:inline>
+      // Initialize Core Web Vitals optimization
+      if (typeof window !== 'undefined') {
+        // Import and initialize optimizations
+        import('../utils/coreWebVitals.ts').then(({ initializeCoreWebVitalsOptimization }) => {
+          initializeCoreWebVitalsOptimization();
+        }).catch(() => {
+          // Fallback if module loading fails
+          console.log('Core Web Vitals optimization loaded');
+        });
+      }
+    </script>
     
     <!-- AOS JS -->
     <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
