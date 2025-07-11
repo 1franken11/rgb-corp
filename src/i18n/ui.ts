@@ -1,5 +1,4 @@
 import type { Language } from './types';
-import { getLanguageFromURL } from './utils';
 
 export const languages = {
   en: 'English',
@@ -15,7 +14,7 @@ export function getLangFromUrl(url: URL) {
 
 export function useTranslations(lang: string) {
   return function t(key: string) {
-    return translations[lang][key] || translations[defaultLang][key] || key;
+    return (translations as any)[lang]?.[key] || (translations as any)[defaultLang]?.[key] || key;
   };
 }
 
@@ -42,6 +41,7 @@ const translations = {
     'FlooringSections.options.Laminate': 'Laminate',
     'FlooringSections.options.Tile': 'Tile',
     'FlooringSections.options.Wood': 'Wood',
+    'FlooringSections.button.Close': 'Close',
     'FlooringSections.descriptions.Laminate': [
       {
         title: 'Durability',
@@ -228,6 +228,7 @@ const translations = {
     'FlooringSections.options.Laminate': 'Laminado',
     'FlooringSections.options.Tile': 'Porcelanato',
     'FlooringSections.options.Wood': 'Madera',
+    'FlooringSections.button.Close': 'Cerrar',
     'FlooringSections.descriptions.Laminate': [
       {
         title: 'Durabilidad',
@@ -414,6 +415,7 @@ const translations = {
     'FlooringSections.options.Laminate': 'Laminado',
     'FlooringSections.options.Tile': 'Porcelanato',
     'FlooringSections.options.Wood': 'Madeira',
+    'FlooringSections.button.Close': 'Fechar',
     'FlooringSections.descriptions.Laminate': [
       {
         title: 'Durabilidade',

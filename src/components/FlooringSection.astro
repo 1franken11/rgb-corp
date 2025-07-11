@@ -10,10 +10,13 @@ interface Props {
 const { lang: propLang } = Astro.props;
 const currentLang: Language = typeof propLang === 'string' ? propLang as Language : getLangFromUrl(Astro.url).lang;
 const t = useTranslations(currentLang);
-const closeButtonText = t('Button.Close');
+
+let closeButtonText = 'Close';
+if (currentLang === 'es') closeButtonText = 'Cerrar';
+if (currentLang === 'pt') closeButtonText = 'Fechar';
 ---
 
-<section id="flooring-section" data-aos="fade-up">
+<section id="flooring-section" data-aos="fade-up" data-close-text={closeButtonText}>
   <div class="flooring-sections" data-aos="zoom-in" data-aos-delay="200">
     <div id="flooring-bg-overlay" class="flooring-bg-overlay"></div>
     <h2 class="flooring-title" data-aos="fade-up" data-aos-delay="100">{t('FlooringSections.title')}</h2>
@@ -125,6 +128,7 @@ const closeButtonText = t('Button.Close');
           const contentElement = document.getElementById(`${floorKey.toLowerCase()}-content`);
           const content = contentElement ? contentElement.innerHTML : '';
           
+          const closeText = document.getElementById('flooring-section')?.getAttribute('data-close-text') || 'Close';
           modal.innerHTML = `
             <div class="modal-card-two-columns">
               <div class="modal-image-column">
@@ -135,7 +139,7 @@ const closeButtonText = t('Button.Close');
                 <div class="modal-content-scroll">
                   ${content}
                 </div>
-                <button class="close-btn">Close</button>
+                <button class="close-btn">${closeText}</button>
               </div>
             </div>
           `;
