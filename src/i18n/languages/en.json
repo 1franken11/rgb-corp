@@ -154,7 +154,8 @@
   },
   "Reviews":{
     "title": "Reviews",
-    "noComments": "No reviews available at the moment."
+    "noComments": "No reviews available at the moment.",
+    "defaultMessage": "No one has left us a review on Facebook yet, would you like to leave us one?"
   },
   "Button":{
     "Close": "Close"
@@ -222,7 +223,6 @@
     ],
     "contact": {
       "phone": "+1 (904) 422-5380",
-      "phone2": "+1 (904) 728-9872",
       "email": "rgbconstructioncorp@gmail.com"
     },
     "legalLinks": [

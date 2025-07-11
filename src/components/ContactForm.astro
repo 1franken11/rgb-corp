@@ -16,12 +16,20 @@ const translations = {
   es: {
     title: "Contáctanos",
     subtitle: "Estamos aquí para ayudarte",
+    subject: "Asunto",
+    ask: "Solicitar presupuesto",
+    another: "Otra consulta",
     name: "Nombre",
+    namePlaceholder: "Tu nombre",
     surname: "Apellido",
+    surnamePlaceholder: "Tu apellido",
     email: "Correo electrónico",
-    phone: "Teléfono",
+    emailPlaceholder: "tu@email.com",
+    cel: "Celular",
+    celPlaceholder: "Tu número de celular",
     message: "Mensaje",
-    submit: "Enviar",
+    messagePlaceholder: "Cuéntanos sobre tu proyecto...",
+    sendButton: "Enviar mensaje",
     success: "¡Mensaje enviado con éxito!",
     error: "Error al enviar el mensaje. Por favor, inténtalo de nuevo.",
     before: "Antes",
@@ -30,12 +38,20 @@ const translations = {
   en: {
     title: "Contact Us",
     subtitle: "We're here to help",
+    subject: "Subject",
+    ask: "Request quote",
+    another: "Other inquiry",
     name: "Name",
+    namePlaceholder: "Your name",
     surname: "Surname",
+    surnamePlaceholder: "Your surname",
     email: "Email",
-    phone: "Phone",
+    emailPlaceholder: "your@email.com",
+    cel: "Phone",
+    celPlaceholder: "Your phone number",
     message: "Message",
-    submit: "Submit",
+    messagePlaceholder: "Tell us about your project...",
+    sendButton: "Send message",
     success: "Message sent successfully!",
     error: "Error sending message. Please try again.",
     before: "Before",
@@ -44,12 +60,20 @@ const translations = {
   pt: {
     title: "Contate-nos",
     subtitle: "Estamos aqui para ajudar",
+    subject: "Assunto",
+    ask: "Solicitar orçamento",
+    another: "Outra consulta",
     name: "Nome",
+    namePlaceholder: "Seu nome",
     surname: "Sobrenome",
+    surnamePlaceholder: "Seu sobrenome",
     email: "Email",
-    phone: "Telefone",
+    emailPlaceholder: "seu@email.com",
+    cel: "Celular",
+    celPlaceholder: "Seu número de celular",
     message: "Mensagem",
-    submit: "Enviar",
+    messagePlaceholder: "Conte-nos sobre seu projeto...",
+    sendButton: "Enviar mensagem",
     success: "Mensagem enviada com sucesso!",
     error: "Erro ao enviar mensagem. Por favor, tente novamente.",
     before: "Antes",
@@ -58,13 +82,21 @@ const translations = {
 };
 
 const t = translations[currentLang];
+
+const encodedMessage = encodeURIComponent(
+  "Hello, I would like more information about your services"
+);
 ---
 
 <!--
 .env example (ponlo en la raíz del proyecto):
-PUBLIC_EMAILJS_SERVICE_ID=tu_service_id
-PUBLIC_EMAILJS_TEMPLATE_ID=tu_template_id
-PUBLIC_EMAILJS_USER_ID=tu_public_key
+PUBLIC_EMAILJS_SERVICE_ID_1=tu_service_id_1
+PUBLIC_EMAILJS_TEMPLATE_ID_1=tu_template_id_1
+PUBLIC_EMAILJS_PUBLIC_KEY_1=tu_public_key_1
+PUBLIC_EMAILJS_SERVICE_ID_2=tu_service_id_2
+PUBLIC_EMAILJS_TEMPLATE_ID_2=tu_template_id_2
+PUBLIC_EMAILJS_PUBLIC_KEY_2=tu_public_key_2
+PUBLIC_TO_EMAIL=tu_email_destino
 -->
 
 <section id="contact-container" class="contact-container" data-aos="fade-up">
@@ -77,36 +109,70 @@ PUBLIC_EMAILJS_USER_ID=tu_public_key
     <p data-aos="fade-up" data-aos-delay="150">{t.subtitle}</p>
     <form id="contactForm" data-lang={currentLang} data-aos="fade-up" data-aos-delay="200">
       <div data-aos="fade-up" data-aos-delay="250">
-        <label for="name">{t.name}</label>
-        <input type="text" id="name" name="name" required />
+        <label for="contactType">{t.subject}</label>
+        <select id="contactType" name="contactType" required>
+          <option value="budget">{t.ask}</option>
+          <option value="other">{t.another}</option>
+        </select>
       </div>
       <div data-aos="fade-up" data-aos-delay="300">
-        <label for="surname">{t.surname}</label>
-        <input type="text" id="surname" name="surname" required />
+        <label for="name">{t.name}</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          placeholder={t.namePlaceholder}
+          required 
+        />
       </div>
       <div data-aos="fade-up" data-aos-delay="350">
-        <label for="email">{t.email}</label>
-        <input type="email" id="email" name="email" required />
+        <label for="surname">{t.surname}</label>
+        <input 
+          type="text" 
+          id="surname" 
+          name="surname" 
+          placeholder={t.surnamePlaceholder}
+          required 
+        />
       </div>
       <div data-aos="fade-up" data-aos-delay="400">
-        <label for="phone">{t.phone}</label>
-        <input type="tel" id="phone" name="phone" required />
+        <label for="email">{t.email}</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder={t.emailPlaceholder}
+          required 
+        />
       </div>
       <div data-aos="fade-up" data-aos-delay="450">
-        <label for="message">{t.message}</label>
-        <textarea id="message" name="message" required></textarea>
+        <label for="cel">{t.cel}</label>
+        <input 
+          type="tel" 
+          id="cel" 
+          name="cel" 
+          placeholder={t.celPlaceholder}
+        />
       </div>
-      <button type="submit" data-aos="fade-up" data-aos-delay="500">{t.submit}</button>
+      <div data-aos="fade-up" data-aos-delay="500">
+        <label for="message">{t.message}</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          placeholder={t.messagePlaceholder}
+          required
+        ></textarea>
+      </div>
+      <button type="submit" data-aos="fade-up" data-aos-delay="550">{t.sendButton}</button>
     </form>
-    <!-- Eliminados los divs de mensajes de éxito/error -->
-    <div class="social-icons" data-aos="fade-up" data-aos-delay="550">
+    <div class="social-icons" data-aos="fade-up" data-aos-delay="600">
       <a href="https://www.instagram.com/rgb_corp/" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-instagram icon instagram"></i>
       </a>
       <a href="https://www.facebook.com/profile.php?id=61562097362152" target="_blank" rel="noopener noreferrer">
         <i class="fab fa-facebook icon facebook"></i>
       </a>
-      <a href="https://wa.me/19044225380?text=I%20want%20to%20know%20more%20about%20floor%20covering%20services" target="_blank" rel="noopener noreferrer">
+      <a href={`https://wa.me/19044225380?text=${encodedMessage}`} target="_blank" rel="noopener noreferrer">
         <i class="fab fa-whatsapp icon whatsapp"></i>
       </a>
     </div>

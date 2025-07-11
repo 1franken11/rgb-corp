@@ -1,6 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
-import type { Language } from '../../i18n/utils';
+import type { Language } from '../i18n/utils';
 import './ReviewsCarousel.css';
 
 interface Props {
@@ -18,18 +18,7 @@ const t = useTranslations(currentLang);
 
 // Datos de ejemplo - Reemplazar con datos reales
 const reviews: Review[] = [
-  {
-    id: 1,
-    iframeSrc: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmary.daboin.romero%2Fposts%2Fpfbid02sMyKmK7dKadMtpGH3eKdadTf54wK75BdJ2npvqqqbucUg5DKS7xndY8aeiUpcMRXl&show_text=true&width=500"
-  },
-  {
-    id: 2,
-    iframeSrc: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fluduena.jugi%2Fposts%2Fpfbid02g3wth84YSmHXHm9xDxnbqQuytSciXoCfVVZb6CCiSatQjy3tXjEJCQWPBXjNBCBbl&show_text=true&width=500"
-  },
-  {
-    id: 3,
-    iframeSrc: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fadrian.quesada.3597%2Fposts%2Fpfbid0rKMwDHmyMDEuf198mCe2nfd8q1yA3y5EZsgAjBxvX5gMcNsc68KiSt2rMc73bnXql&show_text=true&width=500"
-  }
+
 ];
 
 const itemsPerSlide = 3;
@@ -77,7 +66,7 @@ const opinionGroups = reviews.reduce((acc, _, index) =>
       )}
     </div>
   ) : (
-    <p class="text-center" data-aos="fade-up" data-aos-delay="200">{t('Reviews.noComments')}</p>
+    <p class="text-center" data-aos="fade-up" data-aos-delay="200">{t('Reviews.defaultMessage')}</p>
   )}
 </section>
 

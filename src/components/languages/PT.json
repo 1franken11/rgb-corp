@@ -226,7 +226,9 @@
       "title": "Projetos"
     },
     "Reviews":{
-      "title": "Avaliações"
+      "title": "Avaliações",
+      "noComments": "Não há avaliações disponíveis no momento.",
+      "defaultMessage": "Ainda não nos deixaram uma avaliação no Facebook, você gostaria de nos deixar uma?"
     },
     "Button":{
       "Close": "Fechar"
@@ -294,7 +296,6 @@
       ],
       "contact": {
         "phone": "+1 (904) 422-5380",
-        "phone2": "+1 (904) 728-9872",
         "email": "rgbconstructioncorp@gmail.com"
       },
       "legalLinks": [
