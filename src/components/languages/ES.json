@@ -303,6 +303,13 @@
         { "href": "/terms", "text": "Términos y Condiciones" }
       ],
       "copyright": "&copy; {year} RGB Corp. Todos los derechos reservados."
+    },
+    "Error": {
+      "404": {
+        "title": "Página no encontrada",
+        "description": "Lo sentimos, la página que buscas no existe o fue movida.",
+        "backHome": "Volver al inicio"
+      }
     }
   }
   
