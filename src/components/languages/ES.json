@@ -302,7 +302,7 @@
         { "href": "/privacy", "text": "Política de Privacidad" },
         { "href": "/terms", "text": "Términos y Condiciones" }
       ],
-      "copyright": "&copy; {year} RGB Corp. Todos los derechos reservados."
+      "copyright": "Todos los derechos reservados."
     },
     "Error": {
       "404": {
