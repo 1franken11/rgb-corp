@@ -2,79 +2,78 @@
 // Google Analytics 4 Configuration
 const GA_MEASUREMENT_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const isProduction = import.meta.env.PROD;
+
+const analyticsScript = `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${GA_MEASUREMENT_ID}', {
+    page_title: document.title,
+    page_location: window.location.href,
+    send_page_view: true,
+    anonymize_ip: true,
+    cookie_flags: 'SameSite=None;Secure'
+  });
+  // Enhanced ecommerce tracking
+  gtag('config', '${GA_MEASUREMENT_ID}', {
+    custom_map: {
+      'custom_parameter_1': 'service_category',
+      'custom_parameter_2': 'service_type'
+    }
+  });
+`;
+
+const consentScript = `
+  // GDPR compliant consent management
+  window.gtagConsent = {
+    analytics_storage: 'denied',
+    ad_storage: 'denied',
+    wait_for_update: 500
+  };
+  // Check for existing consent
+  const consent = localStorage.getItem('cookie-consent');
+  if (consent === 'accepted') {
+    window.gtagConsent.analytics_storage = 'granted';
+    window.gtagConsent.ad_storage = 'granted';
+    gtag('consent', 'update', window.gtagConsent);
+  }
+  // Consent update function
+  window.updateConsent = function(accepted) {
+    if (accepted) {
+      window.gtagConsent.analytics_storage = 'granted';
+      window.gtagConsent.ad_storage = 'granted';
+      localStorage.setItem('cookie-consent', 'accepted');
+    } else {
+      window.gtagConsent.analytics_storage = 'denied';
+      window.gtagConsent.ad_storage = 'denied';
+      localStorage.setItem('cookie-consent', 'denied');
+    }
+    gtag('consent', 'update', window.gtagConsent);
+  };
+`;
 ---
 
 {isProduction && (
   <>
-    <!-- Google tag (gtag.js) -->
+    {/* Google tag (gtag.js) */}
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', '{$GA_MEASUREMENT_ID}', {
-        page_title: document.title,
-        page_location: window.location.href,
-        send_page_view: true,
-        anonymize_ip: true,
-        cookie_flags: 'SameSite=None;Secure'
-      });
-      
-      // Enhanced ecommerce tracking
-      gtag('config', '{$GA_MEASUREMENT_ID}', {
-        custom_map: {
-          'custom_parameter_1': 'service_category',
-          'custom_parameter_2': 'service_type'
-        }
-      });
-    </script>
-    
-    <!-- Consent management -->
-    <script is:inline>
-      // GDPR compliant consent management
-      window.gtagConsent = {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        wait_for_update: 500
-      };
-      
-      // Check for existing consent
-      const consent = localStorage.getItem('cookie-consent');
-      if (consent === 'accepted') {
-        window.gtagConsent.analytics_storage = 'granted';
-        window.gtagConsent.ad_storage = 'granted';
-        gtag('consent', 'update', window.gtagConsent);
-      }
-      
-      // Consent update function
-      window.updateConsent = function(accepted) {
-        if (accepted) {
-          window.gtagConsent.analytics_storage = 'granted';
-          window.gtagConsent.ad_storage = 'granted';
-          localStorage.setItem('cookie-consent', 'accepted');
-        } else {
-          window.gtagConsent.analytics_storage = 'denied';
-          window.gtagConsent.ad_storage = 'denied';
-          localStorage.setItem('cookie-consent', 'denied');
-        }
-        gtag('consent', 'update', window.gtagConsent);
-      };
-    </script>
+    <script set:html={analyticsScript} />
+    <script set:html={consentScript} />
   </>
 )}
 
-<!-- Privacy-friendly analytics fallback -->
+{/* Privacy-friendly analytics fallback */}
 {!isProduction && (
   <script is:inline>
     console.log('Analytics disabled in development mode');
   </script>
 )}
 
-<!-- Google Search Console Verification -->
+{/* Google Search Console Verification */}
 <meta name="google-site-verification" content="your-verification-code" />
 
-<!-- Bing Webmaster Tools -->
+{/* Bing Webmaster Tools */}
 <meta name="msvalidate.01" content="your-bing-verification-code" />
 
-<!-- Yandex Webmaster -->
+{/* Yandex Webmaster */}
 <meta name="yandex-verification" content="your-yandex-verification-code" /> 
