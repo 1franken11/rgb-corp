@@ -49,7 +49,7 @@
       "title": "LOGO RGB",
       "specialty": {
         "title": "¿QUIÉNES SOMOS?",
-        "description": "En RGB CORPORATION somos especialistas en construcción con un enfoque en la instalación, remodelación y demolición, además de ofrecer venta de materiales de alta calidad. Contamos con un equipo de expertos que garantiza resultados duraderos, seguros y estéticamente impecables. Nuestra misión es transformar espacios con soluciones innovadoras y materiales de primera, asegurando satisfacción y excelencia en cada proyecto. Desde pequeñas renovaciones hasta grandes construcciones, trabajamos con compromiso, profesionalismo y atención al detalle. Confía en nosotros para hacer realidad tu proyecto con la calidad y eficiencia que nos caracterizan."
+        "description": "En RGB CORPORATION somos especialistas en construcción radicados en Jacksonville, enfocados en instalación de pisos, colocación de azulejos, remodelación y demolición para clientes residenciales y comerciales. Además, ofrecemos venta de materiales de alta calidad. Contamos con un equipo de expertos que garantiza resultados duraderos, seguros y estéticamente impecables. Nuestra misión es transformar espacios con soluciones innovadoras y materiales de primera, asegurando satisfacción y excelencia en cada proyecto. Desde pequeñas renovaciones hasta grandes construcciones, trabajamos con compromiso, profesionalismo y atención al detalle. Confía en nosotros para hacer realidad tu proyecto con la calidad y eficiencia que nos caracterizan."
       },
       "whyChooseUs": {
         "title": "¿POR QUÉ ELEGIRNOS?",
@@ -63,7 +63,8 @@
           "Respuesta rápida",
           "Alta satisfacción del cliente",
           "Servicio residencial y comercial",
-          "Atención profesional"
+          "Atención profesional",
+          "Atendemos todo Jacksonville, FL y áreas cercanas como Jacksonville Beach, Orange Park y St. Johns."
         ]
       },
       "commitment": {
@@ -75,7 +76,8 @@
           "Variedad de Opciones: Ofrecemos una amplia gama de pisos, desde madera hasta cerámica, porcelanato y vinílicos, adaptados a todos los estilos y presupuestos.",
           "Proceso Ágil y Eficiente: Sabemos lo importante que es el tiempo, por lo que garantizamos un servicio rápido y efectivo, sin comprometer la calidad del trabajo.",
           "Precios Competitivos: Ofrecemos tarifas justas y transparentes, sin costos ocultos, asegurando que nuestros clientes obtengan el mejor valor por su inversión.",
-          "Satisfacción Garantizada: La satisfacción del cliente es nuestra prioridad. Nos aseguramos de que cada trabajo esté terminado según lo prometido, sin excepciones."
+          "Satisfacción Garantizada: La satisfacción del cliente es nuestra prioridad. Nos aseguramos de que cada trabajo esté terminado según lo prometido, sin excepciones.",
+          "Atendemos con orgullo Jacksonville y ciudades cercanas con servicios profesionales de pisos y azulejos."
         ]
       },
       "services": {
@@ -282,7 +284,7 @@
       "title": "RGB Corp",
       "quickLinksTitle": "Enlaces Rápidos",
       "contactTitle": "Contacto",
-      "description": "Expertos en revestimientos de alta calidad para tu hogar o negocio. Ofrecemos soluciones profesionales y duraderas.",
+      "description": "Expertos en revestimientos de alta calidad para tu hogar o negocio en Jacksonville, Florida. Ofrecemos soluciones profesionales, asequibles y duraderas para pisos de azulejo, vinilo, laminados y madera.",
       "quickLinks": [
         { "href": "/", "text": "Inicio" },
         { "href": "/about", "text": "Quiénes Somos" },

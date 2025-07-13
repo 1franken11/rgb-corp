@@ -49,7 +49,7 @@
       "title": "RGB LOGO",
       "specialty": {
         "title": "WHO ARE WE?",
-        "description": "At RGB CORPORATION, we are specialists in construction with a focus on installation, remodeling, and demolition, as well as selling high-quality materials. We have a team of experts that guarantees durable, safe, and aesthetically perfect results. Our mission is to transform spaces with innovative solutions and top-tier materials, ensuring satisfaction and excellence in every project. From small renovations to large constructions, we work with commitment, professionalism, and attention to detail. Trust us to make your project a reality with the quality and efficiency that define us."
+        "description": "At RGB CORPORATION, we are Jacksonville-based specialists in construction and remodeling, focusing on floor installation, tile setting, and demolition for residential and commercial clients. We also sell high-quality materials. Our team of experts guarantees durable, safe, and aesthetically perfect results. Our mission is to transform spaces with innovative solutions and top-tier materials, ensuring satisfaction and excellence in every project. From small renovations to large constructions, we work with commitment, professionalism, and attention to detail. Trust us to make your project a reality with the quality and efficiency that define us."
       },
       "whyChooseUs": {
         "title": "WHY CHOOSE US?",
@@ -63,7 +63,8 @@
           "Fast response",
           "High customer satisfaction",
           "Residential and commercial service",
-          "Professional attention"
+          "Professional attention",
+          "Serving all of Jacksonville, FL and surrounding areas like Jacksonville Beach, Orange Park and St. Johns."
         ]
       },
       "commitment": {
@@ -75,7 +76,8 @@
           "Variety of Options: We offer a wide range of floors, from wood to ceramic, porcelain, and vinyl, suitable for all styles and budgets.",
           "Fast and Efficient Process: We know how important time is, so we guarantee a quick and effective service without compromising work quality.",
           "Competitive Prices: We offer fair and transparent rates, with no hidden costs, ensuring that our clients get the best value for their investment.",
-          "Guaranteed Satisfaction: Customer satisfaction is our priority. We make sure every job is completed as promised, with no exceptions."
+          "Guaranteed Satisfaction: Customer satisfaction is our priority. We make sure every job is completed as promised, with no exceptions.",
+          "We proudly serve Jacksonville and nearby cities with professional flooring and tile services."
         ]
       },
       "services": {
@@ -212,7 +214,7 @@
       "title": "RGB Corp",
       "quickLinksTitle": "Quick Links",
       "contactTitle": "Contact",
-      "description": "Experts in high-quality flooring for your home or business. We offer professional and durable solutions.",
+      "description": "Experts in high-quality flooring for your home or business in Jacksonville, Florida. We offer professional, affordable and durable solutions for tile, vinyl, laminate, and wood floors.",
       "quickLinks": [
         { "href": "/", "text": "Home" },
         { "href": "/about", "text": "About Us" },

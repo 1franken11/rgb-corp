@@ -1,11 +1,14 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro';
 import TopBar from '../components/TopBar.astro';
 import Navbar from '../components/Navbar.astro';
 import ProjectSection from '../components/ProjectSection.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<TopBar />
-<Navbar />
-<ProjectSection />
-<Footer /> 
+<MainLayout lang="en">
+  <TopBar />
+  <Navbar />
+  <ProjectSection />
+  <Footer />
+</MainLayout> 
