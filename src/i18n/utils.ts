@@ -52,10 +52,10 @@ export function useTranslations(lang: Language) {
   };
 }
 
-export const languageFlags: Record<Language, string> = {
-  es: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743188884/spain_n6iqbo.png",
-  en: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743189034/eeuu_hbbmnt.png",
-  pt: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743187487/11zon_cropped_ykitcx.png",
+export const languageFlags: Record<Language, { url: string; alt: string }> = {
+  es: { url: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743188884/spain_n6iqbo.png", alt: "Spanish language flag – RGB Corporation flooring Jacksonville" },
+  en: { url: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743189034/eeuu_hbbmnt.png", alt: "English language flag – RGB Corporation flooring Jacksonville" },
+  pt: { url: "https://res.cloudinary.com/drwacbtjf/image/upload/v1743187487/11zon_cropped_ykitcx.png", alt: "Portuguese language flag – RGB Corporation flooring Jacksonville" },
 };
 
 export function useI18n() {

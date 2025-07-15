@@ -1,6 +1,6 @@
 export const SlideData = [
     {
-      alt: "TAUARI SOUTH BEACH",
+      alt: "TAUARI SOUTH BEACH - Flooring installation project in Jacksonville, FL",
       srcSet: {
         "1x1": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745075306/1.1_hdkopb_1_1_eqsh8q.png",
         "4x5": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745075316/4.5_eh6me1_1_1_odsvol.png",
@@ -11,7 +11,7 @@ export const SlideData = [
       }
     },
     {
-      alt: "TAUARI SOUTH BEACH",
+      alt: "TAUARI SOUTH BEACH - Flooring installation project in Jacksonville, FL",
       srcSet: {
         "1x1": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745074944/1.1_hles8z_1_1_xs3i5c.png",
         "4x5": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745074938/4.5_xr5ttm_1_1_q983og.png",
@@ -22,7 +22,7 @@ export const SlideData = [
       }
     },
     {
-      alt: "TAUARI SOUTH BEACH",
+      alt: "TAUARI SOUTH BEACH - Flooring installation project in Jacksonville, FL",
       srcSet: {
         "1x1": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745076014/1.1_mesrqu_1_toxjwe.png",
         "4x5": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745076005/4.5_nftogz_1_o7noix.png",
@@ -33,7 +33,7 @@ export const SlideData = [
       }
     },  
     {
-      alt: "TAUARI SOUTH BEACH",
+      alt: "TAUARI SOUTH BEACH - Flooring installation project in Jacksonville, FL",
       srcSet: {
         "1x1": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745075580/1.1_wnoour_1_gcmmjn.png",
         "4x5": "https://res.cloudinary.com/drwacbtjf/image/upload/v1745075588/4.5_pkpxdh_1_bpbqfm.png",

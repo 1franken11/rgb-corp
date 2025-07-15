@@ -34,7 +34,7 @@ function getNewPath(lang: Language) {
     <div class="language-selector">
       <div class="language-selector-flags">
         {Object.entries(languages).map(([lang, code]) => {
-          const typedLang = lang as Language;
+          const typedLang = lang as 'es' | 'en' | 'pt';
           const path = getNewPath(typedLang);
           return (
             <a
@@ -42,7 +42,7 @@ function getNewPath(lang: Language) {
               class={`flag-option ${currentLang === typedLang ? 'active' : ''}`}
               data-lang={typedLang}
             >
-              <img src={languageFlags[typedLang]} alt={`${code} flag`} />
+              <img src={languageFlags[typedLang].url} alt={languageFlags[typedLang].alt} />
               <span>{typedLang.toUpperCase()}</span>
             </a>
           );
