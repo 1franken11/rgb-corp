@@ -97,18 +97,7 @@ const faqSchema = getFAQSchema(lang);
     <CookieConsent lang={lang} />
     
     <!-- Core Web Vitals Optimization -->
-    <script is:inline>
-      // Initialize Core Web Vitals optimization
-      if (typeof window !== 'undefined') {
-        // Import and initialize optimizations
-        import('../utils/coreWebVitals.ts').then(({ initializeCoreWebVitalsOptimization }) => {
-          initializeCoreWebVitalsOptimization();
-        }).catch(() => {
-          // Fallback if module loading fails
-          console.log('Core Web Vitals optimization loaded');
-        });
-      }
-    </script>
+    <script type="module" src="/src/scripts/initCoreWebVitals.js"></script>
     
     <script is:inline>
       window.addEventListener('load', function() {

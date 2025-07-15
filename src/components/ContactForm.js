@@ -77,14 +77,11 @@ window.addEventListener('DOMContentLoaded', () => {
         to_email: toEmail,
       };
       
-      console.log('Sending first EmailJS with:', { serviceID1, templateID1, publicKey1 });
-      
       // Enviar el primer email
       await emailjs.send(serviceID1, templateID1, emailData, publicKey1);
       
       // SOLO en producción intentar enviar el segundo mail
       if (serviceID2 && templateID2 && publicKey2) {
-        console.log('Sending second EmailJS with:', { serviceID2, templateID2, publicKey2 });
         await emailjs.send(serviceID2, templateID2, emailData, publicKey2);
       }
       
@@ -99,8 +96,6 @@ window.addEventListener('DOMContentLoaded', () => {
         text: swalT.successText,
         confirmButtonColor: '#3085d6',
       });
-      
-      console.log("Correos enviados.");
       
     } catch (error) {
       console.error('EmailJS error:', error);

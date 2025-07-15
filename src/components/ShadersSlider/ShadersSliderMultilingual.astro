@@ -37,7 +37,6 @@ const navigation = t('ShadersSlider.navigation');
 </div>
 
 <script is:inline>
-console.log('SLIDER SCRIPT INICIADO');
 window.addEventListener('DOMContentLoaded', () => {
   const images = Array.from(document.querySelectorAll('.slider-img'));
   const overlay = document.getElementById('slider-overlay-text');
@@ -64,7 +63,6 @@ window.addEventListener('DOMContentLoaded', () => {
       overlay.style.visibility = 'visible';
     }
     current = 0;
-    console.log('[SLIDER] showFirstSlide: overlay visible, current=0, title=', titleEl?.textContent, 'subtitle=', subtitleEl?.textContent);
   }
 
   function showSlide(idx, effect = 'fade-zoom', direction = 1) {
@@ -74,7 +72,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (overlay) {
       overlay.classList.remove('show');
       overlay.style.visibility = 'hidden';
-      console.log('[SLIDER] showSlide: overlay oculto antes de transición, idx=', idx, 'current=', current);
     }
     setTimeout(() => {
       // Cambiar el texto y mostrarlo solo después de la transición
@@ -84,7 +81,6 @@ window.addEventListener('DOMContentLoaded', () => {
       if (overlay) {
         overlay.classList.add('show');
         overlay.style.visibility = 'visible';
-        console.log('[SLIDER] showSlide: overlay visible después de transición, idx=', idx, 'current=', current, 'title=', titleEl?.textContent, 'subtitle=', subtitleEl?.textContent);
       }
       isTransitioning = false;
       current = idx;

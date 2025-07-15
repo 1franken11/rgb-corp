@@ -90,8 +90,6 @@ export function monitorCoreWebVitals(): void {
 
 // Log metrics to console and analytics
 function logMetric(name: string, value: number): void {
-  console.log(`${name}: ${Math.round(value)}ms`);
-  
   // Send to Google Analytics if available
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', 'web_vitals', {
@@ -244,7 +242,6 @@ export function initializeCoreWebVitalsOptimization(): void {
   // Optimize on load
   window.addEventListener('load', () => {
     // Additional optimizations after page load
-    console.log('Page fully loaded - Core Web Vitals optimization complete');
   });
 }
 

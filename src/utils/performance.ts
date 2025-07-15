@@ -149,37 +149,14 @@ export function injectPerformanceMonitoring(): string {
           }
           
           // Log to console in development
-          if (import.meta.env.DEV) {
-            console.log('Performance metrics:', {
-              loadTime: Math.round(loadTime),
-              domContentLoaded: Math.round(domContentLoaded)
-            });
-          }
+          // if (import.meta.env.DEV) {
+          //   console.log('Performance metrics:', {
+          //     loadTime: Math.round(loadTime),
+          //     domContentLoaded: Math.round(domContentLoaded)
+          //   });
+          // }
         }
       });
     </script>
   `;
 }
-
-// Optimize third-party scripts
-export function optimizeThirdPartyScripts(): string {
-  return `
-    <script>
-      // Defer non-critical scripts
-      function loadScript(src, callback) {
-        const script = document.createElement('script');
-        script.src = src;
-        script.async = true;
-        if (callback) script.onload = callback;
-        document.head.appendChild(script);
-      }
-      
-      // Load Font Awesome after page load
-      window.addEventListener('load', function() {
-        setTimeout(() => {
-          loadScript('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js');
-        }, 1000);
-      });
-    </script>
-  `;
-} 

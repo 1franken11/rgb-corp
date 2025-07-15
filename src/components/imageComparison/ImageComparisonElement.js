@@ -55,9 +55,7 @@ export class ImageComparisonElement extends HTMLElement {
     this.beforeLabel = this.dataset.beforeLabel || "Before";
     this.afterLabel = this.dataset.afterLabel || "After";
   
-    console.log("ConnectedCallback - About to render with comparisons:", this.comparisons.length);
     this.render(); // Llama a render para crear el DOM
-    console.log("ConnectedCallback - Render completed");
   
     // Obtener referencias DESPUÉS de que render() haya creado los elementos
     // Es crucial usar 'this.querySelector' para buscar dentro del propio Custom Element
@@ -69,15 +67,6 @@ export class ImageComparisonElement extends HTMLElement {
     this.imageBeforeRef = this.querySelector('.image-before');
     this.imageAfterRef = this.querySelector('.image-after');
   
-    console.log("ImageComparisonElement connected!");
-    console.log("Comparisons data loaded:", this.comparisons);
-    console.log("beforeLabel:", this.beforeLabel);
-    console.log("afterLabel:", this.afterLabel);
-    console.log("Container Ref:", this.containerRef);
-    console.log("Image Before Ref:", this.imageBeforeRef);
-    console.log("Image After Ref:", this.imageAfterRef);
-    console.log("Dots Container Ref:", this.dotsContainerRef);
-
     // 4. Agregar event listeners (ahora que las referencias están disponibles)
     if (this.containerRef && this.sliderRef) {
       this.containerRef.addEventListener('mousemove', this.handleMouseMoveBound);
@@ -91,7 +80,6 @@ export class ImageComparisonElement extends HTMLElement {
   
     if (this.dotsContainerRef) {
       this.dotsContainerRef.addEventListener('click', this.handleDotClickBound);
-      console.log("Dot click listener added to:", this.dotsContainerRef);
     }
   
     this.updateImageDisplay(); // Actualiza las URLs de las imágenes y centra
@@ -125,14 +113,10 @@ export class ImageComparisonElement extends HTMLElement {
   }
   
   optimizeUrl(url) { // Elimina la anotación ': string'
-      console.log("Original URL for optimization:", url);
     if (url.includes("/upload/f_auto,q_auto/")) {
-      console.log("URL already optimized:", url);
       return url;
     }
-    console.log("Optimizing URL:", url);
     const optimizedUrl = url.replace("/upload/", "/upload/f_auto,q_auto/");
-    console.log("Optimized URL:", optimizedUrl);
     return optimizedUrl;
   }
   
@@ -242,7 +226,6 @@ export class ImageComparisonElement extends HTMLElement {
   
   // Método para renderizar el contenido interno del Custom Element
   render() {
-    console.log("Render method called with comparisons:", this.comparisons.length);
     const current = this.comparisons[this.currentIndex] || { before: '', after: '', alt: '' };
     
     const dotsHTML = this.comparisons.length > 1
@@ -297,7 +280,6 @@ export class ImageComparisonElement extends HTMLElement {
       this.dotsContainerRef.removeEventListener('click', this.handleDotClickBound);
       this.dotsContainerRef.addEventListener('click', this.handleDotClickBound);
     }
-    console.log("Render completed. InnerHTML length:", this.innerHTML.length);
     this.updateDotsActiveState && this.updateDotsActiveState();
   }
 
