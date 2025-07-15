@@ -156,10 +156,36 @@ const t = useTranslations(currentLang);
           if (!modalGallery) return;
           const media = gallery[index];
           const isVideo = media.endsWith('.mp4');
-          
-          modalGallery.innerHTML = isVideo
-            ? `<video src="${media}" controls autoplay></video>`
-            : `<img src="${media}" alt="Gallery image" />`;
+          // Mapeo de video URL a slug
+          const videoSlugMap = {
+            "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4": "illuminated-glass-staircase",
+            "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4": "contemporary-grey-bathroom",
+            "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663145/dormitorio_kp6y0h.mp4": "spacious-living-vinyl-floor",
+            "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4": "hallway-patio-view-vinyl-floor"
+          };
+          // Traducción del botón
+          const seeMoreText = {
+            es: "Ver más",
+            en: "See more",
+            pt: "Ver mais"
+          };
+          // Detectar idioma actual
+          let lang = document.documentElement.lang || 'es';
+          if (!['es','en','pt'].includes(lang)) lang = 'es';
+          const slug = (videoSlugMap as any)[media];
+          // Renderizado
+          modalGallery.innerHTML = isVideo && slug
+            ? `<div style="position:relative;">
+                <a href="/${lang}/projects/${slug}/" target="_self"
+                   style="position:absolute;top:12px;right:12px;z-index:2;background:#fff;color:#333;border-radius:8px;padding:0.5rem 1rem;font-weight:bold;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+                  ${(seeMoreText as any)[lang] || seeMoreText['es']}
+                </a>
+                <video src="${media}" controls autoplay style="display:block;width:100%;border-radius:12px;"></video>
+             </div>`
+            : (isVideo
+                ? `<video src="${media}" controls autoplay></video>`
+                : `<img src="${media}" alt="Gallery image" />`
+              );
         };
 
         const nextMedia = () => {

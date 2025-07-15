@@ -63,9 +63,11 @@ const menuItems: MenuItem[] = [
 
 const currentPath = Astro.url.pathname;
 const { lang } = getLangFromUrl(Astro.url);
-const isProjectsPage = /\/(en|es|pt)\/projects\/?$/.test(currentPath);
+// Cambiar la expresión regular para detectar cualquier página bajo /projects (incluyendo /projects/[slug])
+const isProjectsPage = /\/(en|es|pt)\/projects(\/.*)?\/?$/.test(currentPath);
 
 function getNavHref(sectionId: string) {
+  // Si estamos en /projects o en /projects/[slug], redirigir a la home del idioma con ancla
   if (isProjectsPage) {
     return `/${lang}/#${sectionId}`;
   }
