@@ -16,14 +16,22 @@ const lang: Language = 'es';
 
 <MainLayout title="RGB Corporation - Inicio" lang={lang}>
     <main>
-  <div style="margin-top: var(--header-total-height);">
+  <div id="inicio" style="margin-top: var(--header-total-height);">
     <ShadersSliderMultilingual lang={lang} />
   </div>
-  <QuienesSomos lang={lang} />
-  <FlooringSection lang={lang} />
-  <ProjectSection lang={lang} />
+  <div id="quienes-somos">
+    <QuienesSomos lang={lang} />
+  </div>
+  <div id="servicios">
+    <FlooringSection lang={lang} />
+  </div>
+  <div id="proyectos">
+    <ProjectSection lang={lang} />
+  </div>
   <ReviewsCarousel lang={lang} />
-  <ContactForm lang={lang} />
+  <div id="contacto">
+    <ContactForm lang={lang} />
+  </div>
   <Footer lang={lang}/> 
 
   </main>

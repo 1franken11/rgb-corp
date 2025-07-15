@@ -1,0 +1,59 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import TopBar from '../../components/TopBar.astro';
+import Navbar from '../../components/Navbar.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import Footer from '../../components/Footer.astro';
+
+const lang = "pt";
+
+const videoObjects = [
+  {
+    name: "Restauração de Escada",
+    description: "Vídeo da restauração completa de uma escada em Jacksonville.",
+    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.jpg", // Use um thumbnail real se tiver
+    uploadDate: "2024-06-01T08:00:00+08:00",
+    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4",
+    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4"
+  },
+  {
+    name: "Restauração de Banheiro",
+    description: "Vídeo da restauração completa de um banheiro em Jacksonville.",
+    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.jpg", // Use um thumbnail real se tiver
+    uploadDate: "2024-06-01T08:00:00+08:00",
+    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4",
+    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4"
+  },
+  {
+    name: "Sala de Estar - Projeto 1",
+    description: "Vídeo da restauração de uma sala de estar em Jacksonville.",
+    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744662421/vinyll_samvcc.jpg", // Use um thumbnail real se tiver
+    uploadDate: "2024-06-01T08:00:00+08:00",
+    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663145/dormitorio_kp6y0h.mp4",
+    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663145/dormitorio_kp6y0h.mp4"
+  },
+  {
+    name: "Sala de Estar - Projeto 2",
+    description: "Vídeo da restauração de uma sala de estar em Jacksonville.",
+    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.jpg", // Use um thumbnail real se tiver
+    uploadDate: "2024-06-01T08:00:00+08:00",
+    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4",
+    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4"
+  }
+];
+---
+<MainLayout lang={lang}>
+  <head slot="head">
+    {videoObjects.map(video => (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        ...video
+      })} />
+    ))}
+  </head>
+  <TopBar lang={lang} />
+  <Navbar lang={lang} />
+  <ProjectSection lang={lang} />
+  <Footer lang={lang} />
+</MainLayout> 

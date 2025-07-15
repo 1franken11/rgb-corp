@@ -13,7 +13,11 @@ const t = useTranslations(currentLang);
 ---
 
 <section id="project-section" class="projects-section" data-aos="fade-up">
-  <h2 class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">{t('ProjectSection.title')}</h2>
+  <h2 class="text-center mb-4" data-aos="fade-up" data-aos-delay="100">
+    <a href={`/${currentLang}/projects/`} style="color:inherit;text-decoration:none;">
+      {t('ProjectSection.title')}
+    </a>
+  </h2>
   <div class="project-gallery" data-aos="fade-up" data-aos-delay="200">
     {ProjectData.map((project, index) => {
       const isVideo = project.media.endsWith(".mp4");

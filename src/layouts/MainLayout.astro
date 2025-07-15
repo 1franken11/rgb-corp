@@ -80,7 +80,8 @@ const faqSchema = getFAQSchema(lang);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     
     <!-- AOS CSS -->
-    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
 
     <!-- Vercel Analytics -->
     <!-- <script async src="/_vercel/insights/script.js"></script> -->
@@ -109,25 +110,33 @@ const faqSchema = getFAQSchema(lang);
       }
     </script>
     
-    <!-- AOS JS -->
-    <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script is:inline>
-      // Configuración global de AOS
-      document.addEventListener('DOMContentLoaded', function() {
-        // Esperar un poco para asegurar que AOS esté cargado
-        setTimeout(() => {
-          if (window.AOS) {
-            window.AOS.init({
-              duration: 1000,
-              once: true,
-              mirror: false,
-              offset: 100,
-              easing: 'ease-in-out'
-            });
-          }
-        }, 100);
+      window.addEventListener('load', function() {
+        if (window.AOS) {
+          window.AOS.init({
+            duration: 1000,
+            once: true,
+            mirror: false,
+            offset: 100,
+            easing: 'ease-in-out'
+          });
+        }
       });
-    </script> -->
+    </script>
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+          link.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href').replace('#', '');
+            const target = document.getElementById(targetId);
+            if (target) {
+              e.preventDefault();
+              target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          });
+        });
+      });
+    </script>
     <script is:inline>
       let lastScrollY = window.scrollY;
       let ticking = false;

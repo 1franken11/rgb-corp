@@ -63,6 +63,14 @@ const menuItems: MenuItem[] = [
 
 const currentPath = Astro.url.pathname;
 const { lang } = getLangFromUrl(Astro.url);
+const isProjectsPage = /\/(en|es|pt)\/projects\/?$/.test(currentPath);
+
+function getNavHref(sectionId: string) {
+  if (isProjectsPage) {
+    return `/${lang}/#${sectionId}`;
+  }
+  return `#${sectionId}`;
+}
 ---
 
 <nav class={styles.navbar} id="main-navbar">
@@ -91,7 +99,7 @@ const { lang } = getLangFromUrl(Astro.url);
     <div id="nav-menu" class="nav-menu"> 
       {menuItems.map((item, i) => (
         <a 
-          href={item.href} 
+          href={getNavHref(item.href.replace('#', ''))}
           class:list={[styles.navLink, currentPath === item.href ? styles.active : 'nav-link']} data-lang-en={item.lang.en}
           data-lang-es={item.lang.es}
           data-lang-por={item.lang.por}
