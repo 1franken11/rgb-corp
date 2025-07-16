@@ -6,12 +6,24 @@
     text-align: center;
   }
   
-  .opinionesSection h2 {
-    color: #8bbaca;
-    font-size: 2.2rem;
-    font-weight: 700;
+  .reviews-title {
+    text-align: center;
     margin-bottom: 1.2rem;
-    letter-spacing: 1px;
+    font-size: clamp(2rem, 7vw, 2.2rem);
+    font-weight: 500;
+    color: rgba(42, 120, 146, 0.7);
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: rgba(240, 248, 255, 0.5);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+    .reviews-title {
+      /* font-size: 2.2rem; */
+      text-align: center;
+    }
   }
   
   .carouselContainer {
@@ -94,10 +106,6 @@
   @media (max-width: 600px) {
     .opinionesSection {
       padding: 2rem 0 1rem 0;
-    }
-    .opinionesSection h2 {
-      font-size: 1.3rem;
-      margin-bottom: 0.7rem;
     }
     .opinionesGrid {
       flex-direction: column;
