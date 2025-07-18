@@ -44,24 +44,25 @@ const slug = Astro.params.slug;
 const video = typeof slug === 'string' ? videos[slug] : undefined;
 ---
 <head>
-  <script type="application/ld+json">
+  <script type="application/ld+json" id="video-jsonld">
     {JSON.stringify({
       "@context": "https://schema.org",
       "@type": "VideoObject",
       "name": video?.title,
       "description": video?.description,
-      "thumbnailUrl": "/img/video-placeholder.jpg",
+      "thumbnailUrl": "https://rgb-corporation.com/img/video-placeholder.jpg",
       "uploadDate": "2025-07-13",
       "contentUrl": video?.videoUrl,
-      "embedUrl": video?.videoUrl,
+      "embedUrl": `https://rgb-corporation.com/es/projects/${slug}/`,
       "publisher": {
         "@type": "Organization",
         "name": "RGB Corporation",
         "logo": {
           "@type": "ImageObject",
-          "url": "/img/logo_optimized.png"
+          "url": "https://rgb-corporation.com/img/logo_optimized.png"
         }
       }
+      // "duration" se agregará dinámicamente
     })}
   </script>
 </head>
@@ -70,7 +71,7 @@ const video = typeof slug === 'string' ? videos[slug] : undefined;
   <section class="video-project-container">
     <div class="video-side">
       {video?.videoUrl
-        ? <video src={video.videoUrl} controls preload="none" style="width: 100%; max-width: 600px; border-radius: 12px;" poster="/img/video-placeholder.jpg"></video>
+        ? <video id="main-video" src={video.videoUrl} controls preload="metadata" style="width: 100%; max-width: 600px; border-radius: 12px;" poster="https://rgb-corporation.com/img/video-placeholder.jpg"></video>
         : <div style="color: red; font-weight: bold;">No se encontró video para este slug.</div>
       }
     </div>
@@ -79,6 +80,29 @@ const video = typeof slug === 'string' ? videos[slug] : undefined;
       <p>{video?.description ?? 'Sin descripción'}</p>
     </div>
   </section>
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      const videoEl = document.getElementById('main-video');
+      if (!videoEl) return;
+      videoEl.addEventListener('loadedmetadata', function() {
+        const duration = videoEl.duration;
+        function formatDuration(seconds) {
+          const mins = Math.floor(seconds / 60);
+          const secs = Math.round(seconds % 60);
+          return `PT${mins > 0 ? mins + 'M' : ''}${secs}S`;
+        }
+        const isoDuration = formatDuration(duration);
+        const ldJson = document.getElementById('video-jsonld');
+        if (ldJson) {
+          try {
+            const data = JSON.parse(ldJson.textContent);
+            data.duration = isoDuration;
+            ldJson.textContent = JSON.stringify(data);
+          } catch (e) {}
+        }
+      });
+    });
+  </script>
 </MainLayout>
 
 <Footer lang="es" />
