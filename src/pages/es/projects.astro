@@ -6,52 +6,8 @@ import ProjectSection from '../../components/ProjectSection.astro';
 import Footer from '../../components/Footer.astro';
 
 const lang = "es";
-
-const videoObjects = [
-  {
-    name: "Restauración de Escalera",
-    description: "Video de la restauración completa de una escalera en Jacksonville.",
-    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.jpg", // Usa un thumbnail real si tienes
-    uploadDate: "2024-06-01T08:00:00+08:00",
-    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4",
-    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4"
-  },
-  {
-    name: "Restauración de Baño",
-    description: "Video de la restauración completa de un baño en Jacksonville.",
-    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.jpg", // Usa un thumbnail real si tienes
-    uploadDate: "2024-06-01T08:00:00+08:00",
-    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4",
-    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4"
-  },
-  {
-    name: "Sala de Estar - Proyecto 1",
-    description: "Video de la restauración de una sala de estar en Jacksonville.",
-    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744662421/vinyll_samvcc.jpg", // Usa un thumbnail real si tienes
-    uploadDate: "2024-06-01T08:00:00+08:00",
-    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663145/dormitorio_kp6y0h.mp4",
-    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663145/dormitorio_kp6y0h.mp4"
-  },
-  {
-    name: "Sala de Estar - Proyecto 2",
-    description: "Video de la restauración de una sala de estar en Jacksonville.",
-    thumbnailUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.jpg", // Usa un thumbnail real si tienes
-    uploadDate: "2024-06-01T08:00:00+08:00",
-    contentUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4",
-    embedUrl: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4"
-  }
-];
 ---
 <MainLayout lang={lang}>
-  <head slot="head">
-    {videoObjects.map(video => (
-      <script type="application/ld+json" set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "VideoObject",
-        ...video
-      })} />
-    ))}
-  </head>
   <TopBar lang={lang} />
   <Navbar lang={lang} />
   <ProjectSection lang={lang} />
