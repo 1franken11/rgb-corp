@@ -18,40 +18,10 @@ const pages = [
     priority: 0.8 
   },
   { 
-    path: '/services/', 
-    lastmod: new Date().toISOString(), 
-    changefreq: 'monthly', 
-    priority: 0.9 
-  },
-  { 
     path: '/projects/', 
     lastmod: new Date().toISOString(), 
     changefreq: 'weekly', 
     priority: 0.8 
-  },
-  { 
-    path: '/contact/', 
-    lastmod: new Date().toISOString(), 
-    changefreq: 'monthly', 
-    priority: 0.7 
-  },
-  { 
-    path: '/flooring/', 
-    lastmod: new Date().toISOString(), 
-    changefreq: 'monthly', 
-    priority: 0.9 
-  },
-  { 
-    path: '/cabinets/', 
-    lastmod: new Date().toISOString(), 
-    changefreq: 'monthly', 
-    priority: 0.9 
-  },
-  { 
-    path: '/renovation/', 
-    lastmod: new Date().toISOString(), 
-    changefreq: 'monthly', 
-    priority: 0.9 
   }
 ];
 
