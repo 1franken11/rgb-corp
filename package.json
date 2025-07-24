@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@astrojs/tailwind": "^6.0.2",
-    "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.11.0",
     "emailjs-com": "^3.2.0",
     "sweetalert2": "^11.22.2"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
     "terser": "^5.43.1"
   }
 }

@@ -1,24 +1,24 @@
 export const ProjectData = [
     {
-      media: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4",
+      media: "https://res.cloudinary.com/drwacbtjf/image/upload/v1753397026/Dise%C3%B1o_sin_t%C3%ADtulo_2_1_blskp0.png",
       gallery: [
         "https://res.cloudinary.com/drwacbtjf/video/upload/v1744662640/escalera_v9srkj.mp4",
       ],
     },
     {
-      media: "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4",
+      media: "https://res.cloudinary.com/drwacbtjf/image/upload/v1753397027/contemporary-grey-bathroom_1_sweyvv.png",
       gallery: [
         "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663142/cocina_e7ky1r.mp4",
       ],
     },
     {
-      media: "https://res.cloudinary.com/drwacbtjf/image/upload/v1744662421/vinyll_samvcc.jpg",
+      media: "https://res.cloudinary.com/drwacbtjf/image/upload/v1753397028/Dise%C3%B1o_sin_t%C3%ADtulo_1_1_mu7wgd.png",
       gallery: [
         "https://res.cloudinary.com/drwacbtjf/video/upload/v1744663145/dormitorio_kp6y0h.mp4",
       ],
     },
     {
-      media: "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4",
+      media: "https://res.cloudinary.com/drwacbtjf/image/upload/v1753397026/Dise%C3%B1o_sin_t%C3%ADtulo_3_1_stdvbf.png",
       gallery: [
         "https://res.cloudinary.com/drwacbtjf/video/upload/v1745276664/pr2_ssmtbp.mp4",
       ],
