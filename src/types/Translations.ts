@@ -97,4 +97,23 @@ materials: string[];
     celPlaceholder:string;
     quote:string;
   };
+  ShadersSlider: {
+    slides: {
+      title: string;
+      subtitle: string;
+    }[];
+    navigation: {
+      previous: string;
+      next: string;
+    };
+    cta: {
+      callNow: string;
+      freeQuote: string;
+    };
+    features: {
+      freeEstimates: string;
+      licensedInsured: string;
+      response24h: string;
+    };
+  };
 }

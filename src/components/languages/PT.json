@@ -52,7 +52,7 @@
         "description": "Na RGB CORPORATION somos especialistas em construção sediados em Jacksonville, com foco em instalação de pisos, colocação de azulejos, reformas e demolições para clientes residenciais e comerciais. Também vendemos materiais de alta qualidade. Contamos com uma equipe de especialistas que garante resultados duradouros, seguros e esteticamente perfeitos. Nossa missão é transformar espaços com soluções inovadoras e materiais de primeira linha, garantindo satisfação e excelência em cada projeto. Desde pequenas reformas até grandes construções, trabalhamos com compromisso, profissionalismo e atenção aos detalhes. Confie em nós para realizar o seu projeto com a qualidade e eficiência que nos definem."
       },
       "whyChooseUs": {
-        "title": "POR QUE ESCOLHER-NOS?",
+        "title": "ESPECIALIDADES E BENEFÍCIOS",
         "items": [
           "Instalação de pisos",
           "Pisos de madeira, vinil, linóleo e laminados",
@@ -278,6 +278,15 @@
       "navigation": {
         "previous": "Anterior",
         "next": "Próximo"
+      },
+      "cta": {
+        "callNow": "WhatsApp: +1 (904) 422-5380",
+        "freeQuote": "Orçamento Gratuito"
+      },
+      "features": {
+        "freeEstimates": "✓ Orçamentos Gratuitos",
+        "licensedInsured": "✓ Licenciados e Segurados",
+        "response24h": "✓ Resposta em 24h"
       }
     },
     "Footer": {

@@ -273,6 +273,15 @@
     "navigation": {
       "previous": "Anterior",
       "next": "Siguiente"
+    },
+    "cta": {
+      "callNow": "WhatsApp: +1 (904) 422-5380",
+      "freeQuote": "Cotización Gratuita"
+    },
+    "features": {
+      "freeEstimates": "✓ Estimados Gratuitos",
+      "licensedInsured": "✓ Licenciados y Asegurados",
+      "response24h": "✓ Respuesta en 24h"
     }
   },
   "Footer": {

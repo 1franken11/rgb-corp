@@ -12,6 +12,8 @@ const t = useTranslations(lang);
 // Obtener los slides y navigation usando la función t
 const slides = t('ShadersSlider.slides');
 const navigation = t('ShadersSlider.navigation');
+const cta = t('ShadersSlider.cta');
+const features = t('ShadersSlider.features');
 ---
 
 <div id="image-slider" class="image-slider" tabindex="0" aria-label="Slider de imágenes fullscreen">
@@ -25,6 +27,15 @@ const navigation = t('ShadersSlider.navigation');
   <div class="slider-overlay-text" id="slider-overlay-text">
     <h1 class="slider-title"></h1>
     <p class="slider-subtitle"></p>
+    <div class="slider-cta">
+      <a href="https://wa.me/19044225380?text=I%20want%20to%20know%20more%20about%20floor%20covering%20services" target="_blank" rel="noopener noreferrer" class="cta-button primary">{cta.callNow}</a>
+      <a href="#contacto" class="cta-button secondary">{cta.freeQuote}</a>
+    </div>
+    <div class="hero-features">
+      <span>{features.freeEstimates}</span>
+      <span>{features.licensedInsured}</span>
+      <span>{features.response24h}</span>
+    </div>
   </div>
   <div class="slider-nav">
     <button class="slider-btn prev" id="slider-prev" aria-label={navigation.previous}>
@@ -51,7 +62,7 @@ window.addEventListener('DOMContentLoaded', () => {
   let isTransitioning = false;
   const DURATION = 1500;
   const INTERVAL = 5000;
-  const EFFECTS = ['fade-zoom', 'slide-skew', 'wave'];
+  const EFFECTS = ['fade-zoom', 'fade-zoom', 'wave'];
 
   // Mostrar el primer texto inmediatamente y nunca ocultarlo hasta la primera transición
   function showFirstSlide() {
@@ -61,6 +72,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if (overlay) {
       overlay.classList.add('show');
       overlay.style.visibility = 'visible';
+      overlay.style.opacity = '1';
+      overlay.style.pointerEvents = 'auto';
     }
     current = 0;
   }
@@ -86,7 +99,7 @@ window.addEventListener('DOMContentLoaded', () => {
       current = idx;
     }, DURATION);
     images.forEach((img, i) => {
-      img.classList.remove('active', 'fade-zoom', 'slide-skew', 'wave', 'out-left', 'out-right');
+      img.classList.remove('active', 'fade-zoom', 'wave', 'out-left', 'out-right');
       if (i === idx) {
         img.classList.add('active', effect);
       } else if (i === current) {
@@ -254,6 +267,60 @@ window.addEventListener('DOMContentLoaded', () => {
   text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   opacity: 0.9;
 }
+
+.slider-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.cta-button.primary {
+  background: #2a7892;
+  color: white;
+}
+
+.cta-button.primary:hover {
+  background: #17596b;
+  transform: translateY(-2px);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.cta-button.secondary:hover {
+  background: white;
+  color: #2a7892;
+}
+
+.hero-features {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.hero-features span {
+  background: rgba(255,255,255,0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+}
 .slider-nav {
   position: absolute;
   bottom: 40px;
@@ -285,6 +352,21 @@ window.addEventListener('DOMContentLoaded', () => {
   .slider-subtitle { font-size: 1rem; }
   .slider-btn { width: 40px; height: 40px; }
   .slider-nav { bottom: 20px; gap: 1rem; }
+  
+  .slider-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-features {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
 }
 .reduced-motion *, .reduced-motion .slider-img, .reduced-motion .slider-overlay-text {
   transition: none !important;

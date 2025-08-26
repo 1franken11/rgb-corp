@@ -203,6 +203,15 @@
     "navigation": {
       "previous": "Previous",
       "next": "Next"
+    },
+    "cta": {
+      "callNow": "WhatsApp: +1 (904) 422-5380",
+      "freeQuote": "Free Quote"
+    },
+    "features": {
+      "freeEstimates": "✓ Free Estimates",
+      "licensedInsured": "✓ Licensed & Insured",
+      "response24h": "✓ 24h Response"
     }
   },
   "Footer": {

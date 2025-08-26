@@ -52,7 +52,7 @@
         "description": "At RGB CORPORATION, we are Jacksonville-based specialists in construction and remodeling, focusing on floor installation, tile setting, and demolition for residential and commercial clients. We also sell high-quality materials. Our team of experts guarantees durable, safe, and aesthetically perfect results. Our mission is to transform spaces with innovative solutions and top-tier materials, ensuring satisfaction and excellence in every project. From small renovations to large constructions, we work with commitment, professionalism, and attention to detail. Trust us to make your project a reality with the quality and efficiency that define us."
       },
       "whyChooseUs": {
-        "title": "WHY CHOOSE US?",
+        "title": "SPECIALTIES AND BENEFITS?",
         "items": [
           "Floor installation",
           "Wood, vinyl, linoleum, and laminate floors",
@@ -208,6 +208,15 @@
       "navigation": {
         "previous": "Previous",
         "next": "Next"
+      },
+      "cta": {
+        "callNow": "WhatsApp: +1 (904) 422-5380",
+        "freeQuote": "Free Quote"
+      },
+      "features": {
+        "freeEstimates": "✓ Free Estimates",
+        "licensedInsured": "✓ Licensed & Insured",
+        "response24h": "✓ 24h Response"
       }
     },
     "Footer": {

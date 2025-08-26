@@ -1,0 +1,231 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import type { Language } from '../../i18n/utils';
+import QuienesSomos from '../../components/QuienesSomos.astro';
+import FlooringSection from '../../components/FlooringSection.astro';
+import ProjectSection from '../../components/ProjectSection.astro';
+import {ContactForm, ShadersSliderMultilingual, ReviewsCarousel} from '../../components';
+import Footer from '../../components/Footer.astro';
+
+const lang: Language = 'en';
+
+// SEO específico para esta página
+const seoData = {
+  title: 'Tile Installation Jacksonville FL - Porcelain & Ceramic | RGB Corporation',
+  description: 'Professional tile installation in Jacksonville, FL. Porcelain, ceramic & natural stone tiles. Kitchen & bathroom tile installation. Free estimates! Call +1 (904) 422-5380',
+  keywords: 'tile installation Jacksonville FL, porcelain tile installation Florida, ceramic tile Jacksonville, bathroom tile installation Florida, kitchen tile installation Jacksonville, tile contractors Florida',
+  canonicalUrl: 'https://rgb-corporation.com/en/tile-installation-jacksonville'
+};
+---
+
+<MainLayout 
+  title={seoData.title} 
+  description={seoData.description}
+  keywords={seoData.keywords}
+  canonicalUrl={seoData.canonicalUrl}
+  lang={lang}
+>
+  <main>
+    <!-- Hero Section específico para Tile -->
+    <div id="inicio" style="margin-top: var(--header-total-height);">
+      <div class="tile-hero">
+        <div class="hero-content">
+          <h1>Tile Installation Jacksonville, FL</h1>
+          <p>Professional tile installation services in Jacksonville. Porcelain, ceramic, and natural stone tiles for kitchens, bathrooms, and floors. Expert craftsmanship guaranteed.</p>
+          <div class="hero-cta">
+            <a href="tel:+19044225380" class="cta-button primary">Call Now: +1 (904) 422-5380</a>
+            <a href="#contacto" class="cta-button secondary">Free Quote</a>
+          </div>
+          <div class="hero-features">
+            <span>✓ Free Estimates</span>
+            <span>✓ Licensed & Insured</span>
+            <span>✓ Expert Craftsmanship</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección específica de Tile -->
+    <section class="tile-specific" data-aos="fade-up">
+      <div class="container">
+        <h2>Professional Tile Installation Services</h2>
+        <div class="tile-services">
+          <div class="service-card">
+            <h3>Kitchen Tile Installation</h3>
+            <p>Backsplash, countertops, and floor tiles for your kitchen. Durable and beautiful solutions.</p>
+          </div>
+          <div class="service-card">
+            <h3>Bathroom Tile Installation</h3>
+            <p>Shower walls, floors, and accent tiles. Waterproof and slip-resistant options.</p>
+          </div>
+          <div class="service-card">
+            <h3>Floor Tile Installation</h3>
+            <p>Durable floor tiles for high-traffic areas. Porcelain and ceramic options available.</p>
+          </div>
+          <div class="service-card">
+            <h3>Porcelain Tile Installation</h3>
+            <p>High-quality porcelain tiles for lasting beauty. Perfect for humid Florida climate.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="quienes-somos">
+      <QuienesSomos lang={lang} />
+    </div>
+    <div id="servicios">
+      <FlooringSection lang={lang} />
+    </div>
+    <div id="proyectos">
+      <ProjectSection lang={lang} />
+    </div>
+    <ReviewsCarousel lang={lang} />
+    <div id="contacto">
+      <ContactForm lang={lang} />
+    </div>
+    <Footer lang={lang} />
+  </main>
+</MainLayout>
+
+<style>
+  .tile-hero {
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('https://res.cloudinary.com/drwacbtjf/image/upload/v1742920359/firstsection2_vvtaae.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    padding: 2rem;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cta-button {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button.primary {
+    background: #2a7892;
+    color: white;
+  }
+
+  .cta-button.primary:hover {
+    background: #17596b;
+    transform: translateY(-2px);
+  }
+
+  .cta-button.secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .cta-button.secondary:hover {
+    background: white;
+    color: #2a7892;
+  }
+
+  .hero-features {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-features span {
+    background: rgba(255,255,255,0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+  }
+
+  .tile-specific {
+    padding: 4rem 0;
+    background: #f8f9fa;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .tile-specific h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #2a7892;
+  }
+
+  .tile-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+  }
+
+  .service-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+
+  .service-card h3 {
+    color: #2a7892;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .service-card p {
+    line-height: 1.6;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-cta {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .hero-features {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+

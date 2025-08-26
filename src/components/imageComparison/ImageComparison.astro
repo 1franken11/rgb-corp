@@ -53,7 +53,7 @@ const uniqueId = `image-comparison-${Math.random().toString(36).substr(2, 9)}`;
   </div>
 </section>
 
-<script type="module" is:inline>
+<script type="module" is:inline define:vars={{ uniqueId }}>
   // Importa la CLASE de tu Custom Element desde el archivo JavaScript en public.
   import { ImageComparisonElement } from '/imageComparison/ImageComparisonElement.js';
 

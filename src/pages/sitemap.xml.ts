@@ -22,6 +22,43 @@ const pages = [
     lastmod: new Date().toISOString(), 
     changefreq: 'weekly', 
     priority: 0.8 
+  },
+  // Nuevas páginas específicas para SEO local
+  { 
+    path: '/vinyl-flooring-jacksonville', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/tile-installation-jacksonville', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/hardwood-flooring-jacksonville', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/laminate-flooring-jacksonville', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.9 
+  },
+  { 
+    path: '/kitchen-remodeling-jacksonville', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.8 
+  },
+  { 
+    path: '/bathroom-remodeling-jacksonville', 
+    lastmod: new Date().toISOString(), 
+    changefreq: 'monthly', 
+    priority: 0.8 
   }
 ];
 

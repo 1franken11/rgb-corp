@@ -195,9 +195,9 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
   },
   en: {
     home: {
-      title: 'RGB Corporation - Flooring Installation Jacksonville, FL | Vinyl, Porcelain & Hardwood Experts',
-      description: 'Professional flooring installation specialists in Jacksonville, Florida. Vinyl, porcelain, hardwood, and laminate flooring. Cabinet installation, kitchen and bathroom remodeling. Free estimates!',
-      keywords: 'flooring installation Jacksonville FL, vinyl flooring Jacksonville, porcelain tiles Florida, hardwood floors Jacksonville, laminate flooring Florida, cabinet installation Jacksonville, kitchen remodeling Florida, bathroom renovation Jacksonville, flooring contractors Jacksonville',
+      title: 'Jacksonville Flooring Installation - Free Quote in 24h | RGB Corporation',
+      description: 'Professional flooring installation in Jacksonville, FL. Free quote in 24 hours. Vinyl, tile, hardwood & laminate. Licensed & insured. Call now! +1 (904) 422-5380',
+      keywords: 'flooring installation Jacksonville FL, Jacksonville flooring contractors, vinyl flooring Jacksonville, porcelain tile Florida, hardwood floors Jacksonville, laminate flooring Florida, cabinet installation Jacksonville, kitchen remodeling Florida, bathroom renovation Jacksonville, flooring companies Jacksonville',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en',
       schemaMarkup: {
@@ -232,7 +232,7 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
         },
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "Flooring and Installation Services",
+          "name": "Flooring Installation Services",
           "itemListElement": [
             {
               "@type": "Offer",
@@ -252,7 +252,7 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Hardwood Flooring Installation"
+                "name": "Hardwood Floor Installation"
               }
             }
           ]
@@ -260,9 +260,9 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
       }
     },
     about: {
-      title: 'About Us - RGB Corporation | Flooring Experts Jacksonville, FL',
-      description: 'Meet RGB Corporation, your trusted partner for flooring installation and renovations in Jacksonville, Florida. Over 10 years of experience in flooring, cabinet installation, and space remodeling.',
-      keywords: 'RGB Corporation Jacksonville, flooring experts Florida, cabinet installation Jacksonville, flooring contractors Florida, Jacksonville flooring company, porcelain tile experts Jacksonville',
+      title: 'Jacksonville Flooring Experts - 10+ Years Experience | RGB Corporation',
+      description: 'Trusted flooring installation experts in Jacksonville, Florida. Over 10 years experience in vinyl, tile, hardwood & laminate flooring. Licensed, insured & bonded. Free estimates!',
+      keywords: 'Jacksonville flooring experts, flooring contractors Florida, tile installation Jacksonville, vinyl flooring experts Florida, hardwood floor specialists Jacksonville, licensed flooring contractors Florida',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/about',
       schemaMarkup: {
@@ -276,15 +276,15 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
       }
     },
     services: {
-      title: 'Flooring & Installation Services | RGB Corporation Jacksonville, FL',
-      description: 'Complete flooring installation services: vinyl, porcelain, hardwood, laminate. Cabinet installation, kitchen and bathroom remodeling in Jacksonville, Florida. Free estimates!',
-      keywords: 'flooring services Jacksonville, vinyl installation Florida, porcelain tiles Jacksonville, hardwood floors Florida, laminate flooring Jacksonville, cabinet installation Florida, kitchen remodeling Jacksonville',
+      title: 'Flooring Services Jacksonville FL - Vinyl, Tile, Hardwood | RGB Corp',
+      description: 'Complete flooring services in Jacksonville, FL. Vinyl, porcelain tile, hardwood & laminate installation. Kitchen & bathroom remodeling. Free estimates! Call +1 (904) 422-5380',
+      keywords: 'flooring services Jacksonville FL, vinyl flooring installation Florida, porcelain tile Jacksonville, hardwood floors Florida, laminate flooring Jacksonville, cabinet installation Florida, kitchen remodeling Jacksonville',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/services',
       schemaMarkup: {
         "@context": "https://schema.org",
         "@type": "ItemList",
-        "name": "Flooring and Installation Services",
+        "name": "Flooring Installation Services",
         "itemListElement": [
           {
             "@type": "Service",
@@ -301,16 +301,16 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
           {
             "@type": "Service",
             "position": 3,
-            "name": "Hardwood Flooring Installation",
-            "description": "Hardwood and laminate flooring installation in Jacksonville, Florida"
+            "name": "Hardwood Floor Installation",
+            "description": "Hardwood and laminate floor installation in Jacksonville, Florida"
           }
         ]
       }
     },
     projects: {
-      title: 'Flooring Projects Gallery | RGB Corporation Jacksonville, FL',
-      description: 'Gallery of completed projects: vinyl, porcelain, hardwood, and laminate flooring installation in Jacksonville, Florida. Kitchen, bathroom, and commercial space renovations.',
-      keywords: 'flooring projects Jacksonville, porcelain work Florida, vinyl installations Jacksonville, flooring renovations Florida, project gallery Jacksonville',
+      title: 'Jacksonville Flooring Projects - Before & After Gallery | RGB Corp',
+      description: 'View our flooring installation projects in Jacksonville, FL. Vinyl, tile, hardwood & laminate transformations. Kitchen & bathroom renovations. Free consultation!',
+      keywords: 'Jacksonville flooring projects, tile installation projects Florida, vinyl flooring gallery Jacksonville, hardwood floor projects Florida, kitchen renovation Jacksonville, bathroom remodeling Florida',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/projects',
       schemaMarkup: {
@@ -321,9 +321,9 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
       }
     },
     contact: {
-      title: 'Contact | RGB Corporation - Flooring Installation Jacksonville, FL',
-      description: 'Contact RGB Corporation for free estimates on flooring installation and renovations in Jacksonville, Florida. Phone: +1-904-422-5380. Services throughout the Jacksonville area.',
-      keywords: 'contact RGB Corporation Jacksonville, flooring estimates Florida, flooring installation phone Jacksonville, flooring quotes Florida',
+      title: 'Jacksonville Flooring Quote - Free Estimate in 24h | RGB Corporation',
+      description: 'Get your free flooring quote in Jacksonville, FL. Call +1 (904) 422-5380 for vinyl, tile, hardwood installation. Licensed & insured. Serving all Jacksonville areas.',
+      keywords: 'Jacksonville flooring quote, free estimate Florida, flooring contractors Jacksonville, tile installation quote Florida, vinyl flooring estimate Jacksonville',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/contact',
       schemaMarkup: {
@@ -334,22 +334,22 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
       }
     },
     flooring: {
-      title: 'Flooring Installation | Vinyl, Porcelain, Hardwood | RGB Corporation Jacksonville, FL',
-      description: 'Professional installation of vinyl, porcelain, hardwood, and laminate flooring in Jacksonville, Florida. Flooring renovation and repair services. Free estimates!',
-      keywords: 'flooring installation Jacksonville FL, vinyl flooring Florida, porcelain tiles Jacksonville, hardwood floors Florida, laminate flooring Jacksonville, flooring renovation Florida',
+      title: 'Flooring Installation Jacksonville FL - Vinyl, Tile, Hardwood | RGB Corp',
+      description: 'Professional flooring installation in Jacksonville, FL. Vinyl, porcelain tile, hardwood & laminate. Free estimates, licensed & insured. Call +1 (904) 422-5380 today!',
+      keywords: 'flooring installation Jacksonville FL, vinyl flooring Florida, porcelain tile Jacksonville, hardwood floors Florida, laminate flooring Jacksonville, flooring contractors Florida',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/flooring',
       schemaMarkup: {
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "Flooring Installation",
-        "description": "Professional installation of vinyl, porcelain, hardwood, and laminate flooring in Jacksonville, Florida"
+        "description": "Professional flooring installation services in Jacksonville, Florida"
       }
     },
     cabinets: {
-      title: 'Cabinet Installation | Kitchens & Bathrooms | RGB Corporation Jacksonville, FL',
-      description: 'Professional cabinet installation for kitchens and bathrooms in Jacksonville, Florida. Kitchen renovation, space design, and kitchen island installation.',
-      keywords: 'cabinet installation Jacksonville FL, kitchen cabinets Florida, bathroom cabinets Jacksonville, kitchen renovation Florida, kitchen islands Jacksonville',
+      title: 'Cabinet Installation Jacksonville FL - Kitchen & Bathroom | RGB Corp',
+      description: 'Professional cabinet installation in Jacksonville, FL. Kitchen & bathroom cabinets, islands, storage solutions. Free estimates! Licensed & insured. Call +1 (904) 422-5380',
+      keywords: 'cabinet installation Jacksonville FL, kitchen cabinets Florida, bathroom cabinets Jacksonville, cabinet contractors Florida, kitchen remodeling Jacksonville',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/cabinets',
       schemaMarkup: {
@@ -360,16 +360,16 @@ const seoContent: Record<Language, Record<RouteKey, SeoData>> = {
       }
     },
     renovation: {
-      title: 'Flooring & Space Renovation | RGB Corporation Jacksonville, FL',
-      description: 'Complete flooring and space renovation services in Jacksonville, Florida. Kitchen, bathroom, and commercial space remodeling. Flooring, cabinet, and wall covering installation.',
-      keywords: 'flooring renovation Jacksonville FL, kitchen remodeling Florida, bathroom renovation Jacksonville, space remodeling Florida, flooring renovation Jacksonville',
+      title: 'Jacksonville Flooring Renovation - Kitchen & Bathroom Remodeling | RGB Corp',
+      description: 'Complete flooring renovation in Jacksonville, FL. Kitchen & bathroom remodeling, vinyl, tile & hardwood installation. Free consultation! Licensed & insured.',
+      keywords: 'Jacksonville flooring renovation, kitchen remodeling Florida, bathroom renovation Jacksonville, flooring contractors Florida, home renovation Jacksonville',
       ogImage: 'https://res.cloudinary.com/drwacbtjf/image/upload/v1742920360/firstsection4_eb9qfy.jpg',
       canonicalUrl: 'https://rgb-corporation.com/en/renovation',
       schemaMarkup: {
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": "Flooring and Space Renovation",
-        "description": "Complete flooring and space renovation services in Jacksonville, Florida"
+        "name": "Flooring Renovation",
+        "description": "Complete flooring renovation and remodeling services in Jacksonville, Florida"
       }
     }
   },
