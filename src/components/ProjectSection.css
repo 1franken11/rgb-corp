@@ -10,12 +10,11 @@
   }
   
   .project-item {
-    position: relative;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
   }
   
   .project-item:hover {
